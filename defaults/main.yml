@@ -10,7 +10,7 @@ k8s_common_kubeconfig:
       # proxy-url: http://proxy.example.org:3128
       server: "{{ vault_cluster_test.url }}"
       certificate_authority_data: "{{ vault_clusters_test.certificate_authority_data }}"
-      
+
   users:
     - name: "kubernetes-admin-test"
       client_certificate_data: "{{ vault_user_admin_test.client_certificate_data }}"
