@@ -1,0 +1,46 @@
+---
+# Variable OS Family specific.
+- name: Include OS Family specific variables.
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - os_all_family_variables
+
+# Variable OS distribution version specific.
+- name: Include OS Debian Family distributions version specific Variables.
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_os_family == 'Debian'
+  tags:
+    - os_debian_family_variables
+
+- name: Include OS RHEL Family distributions version specific Variables.
+  ansible.builtin.include_vars: "{{ ansible_os_family }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_distribution != 'Fedora'
+    - ansible_distribution != 'Amazon'
+    - ansible_distribution != 'Rocky'
+    - ansible_distribution != 'AlmaLinux'
+  tags:
+    - os_rhel_distribution_variables
+
+- name: Include OS Rocky Distributions version specific Variables.
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when:
+    - ansible_distribution == 'Rocky'
+  tags:
+    - os_rocky_distribution_variables
+
+- name: Include OS AlmaLinux Distributions version specific Variables.
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when:
+    - ansible_distribution == 'AlmaLinux'
+  tags:
+    - os_almalinux_distribution_variables
+
+- name: Include OS Amazon Distributions version specific Variables.
+  ansible.builtin.include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+  when: ansible_distribution == 'Amazon'
+  tags:
+    - os_amazon_distribution_variables
+
+...

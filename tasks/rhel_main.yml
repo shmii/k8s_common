@@ -1,0 +1,50 @@
+---
+- name: "OS Common - Redhat Familly - Repositories"
+  ansible.builtin.import_tasks: rhel_repositories.yml
+  tags:
+    - os_common
+    - os_common_repositories
+    - os_common_rhel
+    - os_common_rhel_repositories
+
+- name: OS Common - Redhat Familly - Install DSI tools
+  ansible.builtin.import_tasks: rhel_tools.yml
+  tags:
+    - os_common
+    - os_common_tools
+    - os_common_rhel
+    - os_common_rhel_tools
+
+- name: OS Common - Redhat Familly - Groups
+  ansible.builtin.import_tasks: groups.yml
+  tags:
+    - os_common
+    - os_common_groups
+    - os_common_rhel
+    - os_common_rhel_groups
+
+- name: OS Common - Redhat Familly - Users
+  ansible.builtin.import_tasks: users.yml
+  tags:
+    - os_common
+    - os_common_users
+    - os_common_rhel
+    - os_common_rhel_users
+
+- name: OS Common - Redhat Familly - Directories
+  ansible.builtin.import_tasks: directories.yml
+  tags:
+    - os_common
+    - os_common_directories
+    - os_common_rhel
+    - os_common_rhel_directories
+
+- name: "OS Common - Redhat Familly - LVM"
+  ansible.builtin.import_tasks: lvm.yml
+  tags:
+    - os_common
+    - os_common_lvms
+    - os_common_rhel
+    - os_common_rhel_lvms
+
+...

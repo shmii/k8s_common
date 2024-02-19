@@ -1,0 +1,52 @@
+---
+- name: "OS Common - Debian Familly - Repositories"
+  ansible.builtin.import_tasks: debian_repositories.yml
+  when:
+    - __os_common_base_repo_update | default(false)
+  tags:
+    - os_common
+    - os_common_repositories
+    - os_common_debian
+    - os_common_debian_repositories
+
+- name: "OS Common - Debian Familly - Tools"
+  ansible.builtin.import_tasks: debian_tools.yml
+  tags:
+    - os_common
+    - os_common_tools
+    - os_common_debian
+    - os_common_debian_tools
+
+- name: "OS Common - Debian Familly - Groups"
+  ansible.builtin.import_tasks: groups.yml
+  tags:
+    - os_common
+    - os_common_groups
+    - os_common_debian
+    - os_common_debian_groups
+
+- name: "OS Common - Debian Familly - Users"
+  ansible.builtin.import_tasks: users.yml
+  tags:
+    - os_common
+    - os_common_users
+    - os_common_debian
+    - os_common_debian_users
+
+- name: "OS Common - Debian Familly - Directories"
+  ansible.builtin.import_tasks: directories.yml
+  tags:
+    - os_common
+    - os_common_directories
+    - os_common_debian
+    - os_common_debian_directories
+
+- name: "OS Common - Debian Familly - LVM"
+  ansible.builtin.import_tasks: lvm.yml
+  tags:
+    - os_common
+    - os_common_lvms
+    - os_common_debian
+    - os_common_debian_lvms
+
+...
