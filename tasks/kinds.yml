@@ -3,7 +3,7 @@
   ansible.builtin.debug:
     msg:
       - k8s_common: "{{ k8s_common | default('') }}"
-    verbosity: "{{ os_common_debug_level | default(1) }}"
+    verbosity: "{{ k8s_common_debug_level | default(1) }}"
   tags:
     - k8s_common
     - k8s_common_kinds
