@@ -18,7 +18,6 @@
   when:
     - k8s_common_kinds_manage  | default(true)
     - k8s_common.kinds
-  delegate_to: localhost
   tags:
     - k8s_common
     - k8s_common_kinds
