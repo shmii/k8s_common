@@ -57,7 +57,7 @@
     - k8s_common
     - k8s_common_kinds
     - k8s_common_kinds_manage
-
+    - k8s_common_kinds_direct
 
 - name: "K8S Common - Kinds - Manage - Kind (Through Template) : {{ kind.kind | default('') }}"
   ansible.builtin.debug:
@@ -107,6 +107,7 @@
     - k8s_common
     - k8s_common_kinds
     - k8s_common_kinds_manage
+    - k8s_common_kinds_manage_template
 
 - name: "K8S Common - Kinds - Manage - Kind (Through YML File) : {{ kind.kind | default('') }}"
   ansible.builtin.debug:
@@ -156,6 +157,7 @@
     - k8s_common
     - k8s_common_kinds
     - k8s_common_kinds_manage
+    - k8s_common_kinds_manage_file
 
 # - name: "K8S Common - Kinds - Manage - Kind : {{ kind.kind | default('') }}"
 #   kubernetes.core.k8s:

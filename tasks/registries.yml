@@ -6,8 +6,8 @@
     verbosity: "{{ k8s_common_debug_level | default(1) }}"
   tags:
     - k8s_common
-    - k8s_common_kubeconfig
-    - k8s_common_kubeconfig_debug
+    - k8s_common_registries
+    - k8s_common_registries_debug
 
 - name: "K8S Common - Registries - Manage"
   ansible.builtin.include_tasks: registry.yml
@@ -19,7 +19,7 @@
     - k8s_common_registries is defined
   tags:
     - k8s_common
-    - k8s_common_kinds
-    - k8s_common_kinds_manage
+    - k8s_common_registries
+    - k8s_common_registries_manage
 
 ...
