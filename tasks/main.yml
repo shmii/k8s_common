@@ -31,4 +31,11 @@
     - k8s_common
     - k8s_common_kubeconfig
 
+# Run Tasks.
+- name: "K8S Common - Manage kinds"
+  ansible.builtin.import_tasks: kinds.yml
+  tags:
+    - k8s_common
+    - k8s_common_kinds
+
 ...
