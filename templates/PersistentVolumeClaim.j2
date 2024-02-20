@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+Namespace: "{{ kind.namespace }}"
+metadata:
+  name: "{{ kind.metadata.name | default('') }}"
+  labels: {{ kind.metadata.labels | default('') }}
+    type: local
+spec:
+  storageClassName: csi-cinder-classic
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage:  "{{ kind.spec.resources.requests.storage }}"
