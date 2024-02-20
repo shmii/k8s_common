@@ -2,7 +2,7 @@
 - name: "K8S Common - Kinds - Debug Informations - Kind : {{ kind.kind | default('') }}"
   ansible.builtin.debug:
     msg:
-      - k8s_common.kinds: "{{ k8s_common.kinds | default('') }}"
+      - kind: "{{ kind | default('') }}"
     verbosity: "{{ os_common_debug_level | default(1) }}"
   tags:
     - k8s_common
