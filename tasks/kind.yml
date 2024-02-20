@@ -16,10 +16,10 @@
       - api_version: "{{ kind.api_version | default(omit) }}"
       - name: "{{ kind.name | default(omit) }}"
       - state: "{{ kind.state | default(omit) }}"
-      - context: "{{ kind.state | default(omit) }}"
+      - context: "{{ kind.context | default(omit) }}"
       - kubeconfig: "{{ kind.kubeconfig | default(k8s_common_kubeconfig.file) }}"
-      - wait: true
-      - wait_timeout: "{{ wait_timeout_provisioning }}"
+      - wait: "{{ kind.wait | default(omit) }}"
+      - wait_timeout: "{{ kind.wait_timeout | default(omit) }}"
   when:
     - kind.manage  | default(true)
     - kind.kind
