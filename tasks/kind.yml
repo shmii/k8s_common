@@ -9,7 +9,7 @@
     - k8s_common_kinds
     - k8s_common_kinds_debug
 
-- name: "K8S Common - Kinds - Manage - Kind : {{ kind.kind | default('') }}"
+- name: "K8S Common - Kinds - Manage - Kind (Direct) : {{ kind.kind | default('') }}"
   ansible.builtin.debug:
     msg:
       - kind: "{{ kind.kind }}"
@@ -22,6 +22,28 @@
       - wait_timeout: "{{ kind.wait_timeout | default(omit) }}"
   when:
     - kind.template is undefined
+    - kind.manage  | default(true)
+    - kind.kind
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_kinds
+    - k8s_common_kinds_manage
+
+
+- name: "K8S Common - Kinds - Manage - Kind (Through Template) : {{ kind.kind | default('') }}"
+  ansible.builtin.debug:
+    msg:
+      - kind: "{{ kind.kind }}"
+      - api_version: "{{ kind.api_version | default(omit) }}"
+      - name: "{{ kind.name | default(omit) }}"
+      - state: "{{ kind.state | default(omit) }}"
+      - context: "{{ kind.context | default(omit) }}"
+      - kubeconfig: "{{ kind.kubeconfig | default(k8s_common_kubeconfig.file) }}"
+      - wait: "{{ kind.wait | default(omit) }}"
+      - wait_timeout: "{{ kind.wait_timeout | default(omit) }}"
+  when:
+    - kind.template
     - kind.manage  | default(true)
     - kind.kind
   delegate_to: localhost
