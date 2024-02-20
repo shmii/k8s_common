@@ -21,6 +21,7 @@
       - wait: "{{ kind.wait | default(omit) }}"
       - wait_timeout: "{{ kind.wait_timeout | default(omit) }}"
   when:
+    - !kind.template
     - kind.manage  | default(true)
     - kind.kind
   delegate_to: localhost
