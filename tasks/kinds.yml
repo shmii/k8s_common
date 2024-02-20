@@ -9,19 +9,19 @@
     - k8s_common_kinds
     - k8s_common_kinds_debug
 
-# - name: "K8S Common - Kinds - Manage"
-#   ansible.builtin.include_tasks: kind.yml
-#   loop: "{{ k8s_common.kinds | default([], true) }}"
-#   loop_control:
-#     loop_var: kind
-#     pause: "{{ k8s_common.k8s.wait_timeout | default(60) }}"
-#   when:
-#     - k8s_common_kinds_manage  | default(true)
-#     - k8s_common.kinds
-#   delegate_to: localhost
-#   tags:
-#     - k8s_common
-#     - k8s_common_kinds
-#     - k8s_common_kinds_manage
+- name: "K8S Common - Kinds - Manage"
+  ansible.builtin.include_tasks: kind.yml
+  loop: "{{ k8s_common.kinds | default([], true) }}"
+  loop_control:
+    loop_var: kind
+    pause: "{{ k8s_common.k8s.wait_timeout | default(60) }}"
+  when:
+    - k8s_common_kinds_manage  | default(true)
+    - k8s_common.kinds
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_kinds
+    - k8s_common_kinds_manage
 
 ...
