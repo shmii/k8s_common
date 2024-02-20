@@ -1,0 +1,23 @@
+---
+- name: "K8S Common - registries - Debug Informations"
+  ansible.builtin.debug:
+    msg:
+      - k8s_common_registries: "{{ k8s_common_registries | default('') }}"
+    verbosity: "{{ os_common_debug_level | default(1) }}"
+  tags:
+    - k8s_common
+    - k8s_common_kubeconfig
+    - k8s_common_kubeconfig_debug
+
+- name: "K8S Common - registries - Manage"
+  ansible.builtin.template:
+    src: kubeconfig.yml.j2
+    dest: "{{ k8s_common_kubeconfig.file }}"
+    mode: "0600"
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_kubeconfig
+    - k8s_common_kubeconfig_manage
+
+...

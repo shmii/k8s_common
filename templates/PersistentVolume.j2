@@ -1,14 +1,15 @@
 apiVersion: v1
-kind: PersistentVolumeClaim
+kind: PersistentVolume
 Namespace: "{{ kind.namespace }}"
 metadata:
   name: "{{ kind.metadata.name | default('') }}"
   labels:
     type: local
 spec:
-  storageClassName: csi-cinder-classic
+  storageClassName: manual
+  capacity:
+    storage: "{{ kind.spec.capacity.storage }}"
   accessModes:
     - ReadWriteOnce
-  resources:
-    requests:
-      storage:  "{{ kind.spec.resources.requests.storage }}"
+  hostPath:
+    path: ""{{ kind.spec.hostPath.path }}""

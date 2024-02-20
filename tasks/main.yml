@@ -32,6 +32,13 @@
     - k8s_common_kubeconfig
 
 # Run Tasks.
+- name: "K8S Common - Manage registries"
+  ansible.builtin.import_tasks: registries.yml
+  tags:
+    - k8s_common
+    - k8s_common_registries
+
+# Run Tasks.
 - name: "K8S Common - Manage kinds"
   ansible.builtin.import_tasks: kinds.yml
   tags:
