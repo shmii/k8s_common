@@ -23,8 +23,9 @@
   when:
     - registry is defined
     - registry.manage  | default(true)
-    - registry.name | default(omit)
-    - registry.namespace | default(omit)
+    - registry.name  | default(true)
+    - registry.namespace  | default(true)
+    - registry.state == 'present' or registry.state is undefinedefined
 
   delegate_to: localhost
   vars:
