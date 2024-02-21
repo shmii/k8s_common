@@ -10,6 +10,12 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
+- name: toto
+  set_fact:
+     registry.state: ""
+  when: 
+    - registry.state is undefined
+
 - name: "K8S Common - registries - Manage (Through Template) - Manage Namespace : {{ registry.name | default('') }}"
   kubernetes.core.k8s:
     api_version: v1
