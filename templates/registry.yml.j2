@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: "{{ registry.names }}"
+  namespace: "{{ registry.namespace }}"
+data:
+  .dockerconfigjson: "{{ dockerconfigjson_b64 }}"
+type: kubernetes.io/dockerconfigjson
