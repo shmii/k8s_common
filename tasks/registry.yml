@@ -38,7 +38,7 @@
 - name: "K8S Common - registries - Manage (Through Template) - Registry : {{ registry.name | default('') }}"
   ansible.builtin.template:
     src: registry.yml.j2
-    dest: "~/{{ registry.names | default(omit) }}_registry.yml"
+    dest: "~/{{ registry.name | default(omit) }}_registry.yml"
   vars:
     dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
     dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
