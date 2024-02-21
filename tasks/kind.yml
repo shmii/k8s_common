@@ -93,7 +93,7 @@
     server_side_apply: "{{ kind.server_side_apply | default(omit) }}"
     # src: "{{ kind.src | default(omit) }}"
     state: "{{ kind.state | default(omit) }}"
-    template: "{{ kind.template | default(omit) }}"
+    template: "{{ kind.template | default(omit) }}.j2"
     username: "{{ kind.username | default(omit) }}"
     validate: "{{ kind.validate | default(omit) }}"
     validate_certs: "{{ kind.validate_certs | default(omit) }}"
