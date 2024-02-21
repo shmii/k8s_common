@@ -10,20 +10,23 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
-- name: "K8S Common - registries - Manage (Through Template) - Debug Informations - Registry : {{ registry.name | default('') }}"
-  ansible.builtin.debug:
-    msg:
-      - kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
-      - state: "{{ registry.state | default(omit) }}"
-      - namespace: "{{ registry.namespace | default(omit) }}"
-      - template: registry.yml.j2
-      - context: "{{ registry.context | default(k8s_common_k8s_context) }}"
-      - dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
-      - dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
-      - dockerconfigjson: "{ \"auths\" :{\"{{ registry.url }}\":{\"username\":\"{{ registry.login }}\",\"password\":\"{{ registry.password }}\",\"email\":\"{{ registry.login }}\",\"auth\":\"{{ dockerconfigjson_auth_b64 }}\"}}}"
-      - dockerconfigjson_b64: "{{ dockerconfigjson | to_json | b64encode }}" # workaround : using filter to_json to fix simple vs double quote
+- name: "K8S Common - registries - Manage (Through Template) - Manage Namespace : {{ registry.name | default('') }}"
+  kubernetes.core.k8s:
+    api_version: v1
+    kind: Namespace
+    name: "{{ registry.namespace | default(omit) }}"
+    state: present
+    context: "{{ registry.kubeconfig | default(k8s_common_k8s_context) | default(omit) }}"
+    kubeconfig: "/tmp/kubeconfig.yml"
+    wait: true
+    wait_timeout: 60
+  when:
+    - registry is defined
+    - registry.manage  | default(true)
+    - registry.name | default(omit)
+    - registry.namespace | default(omit)
 
-    verbosity: "{{ k8s_common_debug_level | default(1) }}"
+  delegate_to: localhost
   vars:
     dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
     dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
@@ -33,22 +36,8 @@
     - k8s_common
     - k8s_common_registries
     - k8s_common_registry
-    - k8s_common_registry_debug
+    - k8s_common_registry_manage
 
-- name: "K8S Common - registries - Manage (Through Template) - Write Template - Registry : {{ registry.name | default('') }}"
-  ansible.builtin.template:
-    src: registry.yml.j2
-    dest: "~/{{ registry.name | default(omit) }}_registry.yml"
-  vars:
-    dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
-    dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
-    dockerconfigjson: "{ \"auths\" :{\"{{ registry.url }}\":{\"username\":\"{{ registry.login }}\",\"password\":\"{{ registry.password }}\",\"email\":\"{{ registry.login }}\",\"auth\":\"{{ dockerconfigjson_auth_b64 }}\"}}}"
-    dockerconfigjson_b64: "{{ dockerconfigjson | to_json | b64encode }}" # workaround : using filter to_json to fix simple vs double quote
-  tags:
-    - k8s_common
-    - k8s_common_registries
-    - k8s_common_registry
-    - k8s_common_registry_debug
 
 - name: "K8S Common - registries - Manage (Through Template) : {{ registry.name | default('') }}"
   kubernetes.core.k8s:
@@ -56,12 +45,14 @@
     state: "{{ registry.state | default(omit) }}"
     namespace: "{{ registry.namespace | default(omit) }}"
     template: registry.yml.j2
-    context: "{{ registry.kubeconfig | default(k8s_common_k8s_context) }}"
-    wait: yes 
+    context: "{{ registry.kubeconfig | default(k8s_common_k8s_context) | default(omit) }}"
+    wait: true
     wait_timeout: 60
   when:
     - registry is defined
     - registry.manage  | default(true)
+    - registry.name | default(omit)
+    - registry.namespace | default(omit)
   delegate_to: localhost
   vars:
     dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
