@@ -57,6 +57,8 @@
     namespace: "{{ registry.namespace | default(omit) }}"
     template: registry.yml.j2
     context: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) }}"
+    wait: yes 
+    wait_timeout: 60
   when:
     - registry is defined
     - registry.manage  | default(true)
