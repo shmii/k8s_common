@@ -11,8 +11,8 @@
     - k8s_common_registry_debug
 
 - name: toto
-  set_fact:
-     registry.state: ""
+  ansible.builtin.set_fact:
+    registry.state: ""
   when: 
     - registry.state is undefined
 
