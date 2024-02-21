@@ -10,12 +10,7 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
-- name: toto
-  ansible.builtin.set_fact:
-    registry_state: ""
-
-
-- name: toto
+- name: "K8S Common - registries - Manage (Through Template) - Manage Namespace (registry_state) : {{ registry.name | default('') }}"
   ansible.builtin.set_fact:
     registry_state: "{{ registry.state | default('present', true) }}"
 
