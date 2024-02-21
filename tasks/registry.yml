@@ -56,7 +56,7 @@
     state: "{{ registry.state | default(omit) }}"
     namespace: "{{ registry.namespace | default(omit) }}"
     template: registry.yml.j2
-    context: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) }}"
+    context: "{{ registry.kubeconfig | default(k8s_common_k8s_context) }}"
     wait: yes 
     wait_timeout: 60
   when:
