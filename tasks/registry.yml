@@ -1,5 +1,5 @@
 ---
-- name: "K8S Common - registries - Debug Informations - Registry : {{ registry }}"
+- name: "K8S Common - registries - Debug Informations - Registry : {{ registry.name }}"
   ansible.builtin.debug:
     msg:
       - registry: "{{ registry | default('') }}"
@@ -10,10 +10,10 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
-- name: "K8S Common - registries - Manage - Registry : {{ registry }}"
+- name: "K8S Common - registries - Manage - Registry : {{ registry.name }}"
   ansible.builtin.template:
-    src: kubeconfig.yml.j2
-    dest: "{{ k8s_common_kubeconfig.file }}"
+    src: registry.yml.j2
+    dest: "~/{{ registry.name }}_registry.yml"
     mode: "0600"
   delegate_to: localhost
   vars:
@@ -21,7 +21,6 @@
     dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
     dockerconfigjson: "{ \"auths\" :{\"{{ registry.url }}\":{\"username\":\"{{ registry.login }}\",\"password\":\"{{ registry.password }}\",\"email\":\"{{ registry.login }}\",\"auth\":\"{{ dockerconfigjson_auth_b64 }}\"}}}"
     dockerconfigjson_b64: "{{ dockerconfigjson | to_json | b64encode }}" # workaround : using filter to_json to fix simple vs double quote
-
   tags:
     - k8s_common
     - k8s_common_registries
