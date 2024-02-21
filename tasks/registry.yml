@@ -17,7 +17,7 @@
     name: "{{ registry.namespace | default(omit) }}"
     state: present
     context: "{{ registry.kubeconfig | default(k8s_common_k8s_context) | default(omit) }}"
-    kubeconfig: "/tmp/kubeconfig.yml"
+    kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
     wait: true
     wait_timeout: 60
   when:
