@@ -10,8 +10,22 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
+- name: "K8S Common - registries - Manage (Through Template) - Registry : {{ registry.name | default('') }}"
+  ansible.builtin.debug:
+    msg:
+      - kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
+      - state: "{{ registry.state | default(omit) }}"
+      - namespace: "{{ registry.namespace | default(omit) }}"
+      - template: "registry.yml.j2"
+      - context: "{{ registry.context | default(k8s_common_k8s_context) }}"
+    verbosity: "{{ k8s_common_debug_level | default(1) }}"
+  tags:
+    - k8s_common
+    - k8s_common_registries
+    - k8s_common_registry
+    - k8s_common_registry_debug
 
-- name: "K8S Common - Kinds - Manage - Kind (Through Template) : {{ registry.name | default('') }}"
+- name: "K8S Common - registries - Manage (Through Template) : {{ registry.name | default('') }}"
   kubernetes.core.k8s:
     kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
     state: "{{ registry.state | default(omit) }}"
