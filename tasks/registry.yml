@@ -1,5 +1,5 @@
 ---
-- name: "K8S Common - registries - Debug Informations - Registry : {{ registry.name }}"
+- name: "K8S Common - registries - Debug Informations - Registry : {{ registry.name | default('') }}"
   ansible.builtin.debug:
     msg:
       - registry: "{{ registry | default('') }}"
@@ -10,11 +10,17 @@
     - k8s_common_registry
     - k8s_common_registry_debug
 
-- name: "K8S Common - registries - Manage - Registry : {{ registry.name }}"
-  ansible.builtin.template:
-    src: registry.yml.j2
-    dest: "~/{{ registry.name }}_registry.yml"
-    mode: "0600"
+
+- name: "K8S Common - Kinds - Manage - Kind (Through Template) : {{ registry.name | default('') }}"
+  kubernetes.core.k8s:
+    kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
+    state: "{{ registry.state | default(omit) }}"
+    namespace: "{{ registry.namespace | default(omit) }}"
+    template: "registry.yml.j2"
+    context: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) }}"
+  when:
+    - registry is defined
+    - registry.manage  | default(true)
   delegate_to: localhost
   vars:
     dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"

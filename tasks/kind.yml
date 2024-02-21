@@ -79,7 +79,7 @@
     impersonate_groups: "{{ kind.impersonate_groups | default(omit) }}"
     impersonate_user: "{{ kind.impersonate_user | default(omit) }}"
     kind: "{{ kind.kind | default(omit) }}"
-    kubeconfig: "{{ kind.kubeconfig | default(k8s_common_kubeconfig.file) }}"
+    kubeconfig: "{{ registry.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
     label_selectors: "{{ kind.label_selectors | default(omit) }}"
     merge_type: "{{ kind.merge_type | default(omit) }}"
     name: "{{ kind.name | default(omit) }}"
