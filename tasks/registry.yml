@@ -25,7 +25,8 @@
     - registry.manage  | default(true)
     - registry.name  | default(true)
     - registry.namespace  | default(true)
-    - ( registry.state == 'present' | default('present') ) or registry.state is undefined
+    - registry.state is undefined
+    - registry.state != 'present' | default('present')
 
   delegate_to: localhost
   vars:
