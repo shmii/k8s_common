@@ -12,9 +12,12 @@
 
 - name: toto
   ansible.builtin.set_fact:
-    registry.state: ""
-  when: 
-    - registry.state is undefined
+    registry_state: ""
+
+
+- name: toto
+  ansible.builtin.set_fact:
+    registry_state: "{{ registry.state | default('present', true) }}"
 
 - name: "K8S Common - registries - Manage (Through Template) - Manage Namespace : {{ registry.name | default('') }}"
   kubernetes.core.k8s:
@@ -32,7 +35,7 @@
     - registry.name  | default(true)
     - registry.namespace  | default(true)
     - registry.state is undefined
-    - "{{ registry.state != 'present' | default('present', true) }}"
+    - registry_state == 'present'
 
   delegate_to: localhost
   vars:
