@@ -18,7 +18,17 @@
       - namespace: "{{ registry.namespace | default(omit) }}"
       - template: "registry.yml.j2"
       - context: "{{ registry.context | default(k8s_common_k8s_context) }}"
+      - dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
+      - dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
+      - dockerconfigjson: "{ \"auths\" :{\"{{ registry.url }}\":{\"username\":\"{{ registry.login }}\",\"password\":\"{{ registry.password }}\",\"email\":\"{{ registry.login }}\",\"auth\":\"{{ dockerconfigjson_auth_b64 }}\"}}}"
+      - dockerconfigjson_b64: "{{ dockerconfigjson | to_json | b64encode }}" # workaround : using filter to_json to fix simple vs double quote
+
     verbosity: "{{ k8s_common_debug_level | default(1) }}"
+  vars:
+    dockerconfigjson_auth: "{{ registry.login ~ ':' ~ registry.password }}"
+    dockerconfigjson_auth_b64: "{{ dockerconfigjson_auth | b64encode }}"
+    dockerconfigjson: "{ \"auths\" :{\"{{ registry.url }}\":{\"username\":\"{{ registry.login }}\",\"password\":\"{{ registry.password }}\",\"email\":\"{{ registry.login }}\",\"auth\":\"{{ dockerconfigjson_auth_b64 }}\"}}}"
+    dockerconfigjson_b64: "{{ dockerconfigjson | to_json | b64encode }}" # workaround : using filter to_json to fix simple vs double quote
   tags:
     - k8s_common
     - k8s_common_registries
