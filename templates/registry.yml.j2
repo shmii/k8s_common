@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "{{ registry.name }}"
+  name: "{{ registry.name | default(omit) }}"
   namespace: "{{ registry.namespace | default(omit) }}"
 data:
-  .dockerconfigjson: "{{ dockerconfigjson_b64 }}"
+  .dockerconfigjson: "{{ dockerconfigjson_b64 | default(omit) }}"
 type: kubernetes.io/dockerconfigjson

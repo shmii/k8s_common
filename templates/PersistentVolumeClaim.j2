@@ -8,7 +8,7 @@ metadata:
 spec:
   storageClassName: csi-cinder-classic
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   resources:
     requests:
       storage:  "{{ kind.spec.resources.requests.storage }}"
