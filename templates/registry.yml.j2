@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: "{{ registry.names }}"
+  name: "{{ registry.name }}"
   namespace: "{{ registry.namespace }}"
 data:
   .dockerconfigjson: "{{ dockerconfigjson_b64 }}"
