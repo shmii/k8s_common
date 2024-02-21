@@ -26,7 +26,7 @@
     - registry.name  | default(true)
     - registry.namespace  | default(true)
     - registry.state is undefined
-    - registry.state != 'present' | default('present', true)
+    - "{{ registry.state != 'present' | default('present', true) }}"
 
   delegate_to: localhost
   vars:
