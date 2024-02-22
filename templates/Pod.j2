@@ -6,7 +6,7 @@ Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
-{% if kind.initContainers %}
+{% if kind.initContainers | default(omit) %}
   initContainers:
   {% for initContainer in kind.initContainers | default(omit) -%}
     - name: {{ initContainer.name | default(omit) }}
@@ -25,7 +25,7 @@ spec:
       {%- endfor %}
   {%- endfor %}
 {% endif %}
-
+{% if kind.containers | default(omit) %}
   containers:
   {% for container in kind.containers | default(omit) %}
     - name: {{ container.name | default(omit) }}
@@ -47,6 +47,6 @@ spec:
   {% for imagePullSecret in kind.imagePullSecrets | default(omit) %}
     - name: {{ imagePullSecret.name | default(omit) }}
   {% endfor %}
-
+{% endif %}
 
 ...
