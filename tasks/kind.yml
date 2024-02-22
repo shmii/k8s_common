@@ -61,6 +61,23 @@
     - k8s_common_kinds_manage
     - k8s_common_kinds_direct
 
+- name: "K8S Common - Kinds - Manage - Kind (Through Template) - Save File: {{ kind.kind | default('') }}"
+  ansible.builtin.template:
+    src: "{{ kind.template | default(omit) }}.j2"
+    dest: "~/{{ kind.template | default(omit) }}_{{ kind.name | default('') }}.yaml"
+    mode: '0644'
+  when:
+    - kind.template is defined
+    - kind.src is undefined
+    - kind.resource_definition is undefined
+    - kind.manage  | default(true)
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_kinds
+    - k8s_common_kinds_manage
+    - k8s_common_kinds_manage_write_template
+
 - name: "K8S Common - Kinds - Manage - Kind (Through Template) : {{ kind.kind | default('') }}"
   kubernetes.core.k8s:
     api_key: "{{ kind.api_key | default(omit) }}"

@@ -6,18 +6,39 @@ Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
+{% if kind.initContainers %}
   initContainers:
-  {% for initContainer in kind.initContainers | default(omit) %}
+  {% for initContainer in kind.initContainers | default(omit) -%}
     - name: {{ initContainer.name | default(omit) }}
       image: {{ initContainer.image | default(omit) }}
       command: {{ initContainer.command | default(omit) }}
+      workingDir: "{{ initContainer.workingDir | default(omit) }}"
       env:
-      {% for env in initContainers.env | default(omit) %}
+      {% for env in initContainers.env | default(omit) -%}
+        - name: {{ env.name | default(omit) }}
+          value: "{{ env.value | default(omit) }}"
+      {%- endfor %}
+      volumeMounts:
+      {% for volume in initContainers.volumeMounts | default(omit) -%}
+        - mountPath: "{{ volume.mountPath | default(omit) }}"
+          name: {{ volume.name | default(omit) }}
+      {%- endfor %}
+  {%- endfor %}
+{% endif %}
+
+  containers:
+  {% for container in kind.containers | default(omit) %}
+    - name: {{ container.name | default(omit) }}
+      image: {{ container.image | default(omit) }}
+      command: {{ container.command | default(omit) }}
+      workingDir: "{{ container.workingDir | default(omit) }}"
+      env:
+      {% for env in container.env | default(omit) %}
         - name: {{ env.name | default(omit) }}
           value: "{{ env.value | default(omit) }}"
       {% endfor %}
       volumeMounts:
-      {% for volume in initContainers.volumeMounts | default(omit) %}
+      {% for volume in container.volumeMounts | default(omit) %}
         - mountPath: "{{ volume.mountPath | default(omit) }}"
           name: {{ volume.name | default(omit) }}
       {% endfor %}
@@ -27,43 +48,5 @@ spec:
     - name: {{ imagePullSecret.name | default(omit) }}
   {% endfor %}
 
-
-
-  
-
-  containers:
-    - name: "{{ job.name }}-container"
-      image: "{{ job.image }}"
-      workingDir: "{{ job.working_directory }}"
-      command: ["sh", "-c", "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID && \
-        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY && \
-        aws configure set region $AWS_REGION && \
-        aws configure set endpoint_url $AWS_ENDPOINT_URL && \
-        sleep 5 && \ 
-        {{ job.cmd }} && \
-        {{ aws_cmd_export_output }} echo $? "]
-      env:
-      - name: AWS_ACCESS_KEY_ID 
-        value: "{{ storage.s3.accesskeyid }}"
-      - name: AWS_SECRET_ACCESS_KEY 
-        value: "{{ storage.s3.secretaccesskey }}"
-      - name: AWS_REGION 
-        value: "{{ storage.s3.region }}"
-      - name: AWS_ENDPOINT_URL
-        value: "{{ storage.s3.endpoint }}"
-      - name: AWS_BUCKET_NAME 
-        value: "{{ storage.s3.bucket.name }}"
-      - name: MOUNT_PATH 
-        value: "{{ storage.data_path }}"
-      volumeMounts:
-      - mountPath: "{{ storage.data_path }}"
-        name: data-volume
-  imagePullSecrets:
-      - name: gaelregcred
-
-  volumes:
-  - name: data-volume
-    persistentVolumeClaim:
-      claimName: "{{ persistent_volume_claim_name }}"
 
 ...
