@@ -6,7 +6,7 @@ Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
-{% if kind.initContainers is defined %}
+{% if kind.initContainers is defined -%}
   initContainers:
   {% for initContainer in kind.initContainers | default(omit) %}
     - name: {{ initContainer.name | default(omit) }}
@@ -15,6 +15,5 @@ spec:
       workingDir: "{{ initContainer.workingDir | default(omit) }}"
   {% endfor %}
 {% endif %}
-
 
 ...
