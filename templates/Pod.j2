@@ -8,12 +8,12 @@ metadata:
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
-  {% for initContainer in kind.initContainers | default(omit) %}
+{% for initContainer in kind.initContainers | default(omit) %}
     - name: {{ initContainer.name | default(omit) }}
       image: {{ initContainer.image | default(omit) }}
       command: {{ initContainer.command | default(omit) }}
       workingDir: "{{ initContainer.workingDir | default(omit) }}"
-  {% endfor %}
+{% endfor %}
 {% endif %}
 
 ...
