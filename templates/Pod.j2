@@ -17,13 +17,13 @@ spec:
       {% for env in initContainers.env | default(omit) -%}
         - name: {{ env.name | default(omit) }}
           value: "{{ env.value | default(omit) }}"
-      {%- endfor %}
+      {% endfor %}
       volumeMounts:
       {% for volume in initContainers.volumeMounts | default(omit) -%}
         - mountPath: "{{ volume.mountPath | default(omit) }}"
           name: {{ volume.name | default(omit) }}
-      {%- endfor %}
-  {%- endfor %}
+      {% endfor %}
+  {% endfor %}
 {% endif %}
 {% if kind.containers | default(omit) %}
   containers:
