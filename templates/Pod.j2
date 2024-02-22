@@ -9,44 +9,12 @@ spec:
 {% if kind.initContainers is defined %}
   initContainers:
   {% for initContainer in kind.initContainers | default(omit) %}
-  {% if initContainer.name | default(omit) %}- name: {{ initContainer.name | default(omit) }}
+    - name: {{ initContainer.name | default(omit) }}
       image: {{ initContainer.image | default(omit) }}
       command: {{ initContainer.command | default(omit) }}
       workingDir: "{{ initContainer.workingDir | default(omit) }}"
-      env:
-      {% for env in initContainers.env | default(omit) %}
-        - name: {{ env.name | default(omit) }}
-          value: "{{ env.value | default(omit) }}"
-      {% endfor %}
-      volumeMounts:
-      {% for volume in initContainers.volumeMounts | default(omit) %}
-        - mountPath: "{{ volume.mountPath | default(omit) }}"
-          name: {{ volume.name | default(omit) }}
-      {% endfor %}
   {% endfor %}
 {% endif %}
-{% if kind.containers | default(omit) %}
-  containers:
-  {% for container in kind.containers | default(omit) %}
-    - name: {{ container.name | default(omit) }}
-      image: {{ container.image | default(omit) }}
-      command: {{ container.command | default(omit) }}
-      workingDir: "{{ container.workingDir | default(omit) }}"
-      env:
-      {% for env in container.env | default(omit) %}
-        - name: {{ env.name | default(omit) }}
-          value: "{{ env.value | default(omit) }}"
-      {% endfor %}
-      volumeMounts:
-      {% for volume in container.volumeMounts | default(omit) %}
-        - mountPath: "{{ volume.mountPath | default(omit) }}"
-          name: {{ volume.name | default(omit) }}
-      {% endfor %}
-  {% endfor %}
-  imagePullSecrets:
-  {% for imagePullSecret in kind.imagePullSecrets | default(omit) %}
-    - name: {{ imagePullSecret.name | default(omit) }}
-  {% endfor %}
-{% endif %}
+
 
 ...
