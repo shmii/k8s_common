@@ -14,7 +14,7 @@ spec:
       {% if initContainer.workingDir is defined -%}workingDir: "{% endif %}{{ initContainer.workingDir | default('') }}{% if initContainer.workingDir is defined -%}"{% endif %}
 {% if initContainer.env is defined %}
       env:
-      {% for env in initContainer.env | default([], true) -%}
+      {% for env in initContainer.env | default([], true) %}
         - {% if env.name is defined -%}name: {% endif %}{{ initContainer.name | default('') }}
           {% if env.value is defined -%}value: {% endif %}{{ initContainer.image | default('') }}
       {% endfor %}
