@@ -2,17 +2,16 @@
 apiVersion: v1
 kind: Pod
 Namespace: "{{ kind.namespace | default(omit) }}"
-
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
-{% for initContainer in kind.initContainers | default(omit) %}
-    - name: {{ initContainer.name | default(omit) }}
-      image: {{ initContainer.image | default(omit) }}
-      command: {{ initContainer.command | default(omit) }}
-      workingDir: "{{ initContainer.workingDir | default(omit) }}"
+{% for initContainer in kind.initContainers | default('') %}
+    - name: {{ initContainer.name | default('') }}
+      image: {{ initContainer.image | default('') }}
+      command: {{ initContainer.command | default('') }}
+      workingDir: "{{ initContainer.workingDir | default('') }}"
 {% endfor %}
 {% endif %}
 
