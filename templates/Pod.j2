@@ -8,18 +8,18 @@ metadata:
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
-  {% for initContainer in kind.initContainers | default(omit) -%}
+  {% for initContainer in kind.initContainers | default(omit) %}
   {% if initContainer.name | default(omit) %}- name: {{ initContainer.name | default(omit) }}
       image: {{ initContainer.image | default(omit) }}
       command: {{ initContainer.command | default(omit) }}
       workingDir: "{{ initContainer.workingDir | default(omit) }}"
       env:
-      {% for env in initContainers.env | default(omit) -%}
+      {% for env in initContainers.env | default(omit) %}
         - name: {{ env.name | default(omit) }}
           value: "{{ env.value | default(omit) }}"
       {% endfor %}
       volumeMounts:
-      {% for volume in initContainers.volumeMounts | default(omit) -%}
+      {% for volume in initContainers.volumeMounts | default(omit) %}
         - mountPath: "{{ volume.mountPath | default(omit) }}"
           name: {{ volume.name | default(omit) }}
       {% endfor %}
