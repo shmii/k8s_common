@@ -8,10 +8,10 @@ spec:
 {% if kind.initContainers is defined %}
   initContainers:
 {% for initContainer in kind.initContainers | default([], true) %}
-    - {% if initContainer.name is defined %}name: {% endif %}{{ initContainer.name | default('') }}
-      {% if initContainer.image is defined %}image: {% endif %}{{ initContainer.image | default('') }}
-      {% if initContainer.command is defined %}command: "{% endif %}{{ initContainer.command | default('') }}{% if initContainer.command is defined %}"{% endif %}
-      {% if initContainer.workingDir is defined %}workingDir: "{% endif %}{{ initContainer.workingDir | default('') }}{% if initContainer.workingDir is defined %}"{% endif %}
+{% if initContainer.image is defined %}    - image: {% endif %}{{ initContainer.image | default('') }}
+{% if initContainer.name is defined %}      name: {% endif %}{{ initContainer.name | default('') }}
+{% if initContainer.command is defined %}      command: "{% endif %}{{ initContainer.command | default('') }}{% if initContainer.command is defined %}"{% endif %}
+{% if initContainer.workingDir is defined %}      workingDir: "{% endif %}{{ initContainer.workingDir | default('') }}{% if initContainer.workingDir is defined %}"{% endif %}
 
 {% if initContainer.env is defined %}
       env:
