@@ -42,16 +42,15 @@ spec:
 {% endfor %}
 {% endif %}
 
-{% if kind.volumes is defined %}
+{%- if kind.volumes is defined %}
   volumes:
-{% for volume in kind.volumes | default([], true) %}
-{% if volume.name is defined %}    - name: {% endif %}{{ container.image | default('') }}
-{% if volume.persistentVolumeClaim is defined %}
-{% for pvc in volume.persistentVolumeClaim | default([], true) %}
-{% if pvc.claimName is defined %}    - claimName: {% endif %}{{ pvc.claimName | default('') }}
-{% endfor %}
-{% if kind.container is defined %}
-{% endif %}
-{% endfor %}
-{% endif %}
+  {%- for volume in kind.volumes | default([], true) %}
+    {%- if volume.name is defined %}    - name: {% endif %}{{ container.image | default('') }}
+    {%- if volume.persistentVolumeClaim is defined %}
+      {%- for pvc in volume.persistentVolumeClaim | default([], true) %}
+        {% if pvc.claimName is defined %}    - claimName: {% endif %}{{ pvc.claimName | default('') }}
+      {% endfor %}
+    {% endif %}
+  {%- endfor %}
+{%- endif %}
 ...
