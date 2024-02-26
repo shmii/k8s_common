@@ -11,16 +11,16 @@ spec:
     {%- if initContainer.image is defined %}
     - image: {{ initContainer.image | default('') }}
     {% endif %}
-    {% if initContainer.name is defined %}
+    {%- if initContainer.name is defined %}
     name: {{ initContainer.name | default('') }}
     {% endif %}
-    {% if initContainer.command is defined %}
+    {%- if initContainer.command is defined %}
     command: [{{ initContainer.command | default('')}}]
     {% endif %} 
-    {% if initContainer.workingDir is defined %}
+    {%- if initContainer.workingDir is defined %}
     workingDir: "{{ initContainer.workingDir | default('') }}"
     {% endif %}
-    {% if initContainer.env is defined %}
+    {%- if initContainer.env is defined %}
           env:
     {% for env in initContainer.env | default([], true) %}
             - {% if env.name is defined %}name: {% endif %}{{ env.name | default('') }}
