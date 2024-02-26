@@ -7,6 +7,7 @@ metadata:
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
+
   {%- for initContainer in kind.initContainers | default([], true) %}
     {%- if initContainer.image is defined %}    - image: {% endif %}{{ initContainer.image | default('') }}
     {% if initContainer.name is defined %}      name: {% endif %}{{ initContainer.name | default('') }}
@@ -22,9 +23,9 @@ spec:
     {% endif %}
   {% endfor %}
 {% endif %}
-
 {%- if kind.container is defined %}
   containers:
+
 {% for container in kind.containers | default([], true) %}
 {% if container.image is defined %}    - image: {% endif %}{{ container.image | default('') }}
 {% if container.name is defined %}      name: {% endif %}{{ container.name | default('') }}
@@ -40,9 +41,9 @@ spec:
 {% endif %}
 {% endfor %}
 {% endif %}
-
 {%- if kind.volumes is defined %}
   volumes:
+
   {% for volume in kind.volumes | default([], true) %}
     {%- if volume.name is defined %}    - name: {% endif %}{{ volume.name | default('') }}
     {%- if volume.persistentVolumeClaim is defined %}
