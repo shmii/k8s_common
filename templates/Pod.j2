@@ -5,17 +5,21 @@ Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
-
 {% if kind.initContainers is defined %}
   initContainers:
   {% for initContainer in kind.initContainers | default([], true) %}
     {%- if initContainer.image is defined %}
-        - image:{{ initContainer.image | default('') }}
+    - image: {{ initContainer.image | default('') }}
     {% endif %}
-    {% if initContainer.name is defined %}      name: {% endif %}{{ initContainer.name | default('') }}
-    {% if initContainer.command is defined %}      command: [{% endif %}{{ initContainer.command | default('') }}
-    {% if initContainer.workingDir is defined %}      workingDir: "{% endif %}{{ initContainer.workingDir | default('') }}{% if initContainer.workingDir is defined %}"{% endif %}
-
+    {% if initContainer.name is defined %}
+    name: {{ initContainer.name | default('') }}
+    {% endif %}
+    {% if initContainer.command is defined %}
+    command: [{{ initContainer.command | default('')}}]
+    {% endif %} 
+    {% if initContainer.workingDir is defined %}
+    workingDir: "{{ initContainer.workingDir | default('') }}"
+    {% endif %}
     {% if initContainer.env is defined %}
           env:
     {% for env in initContainer.env | default([], true) %}
