@@ -7,8 +7,7 @@ metadata:
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
-
-  {%- for initContainer in kind.initContainers | default([], true) %}
+  {% for initContainer in kind.initContainers | default([], true) -%}
     {%- if initContainer.image is defined %}
     - image: {{ initContainer.image | default('') }}
     {% endif %}
@@ -32,7 +31,8 @@ spec:
       {% endif %}
     {% endfor %}
     {% endif %}
-  {% endfor %}
+
+  {%- endfor %}
 
 {% endif %}
 
