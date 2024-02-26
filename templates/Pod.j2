@@ -5,12 +5,13 @@ Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
 spec:
+
 {% if kind.initContainers is defined %}
   initContainers:
   {% for initContainer in kind.initContainers | default([], true) %}
     {%- if initContainer.image is defined %}    - image: {% endif %}{{ initContainer.image | default('') }}
     {% if initContainer.name is defined %}      name: {% endif %}{{ initContainer.name | default('') }}
-    {% if initContainer.command is defined %}      command: [{% endif %}{{ initContainer.command | default('') }}{% if initContainer.command is defined %}]{% endif %}
+    {% if initContainer.command is defined %}      command: [{% endif %}{{ initContainer.command | default('') }}
     {% if initContainer.workingDir is defined %}      workingDir: "{% endif %}{{ initContainer.workingDir | default('') }}{% if initContainer.workingDir is defined %}"{% endif %}
 
     {% if initContainer.env is defined %}
@@ -22,6 +23,7 @@ spec:
     {% endif %}
   {% endfor %}
 {% endif %}
+
 {%- if kind.container is defined %}
   containers:
 
@@ -40,6 +42,7 @@ spec:
 {% endif %}
 {% endfor %}
 {% endif %}
+
 {%- if kind.volumes is defined %}
   volumes:
 
