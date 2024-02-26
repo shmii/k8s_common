@@ -45,6 +45,7 @@ spec:
     {%- if volume.name is defined %}    - name: {% endif %}{{ volume.name | default('') }}
     {%- if volume.persistentVolumeClaim is defined %}
       {%- for pvc in volume.persistentVolumeClaim | default([], true) %}
+      test
         {% if pvc.claimName is defined %}    - claimName: {% endif %}{{ pvc.claimName | default('') }}
       {% endfor %}
     {% endif %}
