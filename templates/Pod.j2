@@ -42,7 +42,7 @@ spec:
 {%- if kind.volumes is defined %}
   volumes:
   {% for volume in kind.volumes | default([], true) %}
-    {%- if volume.name is defined %}    - name: {% endif %}{{ container.image | default('') }}
+    {%- if volume.name is defined %}    - name: {% endif %}{{ volume.name | default('') }}
     {%- if volume.persistentVolumeClaim is defined %}
       {%- for pvc in volume.persistentVolumeClaim | default([], true) %}
         {% if pvc.claimName is defined %}    - claimName: {% endif %}{{ pvc.claimName | default('') }}
@@ -50,4 +50,6 @@ spec:
     {% endif %}
   {% endfor %}
 {% endif %}
+
+
 ...
