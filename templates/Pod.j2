@@ -7,65 +7,85 @@ metadata:
 spec:
 {% if kind.initContainers is defined %}
   initContainers:
-  {% for initContainer in kind.initContainers | default([], true) -%}
-    {%- if initContainer.image is defined %}
+{% for initContainer in kind.initContainers | default([], true) %}
+{% if initContainer.image is defined %}
     - image: {{ initContainer.image | default('') }}
-    {% endif %}
-    {%- if initContainer.name is defined %}
-    name: {{ initContainer.name | default('') }}
-    {% endif %}
-    {%- if initContainer.command is defined %}
-    command: [{{ initContainer.command | default('')}}]
-    {% endif %} 
-    {%- if initContainer.workingDir is defined %}
-    workingDir: "{{ initContainer.workingDir | default('') }}"
-    {% endif %}
-    {%- if initContainer.env is defined %}
-    env:
-    {%- for env in initContainer.env | default([], true) %}
-      {% if env.name is defined %}
-      - name: {{ env.name | default('') }}
-      {% endif %}
-      {% if env.value is defined %}
-        value: {{ env.value | default('') }}
-      {% endif %}
-    {% endfor %}
-    {% endif %}
-
-  {%- endfor %}
-
+{% endif %}
+{% if initContainer.name is defined %}
+      name: {{ initContainer.name | default('') }}
+{% endif %}
+{% if initContainer.command is defined %}
+      command: [{{ initContainer.command | default('')}}]
+{% endif %} 
+{% if initContainer.workingDir is defined %}
+      workingDir: "{{ initContainer.workingDir | default('') }}"
+{% endif %}
+{% if initContainer.env is defined %}
+      env:
+{% for env in initContainer.env | default([], true) %}
+{% if env.name is defined %}
+        - name: {{ env.name | default('') }}
+{% endif %}
+{% if env.value is defined %}
+          value: {{ env.value | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
-{%- if kind.container is defined %}
+{% if kind.containers is defined %}
   containers:
-
 {% for container in kind.containers | default([], true) %}
-{% if container.image is defined %}    - image: {% endif %}{{ container.image | default('') }}
-{% if container.name is defined %}      name: {% endif %}{{ container.name | default('') }}
-{% if container.command is defined %}      command: [{% endif %}{{ container.command | default('') }}{% if container.command is defined %}]{% endif %}
-{% if container.workingDir is defined %}      workingDir: "{% endif %}{{ container.workingDir | default('') }}{% if container.workingDir is defined %}"{% endif %}
-
+{% if container.image is defined %}
+    - image: {{ container.image | default('') }}
+{% endif %}
+{% if container.name is defined %}
+      name: {{ container.name | default('') }}
+{% endif %}
+{% if container.command is defined %}
+      command: [{{ container.command | default('') }}]
+{% endif %}
+{% if container.workingDir is defined %}
+      workingDir: "{{ container.workingDir | default('') }}"
+{% endif %}
 {% if container.env is defined %}
       env:
 {% for env in container.env | default([], true) %}
-        - {% if env.name is defined %}name: {% endif %}{{ env.name | default('') }}
-          {% if env.value is defined %}value: {% endif %}{{ env.value | default('') }}
+{% if env.name is defined %}
+        - name: {{ env.name | default('') }}
+{% endif %}
+{% if env.value is defined %}
+          value: {{ env.value | default('') }}
+{% endif %}
 {% endfor %}
 {% endif %}
 {% endfor %}
 {% endif %}
 
-{%- if kind.volumes is defined %}
+
+{% if kind.imagePullSecrets is defined %}
+  imagePullSecrets:
+{% for imagePullSecret in kind.imagePullSecrets | default([], true) %}
+{% if imagePullSecret.name is defined %}
+    - name: {{ imagePullSecret.name | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if kind.volumes is defined %}
   volumes:
-
-  {% for volume in kind.volumes | default([], true) %}
-    {%- if volume.name is defined %}    - name: {% endif %}{{ volume.name | default('') }}
-    {%- if volume.persistentVolumeClaim is defined %}
-
-    persistentVolumeClaim:
-      {% if volume.persistentVolumeClaim.claimName is defined %}   claimName: {% endif %}{{ volume.persistentVolumeClaim.claimName | default('') }}
-    {% endif %}
-  {% endfor %}
+{% for volume in kind.volumes | default([], true) %}
+{% if volume.name is defined %}
+    - name: {{ volume.name | default('') }}
+{% endif %}
+{% if volume.persistentVolumeClaim is defined %}
+      persistentVolumeClaim:
+{% if volume.persistentVolumeClaim.claimName is defined %}
+      claimName: {{ volume.persistentVolumeClaim.claimName | default('') }}
+{% endif %}
+{% endif %}
+{% endfor %}
 {% endif %}
 
 
