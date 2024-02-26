@@ -21,11 +21,11 @@ spec:
     workingDir: "{{ initContainer.workingDir | default('') }}"
     {%- endif %}
     {%- if initContainer.env is defined %}
-            env:
-      {% for env in initContainer.env | default([], true) %}
-              - {% if env.name is defined %}name: {% endif %}{{ env.name | default('') }}
-                {% if env.value is defined %}value: {% endif %}{{ env.value | default('') }}
-      {% endfor %}
+    env:
+    {%- for env in initContainer.env | default([], true) %}
+      - {% if env.name is defined %}name: {% endif %}{{ env.name | default('') }}
+        {% if env.value is defined %}value: {% endif %}{{ env.value | default('') }}
+    {%- endfor %}
     {%- endif %}
   {% endfor %}
 {% endif %}
