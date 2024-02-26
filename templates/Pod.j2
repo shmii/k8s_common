@@ -23,4 +23,35 @@ spec:
 {% endfor %}
 {% endif %}
 
+
+{% if kind.container is defined %}
+  containers:
+{% for container in kind.containers | default([], true) %}
+{% if container.image is defined %}    - image: {% endif %}{{ container.image | default('') }}
+{% if container.name is defined %}      name: {% endif %}{{ container.name | default('') }}
+{% if container.command is defined %}      command: [{% endif %}{{ container.command | default('') }}{% if container.command is defined %}]{% endif %}
+{% if container.workingDir is defined %}      workingDir: "{% endif %}{{ container.workingDir | default('') }}{% if container.workingDir is defined %}"{% endif %}
+
+{% if container.env is defined %}
+      env:
+{% for env in container.env | default([], true) %}
+        - {% if env.name is defined %}name: {% endif %}{{ env.name | default('') }}
+          {% if env.value is defined %}value: {% endif %}{{ env.value | default('') }}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if kind.volumes is defined %}
+  volumes:
+{% for volume in kind.volumes | default([], true) %}
+{% if volume.name is defined %}    - name: {% endif %}{{ container.image | default('') }}
+{% if volume.persistentVolumeClaim is defined %}
+{% for pvc in volume.persistentVolumeClaim | default([], true) %}
+{% if pvc.claimName is defined %}    - claimName: {% endif %}{{ pvc.claimName | default('') }}
+{% endfor %}
+{% if kind.container is defined %}
+{% endif %}
+{% endfor %}
+{% endif %}
 ...
