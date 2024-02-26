@@ -22,9 +22,7 @@ spec:
 {% endif %}
 {% endfor %}
 {% endif %}
-
-
-{% if kind.container is defined %}
+{%- if kind.container is defined %}
   containers:
 {% for container in kind.containers | default([], true) %}
 {% if container.image is defined %}    - image: {% endif %}{{ container.image | default('') }}
@@ -41,7 +39,6 @@ spec:
 {% endif %}
 {% endfor %}
 {% endif %}
-test
 {%- if kind.volumes is defined %}
   volumes:
   {%- for volume in kind.volumes | default([], true) %}
