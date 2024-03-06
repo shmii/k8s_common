@@ -81,7 +81,7 @@ spec:
 {% if volume.persistentVolumeClaim is defined %}
       persistentVolumeClaim:
 {% if volume.persistentVolumeClaim.claimName is defined %}
-      claimName: {{ volume.persistentVolumeClaim.claimName | default('') }}
+        claimName: {{ volume.persistentVolumeClaim.claimName | default('') }}
 {% endif %}
 {% endif %}
 {% endfor %}
