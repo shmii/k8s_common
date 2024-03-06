@@ -16,7 +16,7 @@ spec:
 {% endif %}
 {% if initContainer.command is defined %}
       command: [{{ initContainer.command | default('')}}]
-{% endif %} 
+{% endif %}
 {% if initContainer.workingDir is defined %}
       workingDir: "{{ initContainer.workingDir | default('') }}"
 {% endif %}
@@ -62,7 +62,6 @@ spec:
 {% endif %}
 {% endfor %}
 {% endif %}
-
 
 {% if kind.imagePullSecrets is defined %}
   imagePullSecrets:
