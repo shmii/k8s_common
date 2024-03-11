@@ -1,15 +1,15 @@
 ---
-apiVersion: v1
+apiVersion: "{{ resource.apiVersion | default(omit) }}"
 kind: Pod
 metadata:
-  name: "{{ kind.Pod.name | default(omit) }}"
-  labels: "{{ kind.Pod.labels | default(omit) }}"
-  namespace: "{{ kind.Pod.namespace | default(omit) }}"
+  name: "{{ resource.Pod.name | default(omit) }}"
+  labels: "{{ resource.Pod.labels | default(omit) }}"
+  namespace: "{{ resource.Pod.namespace | default(omit) }}"
 
 spec:
-  activeDeadlineSeconds: "{{ kind.Pod.activeDeadlineSeconds | default(omit) }}"
-  affinity: "{{ kind.Pod.affinity | default(omit) }}"
-  AutomountServiceAccountToken: "{{ kind.Pod.AutomountServiceAccountToken | default(omit) }}"
+  activeDeadlineSeconds: "{{ resource.Pod.activeDeadlineSeconds | default(omit) }}"
+  affinity: "{{ resource.Pod.affinity | default(omit) }}"
+  AutomountServiceAccountToken: "{{ resource.Pod.AutomountServiceAccountToken | default(omit) }}"
 {% if kind.dnsConfig is defined %}
   dnsConfig:
 {% if kind.dnsConfig.nameservers is defined %}
@@ -36,8 +36,8 @@ spec:
 {% endfor %}
 {% endif %}
 {% endif %}
-  dnsPolicy: "{{ kind.Pod.dnsPolicy | default(omit) }}"
-  enableServiceLinks: "{{ kind.Pod.enableServiceLinks | default(omit) }}"
+  dnsPolicy: "{{ resource.Pod.dnsPolicy | default(omit) }}"
+  enableServiceLinks: "{{ resource.Pod.enableServiceLinks | default(omit) }}"
 {% if kind.initContainers is defined %}
   initContainers:
 {% for initContainer in kind.initContainers | default([], true) %}
