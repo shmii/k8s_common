@@ -1,10 +1,43 @@
 ---
 apiVersion: v1
 kind: Pod
-Namespace: "{{ kind.namespace | default(omit) }}"
 metadata:
   name: "{{ kind.Pod.name | default(omit) }}"
+  labels: "{{ kind.Pod.labels | default(omit) }}"
+  namespace: "{{ kind.Pod.namespace | default(omit) }}"
+
 spec:
+  activeDeadlineSeconds: "{{ kind.Pod.activeDeadlineSeconds | default(omit) }}"
+  affinity: "{{ kind.Pod.affinity | default(omit) }}"
+  AutomountServiceAccountToken: "{{ kind.Pod.AutomountServiceAccountToken | default(omit) }}"
+{% if kind.dnsConfig is defined %}
+  dnsConfig:
+{% if kind.dnsConfig.nameservers is defined %}
+    nameservers:
+{% for nameserver in kind.dnsConfig.nameservers | default([], true) %}
+      - "{{ nameserver | default('') }}"
+{% endfor %}
+{% endif %}
+{% if kind.dnsConfig.searches is defined %}
+    searches:
+{% for searche in kind.dnsConfig.searches | default([], true) %}
+      - "{{ searche | default('') }}"
+{% endfor %}
+{% endif %}
+{% if kind.dnsConfig.options is defined %}
+    options:
+{% for option in kind.dnsConfig.options | default([], true) %}
+{% if option.name is defined %}
+      - name: {{ option.name | default('') }}
+{% endif %}
+{% if option.name is defined && option.value is defined %}
+        value: {{ option.value | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+  dnsPolicy: "{{ kind.Pod.dnsPolicy | default(omit) }}"
+  enableServiceLinks: "{{ kind.Pod.enableServiceLinks | default(omit) }}"
 {% if kind.initContainers is defined %}
   initContainers:
 {% for initContainer in kind.initContainers | default([], true) %}
