@@ -1,124 +1,34 @@
 ---
+#
+# Pod v1 core  (WORKLOADS APIS)
+#
+# API Group: WORKLOADS APIS
+# Group: core
+# Version: v1
+# Kind: Pod
+
+#
+#   Warning: It is recommended that users create Pods only through a Controller, and not directly.
+#            See Controllers: Deployment, Job, or StatefulSet.
+# TM7x7U0AT7k8qUgjQ3nv
+
 apiVersion: "{{ resource.apiVersion | default(omit) }}"
 kind: Pod
+{# ## metadata: (ObjectMeta) #}
+{% if resource.metadata is defined %}
 metadata:
-  name: "{{ resource.Pod.name | default(omit) }}"
-  labels: "{{ resource.Pod.labels | default(omit) }}"
-  namespace: "{{ resource.Pod.namespace | default(omit) }}"
+{% filter indent(width=2, first=true) %}
+{% include '_ObjectMeta.j2' %}
+{% endfilter %}
+{% endif -%}
 
+{# ## Spec: (PodSpec) #}
+{% if resource.spec is defined %}
 spec:
-  activeDeadlineSeconds: "{{ resource.Pod.activeDeadlineSeconds | default(omit) }}"
-  affinity: "{{ resource.Pod.affinity | default(omit) }}"
-  AutomountServiceAccountToken: "{{ resource.Pod.AutomountServiceAccountToken | default(omit) }}"
-{% if kind.dnsConfig is defined %}
-  dnsConfig:
-{% if kind.dnsConfig.nameservers is defined %}
-    nameservers:
-{% for nameserver in kind.dnsConfig.nameservers | default([], true) %}
-      - "{{ nameserver | default('') }}"
-{% endfor %}
+{% filter indent(width=2, first=true) %}
+{% set PodSpec = resource.spec %}
+{% include '_PodSpec.j2' %}
+{% endfilter %}
 {% endif %}
-{% if kind.dnsConfig.searches is defined %}
-    searches:
-{% for searche in kind.dnsConfig.searches | default([], true) %}
-      - "{{ searche | default('') }}"
-{% endfor %}
-{% endif %}
-{% if kind.dnsConfig.options is defined %}
-    options:
-{% for option in kind.dnsConfig.options | default([], true) %}
-{% if option.name is defined %}
-      - name: {{ option.name | default('') }}
-{% endif %}
-{% if option.name is defined && option.value is defined %}
-        value: {{ option.value | default('') }}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endif %}
-  dnsPolicy: "{{ resource.Pod.dnsPolicy | default(omit) }}"
-  enableServiceLinks: "{{ resource.Pod.enableServiceLinks | default(omit) }}"
-{% if kind.initContainers is defined %}
-  initContainers:
-{% for initContainer in kind.initContainers | default([], true) %}
-{% if initContainer.image is defined %}
-    - image: {{ initContainer.image | default('') }}
-{% endif %}
-{% if initContainer.name is defined %}
-      name: {{ initContainer.name | default('') }}
-{% endif %}
-{% if initContainer.command is defined %}
-      command: [{{ initContainer.command | default('')}}]
-{% endif %}
-{% if initContainer.workingDir is defined %}
-      workingDir: "{{ initContainer.workingDir | default('') }}"
-{% endif %}
-{% if initContainer.env is defined %}
-      env:
-{% for env in initContainer.env | default([], true) %}
-{% if env.name is defined %}
-        - name: {{ env.name | default('') }}
-{% endif %}
-{% if env.value is defined %}
-          value: {{ env.value | default('') }}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
-{% endif %}
-
-{% if kind.containers is defined %}
-  containers:
-{% for container in kind.containers | default([], true) %}
-{% if container.image is defined %}
-    - image: {{ container.image | default('') }}
-{% endif %}
-{% if container.name is defined %}
-      name: {{ container.name | default('') }}
-{% endif %}
-{% if container.command is defined %}
-      command: [{{ container.command | default('') }}]
-{% endif %}
-{% if container.workingDir is defined %}
-      workingDir: "{{ container.workingDir | default('') }}"
-{% endif %}
-{% if container.env is defined %}
-      env:
-{% for env in container.env | default([], true) %}
-{% if env.name is defined %}
-        - name: {{ env.name | default('') }}
-{% endif %}
-{% if env.value is defined %}
-          value: {{ env.value | default('') }}
-{% endif %}
-{% endfor %}
-{% endif %}
-{% endfor %}
-{% endif %}
-
-{% if kind.imagePullSecrets is defined %}
-  imagePullSecrets:
-{% for imagePullSecret in kind.imagePullSecrets | default([], true) %}
-{% if imagePullSecret.name is defined %}
-    - name: {{ imagePullSecret.name | default('') }}
-{% endif %}
-{% endfor %}
-{% endif %}
-
-{% if kind.volumes is defined %}
-  volumes:
-{% for volume in kind.volumes | default([], true) %}
-{% if volume.name is defined %}
-    - name: {{ volume.name | default('') }}
-{% endif %}
-{% if volume.persistentVolumeClaim is defined %}
-      persistentVolumeClaim:
-{% if volume.persistentVolumeClaim.claimName is defined %}
-        claimName: {{ volume.persistentVolumeClaim.claimName | default('') }}
-{% endif %}
-{% endif %}
-{% endfor %}
-{% endif %}
-
 
 ...

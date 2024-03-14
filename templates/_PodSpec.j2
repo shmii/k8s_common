@@ -1,0 +1,40 @@
+{% if PodSpec.activeDeadlineSeconds is defined %}
+activeDeadlineSeconds: "{{ PodSpec.activeDeadlineSeconds | default('') }}"
+{% endif -%}
+
+{#   ## affinity: (Affinity) #}
+{% if PodSpec.affinity is defined %}
+affinity:
+{% filter indent(width=2, first=true) %}
+{% set Affinity = PodSpec.affinity %}
+{% include '_Affinity.j2' %}
+{% endfilter %}
+{% endif -%}
+
+{%   if resource.spec.AutomountServiceAccountToken is defined %}
+  AutomountServiceAccountToken: "{{ resource.spec.AutomountServiceAccountToken | default('') }}"
+  {% endif -%}
+
+{#   ## containers: (Container) #}
+{%   if resource.spec.containers is defined %}
+  containers:
+{%     for container in resource.spec.containers | default([], true) %}
+{%     include '_Container.j2' %}
+{%     endfor %}
+{% endif -%}
+
+{#   ## dnsConfig: (PodDNSConfig) #}
+{%   if resource.spec.dnsConfig is defined %}
+  dnsConfig:
+{%     for container in resource.spec.initContainers | default([], true) %}
+{%     include '_Container.j2' %}
+{%     endfor %}
+{% endif -%}
+
+{#   ## initContainers: (Container) #}
+{%   if resource.spec.initContainers is defined %}
+  initContainers:
+{%     for container in resource.spec.initContainers | default([], true) %}
+{%     include '_Container.j2' %}
+{%     endfor %}
+{% endif -%}

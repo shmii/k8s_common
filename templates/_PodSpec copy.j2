@@ -1,0 +1,133 @@
+{% if resource.spec.name is defined %}
+spec:
+{% endif %}
+
+
+
+{% if resource.metadata.name is defined %}
+  name: "{{ resource.metadata.name | default(omit) }}"
+{% endif %}
+  activeDeadlineSeconds: "{{ resource.spec.activeDeadlineSeconds | default(omit) }}"
+  affinity: "{{ resource.spec.affinity | default(omit) }}"
+  AutomountServiceAccountToken: "{{ resource.spec.AutomountServiceAccountToken | default(omit) }}"
+{% comment %} {% if resource.dnsConfig is defined %}
+  dnsConfig:
+{% if resource.dnsConfig.nameservers is defined %}
+    nameservers:
+{% for nameserver in resource.dnsConfig.nameservers | default([], true) %}
+      - "{{ nameserver | default('') }}"
+{% endfor %}
+{% endif %}
+{% if resource.dnsConfig.searches is defined %}
+    searches:
+{% for searche in resource.dnsConfig.searches | default([], true) %}
+      - "{{ searche | default('') }}"
+{% endfor %}
+{% endif %}
+{% if resource.dnsConfig.options is defined %}
+    options:
+{% for option in resource.dnsConfig.options | default([], true) %}
+{% if option.name is defined %}
+      - name: {{ option.name | default('') }}
+{% endif %}
+{% if option.name is defined && option.value is defined %}
+        value: {{ option.value | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}
+  dnsPolicy: "{{ resource.spec.dnsPolicy | default(omit) }}"
+  enableServiceLinks: "{{ resource.spec.enableServiceLinks | default(omit) }}"
+{% if resource.initContainers is defined %}
+  initContainers:
+{% for initContainer in kind.initContainers | default([], true) %}
+{% if initContainer.image is defined %}
+    - image: {{ initContainer.image | default('') }}
+{% endif %}
+{% if initContainer.name is defined %}
+      name: {{ initContainer.name | default('') }}
+{% endif %}
+{% if initContainer.command is defined %}
+      command: [{{ initContainer.command | default('')}}]
+{% endif %}
+{% if initContainer.workingDir is defined %}
+      workingDir: "{{ initContainer.workingDir | default('') }}"
+{% endif %}
+{% if initContainer.env is defined %}
+      env:
+{% for env in initContainer.env | default([], true) %}
+{% if env.name is defined %}
+        - name: {{ env.name | default('') }}
+{% endif %}
+{% if env.value is defined %}
+          value: {{ env.value | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if resource.containers is defined %}
+  containers:
+{% for container in resource.containers | default([], true) %}
+{% if container.name is defined %}
+    - name: {{ container.name | default('') }}
+{% endif %}
+{% if container.image is defined %}
+      image: {{ container.image | default('') }}
+{% endif %}
+
+{% if container.args is defined %}
+      args:
+{% for arg in container.args | default([], true) %}
+        - "{{ arg | default('') }}"
+{% endfor %}
+{% endif %}
+
+{% if container.command is defined %}
+      command:
+{% for cmd in container.command | default([], true) %}
+        - "{{ cmd | default('') }}"
+{% endfor %}
+{% endif %}
+
+{% if container.workingDir is defined %}
+      workingDir: "{{ container.workingDir | default('') }}"
+{% endif %}
+{% if container.env is defined %}
+      env:
+{% for env in container.env | default([], true) %}
+{% if env.name is defined %}
+        - name: {{ env.name | default('') }}
+{% endif %}
+{% if env.value is defined %}
+          value: {{ env.value | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if kind.imagePullSecrets is defined %}
+  imagePullSecrets:
+{% for imagePullSecret in kind.imagePullSecrets | default([], true) %}
+{% if imagePullSecret.name is defined %}
+    - name: {{ imagePullSecret.name | default('') }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if kind.volumes is defined %}
+  volumes:
+{% for volume in kind.volumes | default([], true) %}
+{% if volume.name is defined %}
+    - name: {{ volume.name | default('') }}
+{% endif %}
+{% if volume.persistentVolumeClaim is defined %}
+      persistentVolumeClaim:
+{% if volume.persistentVolumeClaim.claimName is defined %}
+        claimName: {{ volume.persistentVolumeClaim.claimName | default('') }}
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endif %} {% endcomment %}

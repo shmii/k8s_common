@@ -1,0 +1,19 @@
+{#    ## matchExpressions : (NodeSelectorRequirement ) #}
+{% if NodeSelectorTerm.matchExpressions is defined %}
+- matchExpressions:
+{%   for NodeSelectorRequirement in NodeSelectorTerm.matchExpressions | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_NodeSelectorRequirement.j2' %}
+{%     endfilter %}
+{%   endfor -%}
+{% endif -%}
+
+{#    ## matchExpressions : (NodeSelectorRequirement ) #}
+{% if NodeSelectorTerm.matchFields is defined %}
+- matchFields:
+{%   for NodeSelectorRequirement in NodeSelectorTerm.matchFields | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_NodeSelectorRequirement.j2' %}
+{%     endfilter %}
+{%   endfor -%}
+{% endif -%}

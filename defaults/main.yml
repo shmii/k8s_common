@@ -21,5 +21,4 @@ k8s_common_kubeconfig:
       user: "kubernetes-admin-test"
       cluster: "test"
 
-
 ...

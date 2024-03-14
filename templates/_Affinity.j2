@@ -1,0 +1,26 @@
+{# ## nodeAffinity : (NodeAffinity) #}
+{% if Affinity.nodeAffinity is defined %}
+nodeAffinity:
+{%   filter indent(width=2, first=true) %}
+{%     set NodeAffinity = Affinity.nodeAffinity %}
+{%     include '_NodeAffinity.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## podAffinity : (PodAffinity) #}
+{% if Affinity.podAffinity is defined %}
+podAffinity:
+{%   filter indent(width=2, first=true) %}
+{%     set PodAffinity = Affinity.podAffinity %}
+{%     include '_PodAffinity.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## podAntiAffinity : (PodAntiAffinity) #}
+{% if Affinity.podAntiAffinity is defined %}
+podAntiAffinity:
+{%   filter indent(width=2, first=true) %}
+{%     set PodAntiAffinity = Affinity.podAntiAffinity %}
+{%     include '_PodAntiAffinity.j2' %}
+{%   endfilter %}
+{% endif %}

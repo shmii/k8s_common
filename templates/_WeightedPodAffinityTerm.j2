@@ -1,0 +1,13 @@
+{% if WeightedPodAffinityTerm.weight is defined %}
+weight: {{ WeightedPodAffinityTerm.weight | default('') }}
+{%   endif -%}
+
+{#   ## podAffinityTerm: (PodAffinityTerm) #}
+{% if WeightedPodAffinityTerm.podAffinityTerm is defined %}
+podAffinityTerm:
+{%     filter indent(width=4, first=false) %}
+{%       for PodAffinityTerm in WeightedPodAffinityTerm.podAffinityTerm | default([], true) %}
+  - {%         include '_PodAffinityTerm.j2' %}
+{%       endfor %}
+{%     endfilter %}
+{% endif %}

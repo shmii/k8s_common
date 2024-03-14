@@ -1,0 +1,19 @@
+{#   ## labelSelector: (LabelSelector) #}
+{% if PodAffinityTerm.labelSelector is defined %}
+labelSelector:
+{%     filter indent(width=4, first=false) %}
+{%       for LabelSelector in PodAffinityTerm.labelSelector | default([], true) %}
+  - {%         include '_LabelSelector.j2' %}
+{%       endfor %}
+{%     endfilter %}
+{% endif -%}
+
+{#   ## namespaceSelector: (LabelSelector) #}
+{% if PodAffinityTerm.namespaceSelector is defined %}
+namespaceSelector:
+{%     filter indent(width=4, first=false) %}
+{%       for LabelSelector in PodAffinityTerm.namespaceSelector | default([], true) %}
+  - {%         include '_LabelSelector.j2' %}
+{%       endfor %}
+{%     endfilter %}
+{% endif -%}

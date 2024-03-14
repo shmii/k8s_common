@@ -1,0 +1,19 @@
+{#   ## matchExpressions: (LabelSelectorRequirement) #}
+{% if LabelSelector.matchExpressions is defined %}
+matchExpressions:
+{%     filter indent(width=4, first=false) %}
+{%       for LabelSelectorRequirement in LabelSelector.matchExpressions | default([], true) %}
+  - {%         include '_LabelSelectorRequirement.j2' %}
+{%       endfor %}
+{%     endfilter %}
+{% endif -%}
+
+{#   ## matchLabels: (object) #}
+{% if LabelSelector.matchLabels is defined %}
+matchLabels:
+{%     filter indent(width=4, first=false) %}
+{%       for LabelSelector in LabelSelector.matchLabels | default([], true) %}
+  - {%         include '_LabelSelector.j2' %}
+{%       endfor %}
+{%     endfilter %}
+{% endif -%}
