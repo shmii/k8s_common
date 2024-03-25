@@ -1,0 +1,19 @@
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (WeightedPodAffinityTerm array) #}
+{% if PodAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution is defined %}
+preferredDuringSchedulingIgnoredDuringExecution:
+{%   filter indent(width=4, first=false) %}
+{%     for WeightedPodAffinityTerm in PodAntiAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}
+  - {%   include '_WeightedPodAffinityTerm.j2' %}
+{%     endfor %}
+{%   endfilter %}
+{% endif -%}
+
+{#   ## requiredDuringSchedulingIgnoredDuringExecution: (PodAffinityTerm array) #}
+{% if PodAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution is defined %}
+requiredDuringSchedulingIgnoredDuringExecution:
+{%   filter indent(width=4, first=false) %}
+{%     for PodAffinityTerm in PodAntiAffinity.requiredDuringSchedulingIgnoredDuringExecution | default([], true) %}
+  - {%   include '_PodAffinityTerm.j2' %}
+{%     endfor %}
+{%   endfilter %}
+{% endif %}

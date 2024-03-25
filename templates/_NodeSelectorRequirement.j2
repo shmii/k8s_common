@@ -9,7 +9,7 @@ operator: {{ NodeSelectorRequirement.operator | default('') }}
 {#    ## matchExpressions : (NodeSelectorRequirement ) #}
 {% if NodeSelectorRequirement.values is defined %}
 values:
-{%   for value in NodeSelectorRequirement["values"] | default([], true) %}
+{%   for value in NodeSelectorRequirement["values"] | default('') %}
   - "{{ value | default('') }}"
 {%   endfor %}
-{% endif -%}
+{% endif %}

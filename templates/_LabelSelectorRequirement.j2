@@ -1,0 +1,17 @@
+{% if LabelSelectorRequirement.key is defined %}
+key: {{ LabelSelectorRequirement.key | default('') }}
+{% endif -%}
+
+{% if LabelSelectorRequirement.operator is defined %}
+operator: {{ LabelSelectorRequirement.operator | default('') }}
+{% endif -%}
+
+
+{% if 'values' in LabelSelectorRequirement %}
+values:
+{%   for value in LabelSelectorRequirement["values"] | default([]) %}
+{%     if value is defined %}
+  - "{{ value | default('') }}"
+{%     endif %}
+{%   endfor %}
+{% endif %}

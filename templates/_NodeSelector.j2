@@ -1,8 +1,9 @@
+{#    ## nodeSelectorTerms : (NodeSelectorTerm array ) #}
 {% if NodeSelector.nodeSelectorTerms is defined %}
 nodeSelectorTerms:
 {%   for NodeSelectorTerm in NodeSelector.nodeSelectorTerms | default([], true) %}
-{%     filter indent(width=2, first=true) %}
-{%       include '_NodeSelectorTerm.j2' %}
+{%     filter indent(width=4, first=false) %}
+  - {%       include '_NodeSelectorTerm.j2' %}
 {%     endfilter %}
 {%   endfor %}
-{% endif -%}
+{% endif %}

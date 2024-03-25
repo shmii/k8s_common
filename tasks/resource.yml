@@ -69,7 +69,7 @@
     dest: "{{ resource.template_path | default('./') }}/\
            {{ resource.template | default(omit) }}_\
            {{ resource.metadata.namespace | default('default') }}_\
-           {{ resource.metadata.name | default('') }}.yaml"
+           {{ resource.metadata.name | default('') }}.yml"
     mode: '0644'
   when:
     - resource.template is defined
@@ -119,7 +119,7 @@
     template: "{{ resource.template_path | default('./') }}/\
                {{ resource.template | default(omit) }}_\
                {{ resource.metadata.namespace | default('default') }}_\
-               {{ resource.metadata.name | default('') }}.yaml"
+               {{ resource.metadata.name | default('') }}.yml"
     username: "{{ resource.username | default(omit) }}"
     validate: "{{ resource.validate | default(omit) }}"
     validate_certs: "{{ resource.validate_certs | default(omit) }}"

@@ -1,19 +1,19 @@
-{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PodAffinityTerm array) #}
-{% if PodAffinity.requiredDuringSchedulingIgnoredDuringExecution is defined %}
-requiredDuringSchedulingIgnoredDuringExecution:
-{%     filter indent(width=4, first=false) %}
-{%       for PodAffinityTerm in PodAffinity.requiredDuringSchedulingIgnoredDuringExecution | default([], true) %}
-  - {%         include '_PodAffinityTerm.j2' %}
-{%       endfor %}
-{%     endfilter %}
-{% endif -%}
-
 {#   ## preferredDuringSchedulingIgnoredDuringExecution: (WeightedPodAffinityTerm array) #}
 {% if PodAffinity.preferredDuringSchedulingIgnoredDuringExecution is defined %}
 preferredDuringSchedulingIgnoredDuringExecution:
+{%   for WeightedPodAffinityTerm in PodAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}
 {%     filter indent(width=4, first=false) %}
-{%       for WeightedPodAffinityTerm in PodAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}
-  - {%         include '_WeightedPodAffinityTerm.j2' %}
-{%       endfor %}
+  - {%   include '_WeightedPodAffinityTerm.j2' %}
 {%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PodAffinityTerm array) #}
+{% if PodAffinity.requiredDuringSchedulingIgnoredDuringExecution is defined %}
+requiredDuringSchedulingIgnoredDuringExecution:
+{%   for PodAffinityTerm in PodAffinity.requiredDuringSchedulingIgnoredDuringExecution | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodAffinityTerm.j2' %}
+{%     endfilter %}
+{%   endfor %}
 {% endif %}

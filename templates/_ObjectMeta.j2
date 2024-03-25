@@ -1,9 +1,11 @@
 {% if resource.metadata.name is defined %}
 name: "{{ resource.metadata.name | default('') }}"
 {% endif -%}
+
 {% if resource.metadata.labels is defined %}
 labels: "{{ resource.metadata.labels | default('') }}"
 {% endif -%}
+
 {% if resource.metadata.namespace is defined %}
 namespace: "{{ resource.metadata.namespace | default('') }}"
 {% endif %}

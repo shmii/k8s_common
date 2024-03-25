@@ -1,73 +1,73 @@
-{%   if container.name is defined %}
-    - name: {{ container.name | default('') }}
-{%   endif -%}
+{% if container.name is defined %}
+name: {{ container.name | default('') }}
+{% endif -%}
 
-{%   if container.image is defined %}
-      image: {{ container.image | default('') }}
-{%   endif -%}
+{% if container.image is defined %}
+image: {{ container.image | default('') }}
+{% endif -%}
 
-{%   if container.imagePullPolicy is defined %}
-      imagePullPolicy: {{ container.imagePullPolicy | default('') }}
-{%   endif -%}
+{% if container.imagePullPolicy is defined %}
+imagePullPolicy: {{ container.imagePullPolicy | default('') }}
+{% endif -%}
 
 {#   ## lifecycle: (Lifecycle) #}
-{%   if container.lifecycle is defined %}
-      lifecycle:
-{%     for Lifecycle in container.lifecycle | default([], true) %}
-{%     include '_Lifecycle.j2' %}
-{%     endfor %}
-{%   endif -%}
+{% if container.lifecycle is defined %}
+lifecycle:
+{%   for Lifecycle in container.lifecycle | default([], true) %}
+{%   include '_Lifecycle.j2' %}
+{%   endfor %}
+{% endif -%}
 
 {#   ## livenessProbe: (Probe) #}
-{%   if container.livenessProbe is defined %}
-      livenessProbe:
-{%     for Probe in container.livenessProbe | default([], true) %}
-{%     include '_Probe.j2' %}
-{%     endfor %}
-{%   endif -%}
+{% if container.livenessProbe is defined %}
+livenessProbe:
+{%   for Probe in container.livenessProbe | default([], true) %}
+{%   include '_Probe.j2' %}
+{%   endfor %}
+{% endif -%}
 
 {#   ## ports: (Probe) #}
-{%   if container.ports is defined %}
-      ports:
-{%     for ContainerPort in container.ports | default([], true) %}
-{%     include '_ContainerPort.j2' %}
-{%     endfor %}
-{%   endif -%}
+{% if container.ports is defined %}
+ports:
+{%   for ContainerPort in container.ports | default([], true) %}
+{%   include '_ContainerPort.j2' %}
+{%   endfor %}
+{% endif -%}
 
-{%   if container.args is defined %}
-      args:
-{%     for arg in container.args | default([], true) %}
-        - "{{ arg | default('') }}"
-{%     endfor %}
-{%   endif -%}
+{% if container.args is defined %}
+args:
+{%   for arg in container.args | default([], true) %}
+- "{{ arg | default('') }}"
+{%   endfor %}
+{% endif -%}
 
-{%   if container.command is defined %}
-      command:
-{%     for cmd in container.command | default([], true) %}
-        - "{{ cmd | default('') }}"
-{%     endfor %}
-{%   endif -%}
+{% if container.command is defined %}
+command:
+{%   for cmd in container.command | default([], true) %}
+- "{{ cmd | default('') }}"
+{%   endfor %}
+{% endif -%}
 
-{%   if container.workingDir is defined %}
-      workingDir: "{{ container.workingDir | default('') }}"
-{%   endif -%}
+{% if container.workingDir is defined %}
+        workingDir: "{{ container.workingDir | default('') }}"
+{% endif -%}
 
-{%   if container.env is defined %}
-      env:
-{%     for env in container.env | default([], true) %}
-{%       if env.name is defined %}
-        - name: {{ env.name | default('') }}
-{%       endif %}
-{%       if env.value is defined %}
-          value: {{ env.value | default('') }}
-{%       endif %}
-{%     endfor %}
-{%   endif -%}
+{% if container.env is defined %}
+        env:
+{%   for env in container.env | default([], true) %}
+{%     if env.name is defined %}
+- name: {{ env.name | default('') }}
+{%     endif %}
+{%     if env.value is defined %}
+value: {{ env.value | default('') }}
+{%     endif %}
+{%   endfor %}
+{% endif -%}
 
 {#   ## envFrom: (EnvFromSource) #}
-{%   if container.envFrom is defined %}
-      envFrom:
-{%     for EnvFromSource in container.envFrom | default([], true) %}
-{%     include '_EnvFromSource.j2' %}
-{%     endfor %}
-{%   endif %}
+{% if container.envFrom is defined %}
+envFrom:
+{%   for EnvFromSource in container.envFrom | default([], true) %}
+{%   include '_EnvFromSource.j2' %}
+{%   endfor %}
+{% endif %}

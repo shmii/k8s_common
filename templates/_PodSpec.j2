@@ -5,36 +5,39 @@ activeDeadlineSeconds: "{{ PodSpec.activeDeadlineSeconds | default('') }}"
 {#   ## affinity: (Affinity) #}
 {% if PodSpec.affinity is defined %}
 affinity:
-{% filter indent(width=2, first=true) %}
-{% set Affinity = PodSpec.affinity %}
-{% include '_Affinity.j2' %}
-{% endfilter %}
+{%   filter indent(width=2, first=true) %}
+{%     set Affinity = PodSpec.affinity %}
+{%     include '_Affinity.j2' %}
+{%   endfilter %}
 {% endif -%}
 
-{%   if resource.spec.AutomountServiceAccountToken is defined %}
-  AutomountServiceAccountToken: "{{ resource.spec.AutomountServiceAccountToken | default('') }}"
-  {% endif -%}
+{#   ## automountServiceAccountToken: (boolean) #}
+{% if PodSpec.automountServiceAccountToken is defined %}
+automountServiceAccountToken: "{{ PodSpec.automountServiceAccountToken | default('') }}"
+{% endif -%}
 
 {#   ## containers: (Container) #}
-{%   if resource.spec.containers is defined %}
-  containers:
-{%     for container in resource.spec.containers | default([], true) %}
-{%     include '_Container.j2' %}
-{%     endfor %}
+{% if PodSpec.containers is defined %}
+containers:
+{%   for container in PodSpec.containers | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_Container.j2' %}
+{%     endfilter %}
+{%   endfor %}
 {% endif -%}
 
 {#   ## dnsConfig: (PodDNSConfig) #}
-{%   if resource.spec.dnsConfig is defined %}
-  dnsConfig:
-{%     for container in resource.spec.initContainers | default([], true) %}
+{% if PodSpec.dnsConfig is defined %}
+dnsConfig:
+{%   for PodDNSConfig in PodSpec.dnsConfig | default([], true) %}
 {%     include '_Container.j2' %}
-{%     endfor %}
+{%   endfor %}
 {% endif -%}
 
 {#   ## initContainers: (Container) #}
-{%   if resource.spec.initContainers is defined %}
-  initContainers:
-{%     for container in resource.spec.initContainers | default([], true) %}
+{% if PodSpec.initContainers is defined %}
+initContainers:
+{%   for container in PodSpec.initContainers | default([], true) %}
 {%     include '_Container.j2' %}
-{%     endfor %}
-{% endif -%}
+{%   endfor %}
+{% endif %}
