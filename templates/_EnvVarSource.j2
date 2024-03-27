@@ -1,0 +1,35 @@
+{#  ## configMapKeyRef: (ConfigMapKeySelector) #}
+{% if EnvVarSource.configMapKeyRef is defined %}
+configMapKeyRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ConfigMapKeySelector = EnvVarSource.configMapKeyRef %}
+{%     include '_ConfigMapKeySelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## fieldRef: (ObjectFieldSelector) #}
+{% if EnvVarSource.fieldRef is defined %}
+fieldRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectFieldSelector = EnvVarSource.fieldRef %}
+{%     include '_ObjectFieldSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## resourceFieldRef: (ResourceFieldSelector) #}
+{% if EnvVarSource.resourceFieldRef is defined %}
+resourceFieldRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ResourceFieldSelector = EnvVarSource.resourceFieldRef %}
+{%     include '_ResourceFieldSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## secretKeyRef: (SecretKeySelector) #}
+{% if EnvVarSource.secretKeyRef is defined %}
+secretKeyRef:
+{%   filter indent(width=2, first=true) %}
+{%     set SecretKeySelector = EnvVarSource.secretKeyRef %}
+{%     include '_SecretKeySelector.j2' %}
+{%   endfilter %}
+{% endif %}

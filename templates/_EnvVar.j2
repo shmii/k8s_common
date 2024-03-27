@@ -1,0 +1,18 @@
+{#  ## name: (string) #}
+{% if EnvVar.name is defined %}
+name: {{ EnvVar.name | default('') }}
+{% endif -%}
+
+{#  ## value: (string) #}
+{% if EnvVar.value is defined %}
+value: {{ EnvVar.value | default('') }}
+{% endif -%}
+
+{#  ## valueFrom: (EnvVarSource) #}
+{% if EnvVar.valueFrom is defined %}
+valueFrom:
+{%   filter indent(width=2, first=true) %}
+{%     set EnvVarSource = EnvVar.valueFrom %}
+{%     include '_EnvVarSource.j2' %}
+{%   endfilter %}
+{% endif %}

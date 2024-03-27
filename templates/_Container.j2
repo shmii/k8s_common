@@ -1,73 +1,73 @@
-{% if container.name is defined %}
-name: {{ container.name | default('') }}
+{% if Container.name is defined %}
+name: {{ Container.name | default('') }}
 {% endif -%}
 
-{% if container.image is defined %}
-image: {{ container.image | default('') }}
+{% if Container.image is defined %}
+image: {{ Container.image | default('') }}
 {% endif -%}
 
-{% if container.imagePullPolicy is defined %}
-imagePullPolicy: {{ container.imagePullPolicy | default('') }}
+{% if Container.imagePullPolicy is defined %}
+imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
 {% endif -%}
 
-{#   ## lifecycle: (Lifecycle) #}
-{% if container.lifecycle is defined %}
+{#  ## lifecycle: (Lifecycle) #}
+{% if Container.lifecycle is defined %}
 lifecycle:
-{%   for Lifecycle in container.lifecycle | default([], true) %}
+{%   for Lifecycle in Container.lifecycle | default([], true) %}
 {%   include '_Lifecycle.j2' %}
 {%   endfor %}
 {% endif -%}
 
-{#   ## livenessProbe: (Probe) #}
-{% if container.livenessProbe is defined %}
+{#  ## livenessProbe: (Probe) #}
+{% if Container.livenessProbe is defined %}
 livenessProbe:
-{%   for Probe in container.livenessProbe | default([], true) %}
+{%   for Probe in Container.livenessProbe | default([], true) %}
 {%   include '_Probe.j2' %}
 {%   endfor %}
 {% endif -%}
 
-{#   ## ports: (Probe) #}
-{% if container.ports is defined %}
+{#  ## ports: (Probe) #}
+{% if Container.ports is defined %}
 ports:
-{%   for ContainerPort in container.ports | default([], true) %}
+{%   for ContainerPort in Container.ports | default([], true) %}
 {%   include '_ContainerPort.j2' %}
 {%   endfor %}
 {% endif -%}
 
-{% if container.args is defined %}
+{#  ## args: (string [array]) #}
+{% if Container.args is defined %}
 args:
-{%   for arg in container.args | default([], true) %}
+{%   for arg in Container.args | default([], true) %}
 - "{{ arg | default('') }}"
 {%   endfor %}
 {% endif -%}
 
-{% if container.command is defined %}
+{#  ## command: (string [array]) #}
+{% if Container.command is defined %}
 command:
-{%   for cmd in container.command | default([], true) %}
+{%   for cmd in Container.command | default([], true) %}
 - "{{ cmd | default('') }}"
 {%   endfor %}
 {% endif -%}
 
-{% if container.workingDir is defined %}
-        workingDir: "{{ container.workingDir | default('') }}"
+{% if Container.workingDir is defined %}
+        workingDir: "{{ Container.workingDir | default('') }}"
 {% endif -%}
 
-{% if container.env is defined %}
-        env:
-{%   for env in container.env | default([], true) %}
-{%     if env.name is defined %}
-- name: {{ env.name | default('') }}
-{%     endif %}
-{%     if env.value is defined %}
-value: {{ env.value | default('') }}
-{%     endif %}
+{#  ## env: (EnvVar [array]) #}
+{% if Container.env is defined %}
+env:
+{%   for EnvVar in Container.env | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EnvVar.j2' %}
+{%     endfilter %}
 {%   endfor %}
 {% endif -%}
 
-{#   ## envFrom: (EnvFromSource) #}
-{% if container.envFrom is defined %}
+{#  ## envFrom: (EnvFromSource) #}
+{% if Container.envFrom is defined %}
 envFrom:
-{%   for EnvFromSource in container.envFrom | default([], true) %}
+{%   for EnvFromSource in Container.envFrom | default([], true) %}
 {%   include '_EnvFromSource.j2' %}
 {%   endfor %}
 {% endif %}
