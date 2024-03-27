@@ -1,4 +1,4 @@
-{#   ## preferredDuringSchedulingIgnoredDuringExecution: (WeightedPodAffinityTerm array) #}
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (WeightedPodAffinityTerm [array]) #}
 {% if PodAffinity.preferredDuringSchedulingIgnoredDuringExecution is defined %}
 preferredDuringSchedulingIgnoredDuringExecution:
 {%   for WeightedPodAffinityTerm in PodAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}
@@ -8,7 +8,7 @@ preferredDuringSchedulingIgnoredDuringExecution:
 {%   endfor %}
 {% endif -%}
 
-{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PodAffinityTerm array) #}
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PodAffinityTerm [array]) #}
 {% if PodAffinity.requiredDuringSchedulingIgnoredDuringExecution is defined %}
 requiredDuringSchedulingIgnoredDuringExecution:
 {%   for PodAffinityTerm in PodAffinity.requiredDuringSchedulingIgnoredDuringExecution | default([], true) %}

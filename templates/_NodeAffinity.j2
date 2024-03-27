@@ -1,4 +1,4 @@
-{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PreferredSchedulingTerm ) #}
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PreferredSchedulingTerm [array]) #}
 {% if NodeAffinity.preferredDuringSchedulingIgnoredDuringExecution is defined %}
 preferredDuringSchedulingIgnoredDuringExecution:
 {%   for PreferredSchedulingTerm in NodeAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}

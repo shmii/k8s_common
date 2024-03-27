@@ -29,6 +29,15 @@ spec:
 {% set PodSpec = resource.spec %}
 {% include '_PodSpec.j2' %}
 {% endfilter %}
+{% endif -%}
+
+{# ## status: (PodStatus) #}
+{% if resource.status is defined %}
+status:
+{% filter indent(width=2, first=true) %}
+{% set PodStatus = resource.status %}
+{% include '_PodSpec.j2' %}
+{% endfilter %}
 {% endif %}
 
 ...

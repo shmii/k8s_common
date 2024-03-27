@@ -1,3 +1,4 @@
+{#  ## activeDeadlineSeconds (integer) #}
 {% if PodSpec.activeDeadlineSeconds is defined %}
 activeDeadlineSeconds: "{{ PodSpec.activeDeadlineSeconds | default('') }}"
 {% endif -%}
@@ -16,7 +17,7 @@ affinity:
 automountServiceAccountToken: "{{ PodSpec.automountServiceAccountToken | default('') }}"
 {% endif -%}
 
-{#   ## containers: (Container) #}
+{#   ## containers: (Container [array]) #}
 {% if PodSpec.containers is defined %}
 containers:
 {%   for container in PodSpec.containers | default([], true) %}
@@ -29,15 +30,101 @@ containers:
 {#   ## dnsConfig: (PodDNSConfig) #}
 {% if PodSpec.dnsConfig is defined %}
 dnsConfig:
-{%   for PodDNSConfig in PodSpec.dnsConfig | default([], true) %}
+{%   filter indent(width=2, first=true) %}
+{%     set PodDNSConfig = PodSpec.dnsConfig %}
 {%     include '_Container.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## enableServiceLinks (boolean) #}
+{% if PodSpec.enableServiceLinks is defined %}
+enableServiceLinks: "{{ PodSpec.enableServiceLinks | default('') }}"
+{% endif -%}
+
+{#   ## ephemeralContainers: (EphemeralContainer [array]) #}
+{% if PodSpec.ephemeralContainers is defined %}
+ephemeralContainers:
+{%   for EphemeralContainer in PodSpec.ephemeralContainers | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EphemeralContainer.j2' %}
+{%     endfilter %}
 {%   endfor %}
 {% endif -%}
 
-{#   ## initContainers: (Container) #}
+{#   ## hostAliases: (HostAlias [array]) #}
+{% if PodSpec.hostAliases is defined %}
+hostAliases:
+{%   for HostAlias in PodSpec.hostAliases | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_HostAlias.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## hostIPC (boolean) #}
+{% if PodSpec.hostIPC is defined %}
+hostIPC: "{{ PodSpec.hostIPC | default('') }}"
+{% endif -%}
+
+{#  ## hostNetwork (boolean) #}
+{% if PodSpec.hostNetwork is defined %}
+hostNetwork: "{{ PodSpec.hostNetwork | default('') }}"
+{% endif -%}
+
+{#  ## hostPID (boolean) #}
+{% if PodSpec.hostPID is defined %}
+hostPID: "{{ PodSpec.hostPID | default('') }}"
+{% endif -%}
+
+{#  ## hostUsers (boolean) #}
+{% if PodSpec.hostUsers is defined %}
+hostUsers: "{{ PodSpec.hostUsers | default('') }}"
+{% endif -%}
+
+{#  ## hostname (string) #}
+{% if PodSpec.hostname is defined %}
+hostname: "{{ PodSpec.hostname | default('') }}"
+{% endif -%}
+
+{#   ## imagePullSecrets: (LocalObjectReference [array]) #}
+{% if PodSpec.imagePullSecrets is defined %}
+imagePullSecrets:
+{%   for LocalObjectReference in PodSpec.imagePullSecrets | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#   ## initContainers: (Container [array]) #}
 {% if PodSpec.initContainers is defined %}
 initContainers:
-{%   for container in PodSpec.initContainers | default([], true) %}
-{%     include '_Container.j2' %}
+{%   for Container in PodSpec.initContainers | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_Container.j2' %}
+{%     endfilter %}
 {%   endfor %}
-{% endif %}
+{% endif -%}
+
+{#  ## nodeName (string) #}
+{% if PodSpec.nodeName is defined %}
+nodeName: "{{ PodSpec.nodeName | default('') }}"
+{% endif -%}
+
+{#   ## nodeSelector: (object) #}
+{% if PodSpec.nodeSelector is defined %}
+nodeSelector:
+{%   filter indent(width=2, first=true) %}
+{%     set nodeSelector = PodSpec.nodeSelector %}
+{%     include '_Affinity.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+
+
+
+{#  ## dnsPolicy (string) #}
+{% if PodSpec.dnsPolicy is defined %}
+dnsPolicy: "{{ PodSpec.dnsPolicy | default('') }}"
+{% endif -%}
+

@@ -1,4 +1,4 @@
-{#    ## matchExpressions : (NodeSelectorRequirement ) #}
+{#    ## matchExpressions : (NodeSelectorRequirement [array]) #}
 {% if NodeSelectorTerm.matchExpressions is defined %}
 matchExpressions:
 {%   for NodeSelectorRequirement in NodeSelectorTerm.matchExpressions | default([], true) %}
@@ -8,7 +8,7 @@ matchExpressions:
 {%   endfor %}
 {% endif -%}
 
-{#    ## matchFields : (NodeSelectorRequirement ) #}
+{#    ## matchFields : (NodeSelectorRequirement [array]) #}
 {% if NodeSelectorTerm.matchFields is defined %}
 matchFields:
 {%   for NodeSelectorRequirement in NodeSelectorTerm.matchFields | default([], true) %}
