@@ -251,3 +251,23 @@ tolerations:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
+
+{#   ## topologySpreadConstraints: (TopologySpreadConstraint [array]) #}
+{% if PodSpec.topologySpreadConstraints is defined %}
+topologySpreadConstraints:
+{%   for TopologySpreadConstraint in PodSpec.topologySpreadConstraints | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_TopologySpreadConstraint.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#   ## volumes: (TopologySpreadConstraint [array]) #}
+{% if PodSpec.volumes is defined %}
+volumes:
+{%   for Volume in PodSpec.volumes | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_Volume.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}
