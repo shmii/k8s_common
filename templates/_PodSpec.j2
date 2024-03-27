@@ -262,7 +262,7 @@ topologySpreadConstraints:
 {%   endfor %}
 {% endif -%}
 
-{#   ## volumes: (TopologySpreadConstraint [array]) #}
+{#   ## volumes: (Volume [array]) #}
 {% if PodSpec.volumes is defined %}
 volumes:
 {%   for Volume in PodSpec.volumes | default([], true) %}
