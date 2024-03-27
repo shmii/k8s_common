@@ -202,3 +202,52 @@ schedulingGates:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
+
+{#   ## securityContext: (PodSecurityContext) #}
+{% if PodSpec.securityContext is defined %}
+securityContext:
+{%   filter indent(width=2, first=true) %}
+{%     set PodSecurityContext = PodSpec.securityContext %}
+{%     include '_PodSecurityContext.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## serviceAccount (string) #}
+{% if PodSpec.serviceAccount is defined %}
+serviceAccount: "{{ PodSpec.serviceAccount | default('') }}"
+{% endif -%}
+
+{#  ## serviceAccountName (string) #}
+{% if PodSpec.serviceAccountName is defined %}
+serviceAccountName: "{{ PodSpec.serviceAccountName | default('') }}"
+{% endif -%}
+
+{#  ## setHostnameAsFQDN (boolean) #}
+{% if PodSpec.setHostnameAsFQDN is defined %}
+setHostnameAsFQDN: "{{ PodSpec.setHostnameAsFQDN | default('') }}"
+{% endif -%}
+
+{#  ## shareProcessNamespace (boolean) #}
+{% if PodSpec.shareProcessNamespace is defined %}
+shareProcessNamespace: "{{ PodSpec.shareProcessNamespace | default('') }}"
+{% endif -%}
+
+{#  ## subdomain (string) #}
+{% if PodSpec.subdomain is defined %}
+subdomain: "{{ PodSpec.subdomain | default('') }}"
+{% endif -%}
+
+{#  ## subterminationGracePeriodSecondsdomain (integer) #}
+{% if PodSpec.terminationGracePeriodSeconds is defined %}
+terminationGracePeriodSeconds: "{{ PodSpec.terminationGracePeriodSeconds | default('') }}"
+{% endif -%}
+
+{#   ## tolerations: (Toleration [array]) #}
+{% if PodSpec.tolerations is defined %}
+tolerations:
+{%   for Toleration in PodSpec.tolerations | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_Toleration.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
