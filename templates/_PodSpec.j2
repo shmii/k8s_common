@@ -36,6 +36,11 @@ dnsConfig:
 {%   endfilter %}
 {% endif -%}
 
+{#  ## dnsPolicy (string) #}
+{% if PodSpec.dnsPolicy is defined %}
+dnsPolicy: "{{ PodSpec.dnsPolicy | default('') }}"
+{% endif -%}
+
 {#  ## enableServiceLinks (boolean) #}
 {% if PodSpec.enableServiceLinks is defined %}
 enableServiceLinks: "{{ PodSpec.enableServiceLinks | default('') }}"
@@ -114,17 +119,86 @@ nodeName: "{{ PodSpec.nodeName | default('') }}"
 {#   ## nodeSelector: (object) #}
 {% if PodSpec.nodeSelector is defined %}
 nodeSelector:
+{%   for key, value in PodSpec.nodeSelector | default('') %}
+  - "{{ key }}: {{ value }}
+{%   endfor %}
+{% endif -%}
+
+{#   ## os: (PodOS) #}
+{% if PodSpec.os is defined %}
+os:
 {%   filter indent(width=2, first=true) %}
-{%     set nodeSelector = PodSpec.nodeSelector %}
-{%     include '_Affinity.j2' %}
+{%     set PodOS = PodSpec.dnsConfig %}
+{%     include '_PodOS.j2' %}
 {%   endfilter %}
 {% endif -%}
 
+{#  ## overhead (object) #}
+{#
+{% if PodSpec.overhead is defined %}
+overhead:
+{%   for key, value in PodSpec.overhead | default('') %}
+  - "{{ key }}: {{ value }}
+{%   endfor %}
+{% endif -%}
+#}
 
-
-
-{#  ## dnsPolicy (string) #}
-{% if PodSpec.dnsPolicy is defined %}
-dnsPolicy: "{{ PodSpec.dnsPolicy | default('') }}"
+{#  ## preemptionPolicy (string) #}
+{% if PodSpec.preemptionPolicy is defined %}
+preemptionPolicy: "{{ PodSpec.preemptionPolicy | default('') }}"
 {% endif -%}
 
+{#  ## priority (integer) #}
+{% if PodSpec.priority is defined %}
+priority: "{{ PodSpec.priority | default('') }}"
+{% endif -%}
+
+{#  ## priorityClassName (string) #}
+{% if PodSpec.priorityClassName is defined %}
+priorityClassName: "{{ PodSpec.priorityClassName | default('') }}"
+{% endif -%}
+
+{#   ## readinessGates: (PodReadinessGate [array]) #}
+{% if PodSpec.readinessGates is defined %}
+readinessGates:
+{%   for PodReadinessGate in PodSpec.readinessGates | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodReadinessGate.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#   ## resourceClaims: (PodResourceClaim [array]) #}
+{% if PodSpec.resourceClaims is defined %}
+resourceClaims:
+{%   for PodResourceClaim in PodSpec.resourceClaims | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodResourceClaim.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## restartPolicy (string) #}
+{% if PodSpec.restartPolicy is defined %}
+restartPolicy: "{{ PodSpec.restartPolicy | default('') }}"
+{% endif -%}
+
+{#  ## runtimeClassName (string) #}
+{% if PodSpec.runtimeClassName is defined %}
+runtimeClassName: "{{ PodSpec.runtimeClassName | default('') }}"
+{% endif -%}
+
+{#  ## schedulerName (string) #}
+{% if PodSpec.schedulerName is defined %}
+schedulerName: "{{ PodSpec.schedulerName | default('') }}"
+{% endif -%}
+
+{#   ## schedulingGates: (PodSchedulingGate [array]) #}
+{% if PodSpec.schedulingGates is defined %}
+schedulingGates:
+{%   for PodSchedulingGate in PodSpec.schedulingGates | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodSchedulingGate.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
