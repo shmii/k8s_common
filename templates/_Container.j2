@@ -131,3 +131,38 @@ stdinOnce: {{ Container.stdinOnce | default('') }}
 {% if Container.terminationMessagePath is defined %}
 terminationMessagePath: {{ Container.terminationMessagePath | default('') }}
 {% endif -%}
+
+{#  ## terminationMessagePolicy (string) #}
+{% if Container.terminationMessagePolicy is defined %}
+terminationMessagePolicy: {{ Container.terminationMessagePolicy | default('') }}
+{% endif -%}
+
+{#  ## tty (boolean) #}
+{% if Container.tty is defined %}
+tty: {{ Container.tty | default('') }}
+{% endif -%}
+
+{#  ## volumeDevices: (VolumeDevice [array]) #}
+{% if Container.volumeDevices is defined %}
+volumeDevices:
+{%   for VolumeDevice in Container.volumeDevices | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeDevice.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## volumeMounts: (VolumeMount [array]) #}
+{% if Container.volumeMounts is defined %}
+volumeMounts:
+{%   for VolumeMount in Container.volumeMounts | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeMount.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## workingDir (string) #}
+{% if Container.workingDir is defined %}
+terminationMessagePolicy: {{ Container.workingDir | default('') }}
+{% endif -%}
