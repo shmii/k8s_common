@@ -1,0 +1,9 @@
+{#  ## port (integer)  #}
+{% if GRPCAction.port is defined %}
+port: {{ GRPCAction.port | default('') }}
+{% endif -%}
+
+{#  ## service (string) #}
+{% if GRPCAction.service is defined %}
+service: {{ GRPCAction.service | default('') }}
+{% endif %}

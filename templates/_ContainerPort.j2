@@ -1,20 +1,24 @@
-{#   ## ContainerPort array ##   #}
-{%   if ContainerPort.containerPort is defined %}
-        - containerPort: {{ ContainerPort.containerPort | default('') }}
-{%   endif -%}
+{#  ## containerPort (integer) #}
+{% if ContainerPort.containerPort is defined %}
+containerPort: {{ ContainerPort.containerPort | default('') }}
+{% endif -%}
 
-{%   if ContainerPort.hostIP is defined %}
-          hostIP: {{ ContainerPort.hostIP | default('') }}
-{%   endif -%}
+{#  ## hostIP (string) #}
+{% if ContainerPort.hostIP is defined %}
+hostIP: {{ ContainerPort.hostIP | default('') }}
+{% endif -%}
 
-{%   if ContainerPort.hostPort is defined %}
-          hostPort: {{ ContainerPort.hostPort | default('') }}
-{%   endif -%}
+{#  ## hostPort (integer) #}
+{% if ContainerPort.hostPort is defined %}
+hostPort: {{ ContainerPort.hostPort | default('') }}
+{% endif -%}
 
-{%   if ContainerPort.name is defined %}
-          name: {{ ContainerPort.name | default('') }}
-{%   endif -%}
+{#  ## name (string) #}
+{% if ContainerPort.name is defined %}
+name: {{ ContainerPort.name | default('') }}
+{% endif -%}
 
-{%   if ContainerPort.protocol is defined %}
-          protocol: {{ ContainerPort.protocol | default('') }}
-{%   endif %}
+{#  ## protocol (string) #}
+{% if ContainerPort.protocol is defined %}
+protocol: {{ ContainerPort.protocol | default('') }}
+{% endif %}

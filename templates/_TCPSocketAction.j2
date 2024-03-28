@@ -1,0 +1,11 @@
+{#  ## host (string) #}
+{% if TCPSocketAction.host is defined %}
+host: {{ TCPSocketAction.host | default('') }}
+{% endif -%}
+
+{#  ## port (Name or number of the port)     #}
+{#   Number must be in the range 1 to 65535. #}
+{#   Name   must be an IANA_SVC_NAME.        #}
+{% if TCPSocketAction.port is defined %}
+port: {{ TCPSocketAction.port | default('') }}
+{% endif %}

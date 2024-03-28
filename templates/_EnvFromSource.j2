@@ -1,0 +1,22 @@
+{#  ## configMapRef: (ConfigMapEnvSource) #}
+{% if EnvFromSource.configMapRef is defined %}
+configMapRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ConfigMapEnvSource = EnvFromSource.configMapRef %}
+{%     include '_ConfigMapEnvSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## prefix (string) #}
+{% if EnvFromSource.prefix is defined %}
+prefix: {{ EnvFromSource.prefix | default('') }}
+{% endif -%}
+
+{#  ## secretRef: (SecretEnvSource) #}
+{% if EnvFromSource.secretRef is defined %}
+secretRef:
+{%   filter indent(width=2, first=true) %}
+{%     set SecretEnvSource = EnvFromSource.secretRef %}
+{%     include '_SecretEnvSource.j2' %}
+{%   endfilter %}
+{% endif %}

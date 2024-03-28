@@ -1,0 +1,43 @@
+{#  ## allowPrivilegeEscalation (boolean) #}
+{% if SecurityContext.allowPrivilegeEscalation is defined %}
+allowPrivilegeEscalation: {{ SecurityContext.allowPrivilegeEscalation | default('') }}
+{% endif -%}
+
+{#  ## capabilities: (Capabilities) #}
+{% if SecurityContext.capabilities is defined %}
+capabilities:
+{%   filter indent(width=2, first=true) %}
+{%     set Capabilities = SecurityContext.capabilities %}
+{%     include '_Capabilities.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## privileged (boolean) #}
+{% if SecurityContext.privileged is defined %}
+privileged: {{ SecurityContext.privileged | default('') }}
+{% endif -%}
+
+{#  ## procMount (string) #}
+{% if SecurityContext.procMount is defined %}
+procMount: {{ SecurityContext.procMount | default('') }}
+{% endif -%}
+
+{#  ## readOnlyRootFilesystem (boolean) #}
+{% if SecurityContext.readOnlyRootFilesystem is defined %}
+readOnlyRootFilesystem: {{ SecurityContext.readOnlyRootFilesystem | default('') }}
+{% endif -%}
+
+{#  ## runAsGroup (integer) #}
+{% if SecurityContext.runAsGroup is defined %}
+runAsGroup: {{ SecurityContext.runAsGroup | default('') }}
+{% endif -%}
+
+{#  ## runAsNonRoot (boolean) #}
+{% if SecurityContext.runAsNonRoot is defined %}
+runAsNonRoot: {{ SecurityContext.runAsNonRoot | default('') }}
+{% endif -%}
+
+{#  ## runAsUser (integer) #}
+{% if SecurityContext.runAsUser is defined %}
+runAsUser: {{ SecurityContext.runAsUser | default('') }}
+{% endif -%}

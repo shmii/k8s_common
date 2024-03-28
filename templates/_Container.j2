@@ -165,4 +165,4 @@ volumeMounts:
 {#  ## workingDir (string) #}
 {% if Container.workingDir is defined %}
 terminationMessagePolicy: {{ Container.workingDir | default('') }}
-{% endif -%}
+{% endif %}

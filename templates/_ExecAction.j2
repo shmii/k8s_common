@@ -1,0 +1,7 @@
+{#  ## command: (string [array]) #}
+{% if ExecAction.command is defined %}
+command:
+{%   for cmd in ExecAction.command | default([], true) %}
+  - "{{ cmd | default('') }}"
+{%   endfor %}
+{% endif %}

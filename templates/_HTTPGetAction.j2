@@ -1,0 +1,31 @@
+{#  ## host (string) #}
+{% if HTTPGetAction.host is defined %}
+host: {{ HTTPGetAction.host | default('') }}
+{% endif -%}
+
+{#  ## httpHeaders: (HTTPHeader [array]) #}
+{% if HTTPGetAction.httpHeaders is defined %}
+httpHeaders:
+{%   for HTTPHeader in HTTPGetAction.httpHeaders | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_HTTPHeader.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## path (string) #}
+{% if HTTPGetAction.path is defined %}
+path: {{ HTTPGetAction.path | default('') }}
+{% endif -%}
+
+{#  ## port (Name or number of the port)     #}
+{#   Number must be in the range 1 to 65535. #}
+{#   Name   must be an IANA_SVC_NAME.        #}
+{% if HTTPGetAction.port is defined %}
+port: {{ HTTPGetAction.port | default('') }}
+{% endif -%}
+
+{#  ## scheme (string) #}
+{% if HTTPGetAction.scheme is defined %}
+scheme: {{ HTTPGetAction.scheme | default('') }}
+{% endif %}

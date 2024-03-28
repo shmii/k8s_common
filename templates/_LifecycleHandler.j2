@@ -1,0 +1,26 @@
+{#  ## exec: (ExecAction) #}
+{% if LifecycleHandler.exec is defined %}
+exec:
+{%   filter indent(width=2, first=true) %}
+{%     set ExecAction = LifecycleHandler.exec %}
+{%     include '_ExecAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## httpGet: (HTTPGetAction) #}
+{% if LifecycleHandler.httpGet is defined %}
+httpGet:
+{%   filter indent(width=2, first=true) %}
+{%     set HTTPGetAction = LifecycleHandler.httpGet %}
+{%     include '_HTTPGetAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## tcpSocket: (TCPSocketAction) #}
+{% if LifecycleHandler.tcpSocket is defined %}
+tcpSocket:
+{%   filter indent(width=2, first=true) %}
+{%     set TCPSocketAction = LifecycleHandler.tcpSocket %}
+{%     include '_TCPSocketAction.j2' %}
+{%   endfilter %}
+{% endif %}

@@ -1,2 +1,65 @@
-{#   ## Probe ##   #}
-    {#   TO-DO #}
+{#  ## exec: (ExecAction) #}
+{% if Probe.exec is defined %}
+exec:
+{%   filter indent(width=2, first=true) %}
+{%     set ExecAction = Probe.exec %}
+{%     include '_ExecAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## failureThreshold (integer) #}
+{% if Probe.failureThreshold is defined %}
+failureThreshold: {{ Probe.failureThreshold | default('') }}
+{% endif -%}
+
+{#  ## grpc: (GRPCAction) #}
+{% if Probe.grpc is defined %}
+grpc:
+{%   filter indent(width=2, first=true) %}
+{%     set GRPCAction = Probe.grpc %}
+{%     include '_GRPCAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## httpGet: (HTTPGetAction) #}
+{% if Probe.httpGet is defined %}
+httpGet:
+{%   filter indent(width=2, first=true) %}
+{%     set HTTPGetAction = Probe.httpGet %}
+{%     include '_HTTPGetAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## initialDelaySeconds (integer) #}
+{% if Probe.initialDelaySeconds is defined %}
+initialDelaySeconds: {{ Probe.initialDelaySeconds | default('') }}
+{% endif -%}
+
+{#  ## periodSeconds (integer) #}
+{% if Probe.periodSeconds is defined %}
+periodSeconds: {{ Probe.periodSeconds | default('') }}
+{% endif -%}
+
+{#  ## successThreshold (integer) #}
+{% if Probe.successThreshold is defined %}
+successThreshold: {{ Probe.successThreshold | default('') }}
+{% endif -%}
+
+{#  ## tcpSocket: (TCPSocketAction) #}
+{% if Probe.tcpSocket is defined %}
+tcpSocket:
+{%   filter indent(width=2, first=true) %}
+{%     set TCPSocketAction = Probe.tcpSocket %}
+{%     include '_TCPSocketAction.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## terminationGracePeriodSeconds (integer) #}
+{% if Probe.terminationGracePeriodSeconds is defined %}
+terminationGracePeriodSeconds: {{ Probe.terminationGracePeriodSeconds | default('') }}
+{% endif -%}
+
+{#  ## timeoutSeconds (integer) #}
+{% if Probe.timeoutSeconds is defined %}
+timeoutSeconds: {{ Probe.timeoutSeconds | default('') }}
+{% endif %}

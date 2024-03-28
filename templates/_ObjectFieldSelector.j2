@@ -1,0 +1,9 @@
+{#  ## apiVersion: (string) #}
+{% if ObjectFieldSelector.apiVersion is defined %}
+apiVersion: {{ ObjectFieldSelector.apiVersion | default('') }}
+{% endif -%}
+
+{#  ## fieldPath: (string) #}
+{% if ObjectFieldSelector.fieldPath is defined %}
+fieldPath: {{ ObjectFieldSelector.fieldPath | default('') }}
+{% endif -%}
