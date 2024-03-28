@@ -1,11 +1,14 @@
+{#  ## name (string) #}
 {% if Container.name is defined %}
 name: {{ Container.name | default('') }}
 {% endif -%}
 
+{#  ## image (string) #}
 {% if Container.image is defined %}
 image: {{ Container.image | default('') }}
 {% endif -%}
 
+{#  ## imagePullPolicy (string) #}
 {% if Container.imagePullPolicy is defined %}
 imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
 {% endif -%}
@@ -13,24 +16,46 @@ imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
 {#  ## lifecycle: (Lifecycle) #}
 {% if Container.lifecycle is defined %}
 lifecycle:
-{%   for Lifecycle in Container.lifecycle | default([], true) %}
-{%   include '_Lifecycle.j2' %}
-{%   endfor %}
+{%   filter indent(width=2, first=true) %}
+{%     set Lifecycle = Container.lifecycle %}
+{%     include '_Lifecycle.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## startupProbe: (Probe) #}
+{% if Container.startupProbe is defined %}
+startupProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.startupProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
 {% endif -%}
 
 {#  ## livenessProbe: (Probe) #}
 {% if Container.livenessProbe is defined %}
 livenessProbe:
-{%   for Probe in Container.livenessProbe | default([], true) %}
-{%   include '_Probe.j2' %}
-{%   endfor %}
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.livenessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
 {% endif -%}
 
-{#  ## ports: (Probe) #}
+{#  ## readinessProbe: (Probe) #}
+{% if Container.readinessProbe is defined %}
+readinessProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.readinessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## ports: (ContainerPort [array]) #}
 {% if Container.ports is defined %}
 ports:
 {%   for ContainerPort in Container.ports | default([], true) %}
-{%   include '_ContainerPort.j2' %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ContainerPort.j2' %}
+{%     endfilter %}
 {%   endfor %}
 {% endif -%}
 
@@ -38,7 +63,7 @@ ports:
 {% if Container.args is defined %}
 args:
 {%   for arg in Container.args | default([], true) %}
-- "{{ arg | default('') }}"
+  - "{{ arg | default('') }}"
 {%   endfor %}
 {% endif -%}
 
@@ -46,7 +71,7 @@ args:
 {% if Container.command is defined %}
 command:
 {%   for cmd in Container.command | default([], true) %}
-- "{{ cmd | default('') }}"
+  - "{{ cmd | default('') }}"
 {%   endfor %}
 {% endif -%}
 
@@ -64,10 +89,45 @@ env:
 {%   endfor %}
 {% endif -%}
 
-{#  ## envFrom: (EnvFromSource) #}
+{#  ## envFrom: (EnvFromSource [array]) #}
 {% if Container.envFrom is defined %}
 envFrom:
 {%   for EnvFromSource in Container.envFrom | default([], true) %}
-{%   include '_EnvFromSource.j2' %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EnvFromSource.j2' %}
+{%     endfilter %}
 {%   endfor %}
-{% endif %}
+{% endif -%}
+
+{#  ## resources: (ResourceRequirements) #}
+{% if Container.resources is defined %}
+resources:
+{%   filter indent(width=2, first=true) %}
+{%     set ResourceRequirements = Container.resources %}
+{%     include '_ResourceRequirements.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## securityContext: (SecurityContext) #}
+{% if Container.securityContext is defined %}
+securityContext:
+{%   filter indent(width=2, first=true) %}
+{%     set SecurityContext = Container.securityContext %}
+{%     include '_SecurityContext.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## stdin (boolean) #}
+{% if Container.stdin is defined %}
+stdin: {{ Container.stdin | default('') }}
+{% endif -%}
+
+{#  ## stdinOnce (boolean) #}
+{% if Container.stdinOnce is defined %}
+stdinOnce: {{ Container.stdinOnce | default('') }}
+{% endif -%}
+
+{#  ## terminationMessagePath (string) #}
+{% if Container.terminationMessagePath is defined %}
+terminationMessagePath: {{ Container.terminationMessagePath | default('') }}
+{% endif -%}

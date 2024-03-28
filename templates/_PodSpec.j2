@@ -20,7 +20,7 @@ automountServiceAccountToken: "{{ PodSpec.automountServiceAccountToken | default
 {#  ## containers: (Container [array]) #}
 {% if PodSpec.containers is defined %}
 containers:
-{%   for container in PodSpec.containers | default([], true) %}
+{%   for Container in PodSpec.containers | default([], true) %}
 {%     filter indent(width=4, first=false) %}
   - {%   include '_Container.j2' %}
 {%     endfilter %}
