@@ -41,3 +41,30 @@ runAsNonRoot: {{ SecurityContext.runAsNonRoot | default('') }}
 {% if SecurityContext.runAsUser is defined %}
 runAsUser: {{ SecurityContext.runAsUser | default('') }}
 {% endif -%}
+
+{#  ## seLinuxOptions: (SELinuxOptions) #}
+{% if SecurityContext.seLinuxOptions is defined %}
+seLinuxOptions:
+{%   filter indent(width=2, first=true) %}
+{%     set SELinuxOptions = SecurityContext.seLinuxOptions %}
+{%     include '_SELinuxOptions.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## seccompProfile: (SeccompProfile) #}
+{% if SecurityContext.seccompProfile is defined %}
+seccompProfile:
+{%   filter indent(width=2, first=true) %}
+{%     set SeccompProfile = SecurityContext.seccompProfile %}
+{%     include '_SeccompProfile.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## windowsOptions: (WindowsSecurityContextOptions) #}
+{% if SecurityContext.windowsOptions is defined %}
+windowsOptions:
+{%   filter indent(width=2, first=true) %}
+{%     set WindowsSecurityContextOptions = SecurityContext.windowsOptions %}
+{%     include '_WindowsSecurityContextOptions.j2' %}
+{%   endfilter %}
+{% endif %}

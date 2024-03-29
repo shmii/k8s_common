@@ -11,15 +11,15 @@ claims:
 {#  ## limits: (object) #}
 {% if ResourceRequirements.limits is defined %}
 limits:
-{%   for key, value in ResourceRequirements.limits | default('') %}
-  - "{{ key }}: {{ value }}
+{%   for key in ResourceRequirements.limits | default('') %}
+  {{ key }}: {{ ResourceRequirements.limits[key] }}
 {%   endfor %}
 {% endif -%}
 
 {#  ## requests: (object) #}
 {% if ResourceRequirements.requests is defined %}
 requests:
-{%   for key, value in ResourceRequirements.requests | default('') %}
-  - "{{ key }}: {{ value }}
+{%   for key in ResourceRequirements.requests | default('') %}
+  {{ key }}: {{ ResourceRequirements.requests[key] }}
 {%   endfor %}
 {% endif %}

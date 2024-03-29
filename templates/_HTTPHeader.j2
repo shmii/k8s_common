@@ -1,0 +1,9 @@
+{#  ## name (string) #}
+{% if HTTPHeader.name is defined %}
+name: {{ HTTPHeader.name | default('') }}
+{% endif -%}
+
+{#  ## value (string) #}
+{% if HTTPHeader.value is defined %}
+value: {{ HTTPHeader.value | default('') }}
+{% endif -%}

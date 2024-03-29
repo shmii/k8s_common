@@ -32,7 +32,7 @@ containers:
 dnsConfig:
 {%   filter indent(width=2, first=true) %}
 {%     set PodDNSConfig = PodSpec.dnsConfig %}
-{%     include '_Container.j2' %}
+{%     include '_PodDNSConfig.j2' %}
 {%   endfilter %}
 {% endif -%}
 
@@ -132,16 +132,6 @@ os:
 {%     include '_PodOS.j2' %}
 {%   endfilter %}
 {% endif -%}
-
-{#  ## overhead (object) #}
-{#
-{% if PodSpec.overhead is defined %}
-overhead:
-{%   for key, value in PodSpec.overhead | default('') %}
-  - "{{ key }}: {{ value }}
-{%   endfor %}
-{% endif -%}
-#}
 
 {#  ## preemptionPolicy (string) #}
 {% if PodSpec.preemptionPolicy is defined %}

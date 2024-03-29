@@ -1,3 +1,65 @@
+
+{#  ## name (string) #}
+{% if Container.name is defined %}
+name: {{ Container.name | default('') }}
+{% endif -%}
+
+{#  ## image (string) #}
+{% if Container.image is defined %}
+image: {{ Container.image | default('') }}
+{% endif -%}
+
+{#  ## imagePullPolicy (string) #}
+{% if Container.imagePullPolicy is defined %}
+imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
+{% endif -%}
+
+{#  ## lifecycle: (Lifecycle) #}
+{% if Container.lifecycle is defined %}
+lifecycle:
+{%   filter indent(width=2, first=true) %}
+{%     set Lifecycle = Container.lifecycle %}
+{%     include '_Lifecycle.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## startupProbe: (Probe) #}
+{% if Container.startupProbe is defined %}
+startupProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.startupProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## livenessProbe: (Probe) #}
+{% if Container.livenessProbe is defined %}
+livenessProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.livenessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## readinessProbe: (Probe) #}
+{% if Container.readinessProbe is defined %}
+readinessProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = Container.readinessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## ports: (ContainerPort [array]) #}
+{% if Container.ports is defined %}
+ports:
+{%   for ContainerPort in Container.ports | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ContainerPort.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
 {#  ## args: (string [array]) #}
 {% if Container.args is defined %}
 args:
@@ -12,6 +74,10 @@ command:
 {%   for cmd in Container.command | default([], true) %}
   - "{{ cmd | default('') }}"
 {%   endfor %}
+{% endif -%}
+
+{% if Container.workingDir is defined %}
+        workingDir: "{{ Container.workingDir | default('') }}"
 {% endif -%}
 
 {#  ## env: (EnvVar [array]) #}
@@ -34,58 +100,6 @@ envFrom:
 {%   endfor %}
 {% endif -%}
 
-{#  ## image (string) #}
-{% if Container.image is defined %}
-image: {{ Container.image | default('') }}
-{% endif -%}
-
-{#  ## imagePullPolicy (string) #}
-{% if Container.imagePullPolicy is defined %}
-imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
-{% endif -%}
-
-{#  ## lifecycle: (Lifecycle) #}
-{% if Container.lifecycle is defined %}
-lifecycle:
-{%   filter indent(width=2, first=true) %}
-{%     set Lifecycle = Container.lifecycle %}
-{%     include '_Lifecycle.j2' %}
-{%   endfilter %}
-{% endif -%}
-
-{#  ## livenessProbe: (Probe) #}
-{% if Container.livenessProbe is defined %}
-livenessProbe:
-{%   filter indent(width=2, first=true) %}
-{%     set Probe = Container.livenessProbe %}
-{%     include '_Probe.j2' %}
-{%   endfilter %}
-{% endif -%}
-
-{#  ## name (string) #}
-{% if Container.name is defined %}
-name: {{ Container.name | default('') }}
-{% endif -%}
-
-{#  ## ports: (ContainerPort [array]) #}
-{% if Container.ports is defined %}
-ports:
-{%   for ContainerPort in Container.ports | default([], true) %}
-{%     filter indent(width=4, first=false) %}
-  - {%   include '_ContainerPort.j2' %}
-{%     endfilter %}
-{%   endfor %}
-{% endif -%}
-
-{#  ## readinessProbe: (Probe) #}
-{% if Container.readinessProbe is defined %}
-readinessProbe:
-{%   filter indent(width=2, first=true) %}
-{%     set Probe = Container.readinessProbe %}
-{%     include '_Probe.j2' %}
-{%   endfilter %}
-{% endif -%}
-
 {#  ## resources: (ResourceRequirements) #}
 {% if Container.resources is defined %}
 resources:
@@ -101,15 +115,6 @@ securityContext:
 {%   filter indent(width=2, first=true) %}
 {%     set SecurityContext = Container.securityContext %}
 {%     include '_SecurityContext.j2' %}
-{%   endfilter %}
-{% endif -%}
-
-{#  ## startupProbe: (Probe) #}
-{% if Container.startupProbe is defined %}
-startupProbe:
-{%   filter indent(width=2, first=true) %}
-{%     set Probe = Container.startupProbe %}
-{%     include '_Probe.j2' %}
 {%   endfilter %}
 {% endif -%}
 
@@ -160,5 +165,5 @@ volumeMounts:
 
 {#  ## workingDir (string) #}
 {% if Container.workingDir is defined %}
-workingDir: "{{ Container.workingDir | default('') }}"
-{% endif -%}
+terminationMessagePolicy: {{ Container.workingDir | default('') }}
+{% endif %}

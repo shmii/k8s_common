@@ -10,7 +10,7 @@
 #
 #   Warning: It is recommended that users create Pods only through a Controller, and not directly.
 #            See Controllers: Deployment, Job, or StatefulSet.
-# TM7x7U0AT7k8qUgjQ3nv
+#
 
 apiVersion: "{{ resource.apiVersion | default(omit) }}"
 kind: Pod
@@ -21,6 +21,7 @@ metadata:
 {% include '_ObjectMeta.j2' %}
 {% endfilter %}
 {% endif -%}
+
 
 {# ## Spec: (PodSpec) #}
 {% if resource.spec is defined %}
@@ -36,7 +37,7 @@ spec:
 status:
 {% filter indent(width=2, first=true) %}
 {% set PodStatus = resource.status %}
-{% include '_PodSpec.j2' %}
+{% include '_PodStatus.j2' %}
 {% endfilter %}
 {% endif %}
 
