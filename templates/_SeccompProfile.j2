@@ -1,0 +1,9 @@
+{#  ## localhostProfile (string) #}
+{% if SeccompProfile.localhostProfile is defined %}
+localhostProfile: {{ SeccompProfile.localhostProfile | default('') }}
+{% endif -%}
+
+{#  ## type (string) #}
+{% if SeccompProfile.type is defined %}
+type: {{ SeccompProfile.type | default('') }}
+{% endif %}

@@ -1,0 +1,9 @@
+{#  ## name (string) #}
+{% if PodDNSConfigOption.name is defined %}
+name: "{{ PodDNSConfigOption.name | default('') }}"
+{% endif -%}
+
+{#  ## value (string) #}
+{% if PodDNSConfigOption.value is defined %}
+value: "{{ PodDNSConfigOption.value | default('') }}"
+{% endif %}
