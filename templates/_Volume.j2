@@ -272,3 +272,23 @@ secret:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
+
+{#  ## storageos: (StorageOSVolumeSource) #}
+{% if Volume.storageos is defined %}
+storageos:
+{%   for StorageOSVolumeSource in Volume.storageos | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_StorageOSVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## vsphereVolume: (VsphereVirtualDiskVolumeSource) #}
+{% if Volume.vsphereVolume is defined %}
+vsphereVolume:
+{%   for VsphereVirtualDiskVolumeSource in Volume.vsphereVolume | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VsphereVirtualDiskVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}
