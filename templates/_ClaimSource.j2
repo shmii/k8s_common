@@ -1,0 +1,9 @@
+{#  ## resourceClaimName (string) #}
+{% if ClaimSource.resourceClaimName is defined %}
+resourceClaimName: "{{ ClaimSource.resourceClaimName | default('') }}"
+{% endif -%}
+
+{#  ## resourceClaimTemplateName (string) #}
+{% if ClaimSource.resourceClaimTemplateName is defined %}
+resourceClaimTemplateName: "{{ ClaimSource.resourceClaimTemplateName | default('') }}"
+{% endif -%}

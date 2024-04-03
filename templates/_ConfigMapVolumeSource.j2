@@ -1,0 +1,24 @@
+{#  ## defaultMode (integer) #}
+{% if ConfigMapVolumeSource.defaultMode is defined %}
+defaultMode: {{ ConfigMapVolumeSource.defaultMode | default('') }}
+{% endif -%}
+
+{#  ## items: (KeyToPath [array]) #}
+{% if ConfigMapVolumeSource.items is defined %}
+items:
+{%   for KeyToPath in ConfigMapVolumeSource.items | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_KeyToPath.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## name (string) #}
+{% if ConfigMapVolumeSource.name is defined %}
+name: "{{ ConfigMapVolumeSource.name | default('') }}"
+{% endif -%}
+
+{#  ## optional (boolean) #}
+{% if ConfigMapVolumeSource.optional is defined %}
+optional: {{ ConfigMapVolumeSource.optional | default('') }}
+{% endif %}

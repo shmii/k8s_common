@@ -1,0 +1,14 @@
+
+{#  ## name (string) #}
+{% if PodResourceClaim.name is defined %}
+name: "{{ PodResourceClaim.name | default('') }}"
+{% endif -%}
+
+{#  ## source: (ClaimSource) #}
+{% if PodResourceClaim.source is defined %}
+source:
+{%   filter indent(width=2, first=true) %}
+{%     set ClaimSource = PodResourceClaim.source %}
+{%     include '_ClaimSource.j2' %}
+{%   endfilter %}
+{% endif %}

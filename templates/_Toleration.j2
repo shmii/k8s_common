@@ -1,0 +1,24 @@
+{#  ## effect (string) #}
+{% if Toleration.effect is defined %}
+effect: "{{ Toleration.effect | default('') }}"
+{% endif -%}
+
+{#  ## key (string) #}
+{% if Toleration.key is defined %}
+key: "{{ Toleration.key | default('') }}"
+{% endif -%}
+
+{#  ## operator (string) #}
+{% if Toleration.operator is defined %}
+operator: "{{ Toleration.operator | default('') }}"
+{% endif -%}
+
+{#  ## tolerationSeconds (integer) #}
+{% if Toleration.tolerationSeconds is defined %}
+tolerationSeconds: "{{ Toleration.tolerationSeconds | default('') }}"
+{% endif -%}
+
+{#  ## value (string) #}
+{% if Toleration.value is defined %}
+value: "{{ Toleration.value | default('') }}"
+{% endif %}

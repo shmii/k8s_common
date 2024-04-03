@@ -55,7 +55,7 @@ ephemeralContainers:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
-==> ICI
+
 {#  ## hostAliases: (HostAlias [array]) #}
 {% if PodSpec.hostAliases is defined %}
 hostAliases:
@@ -119,8 +119,8 @@ nodeName: "{{ PodSpec.nodeName | default('') }}"
 {#  ## nodeSelector: (object) #}
 {% if PodSpec.nodeSelector is defined %}
 nodeSelector:
-{%   for key, value in PodSpec.nodeSelector | default('') %}
-  - "{{ key }}: {{ value }}
+{%   for nodeSelector in PodSpec.nodeSelector | default([], true) %}
+  {{ nodeSelector }}: {{ PodSpec.nodeSelector[nodeSelector] }}
 {%   endfor %}
 {% endif -%}
 
@@ -131,6 +131,14 @@ os:
 {%     set PodOS = PodSpec.dnsConfig %}
 {%     include '_PodOS.j2' %}
 {%   endfilter %}
+{% endif -%}
+
+{#  ## overhead: (object) #}
+{% if PodSpec.overhead is defined %}
+overhead:
+{%   for overhead in PodSpec.overhead | default([], true) %}
+  {{ overhead }}: {{ PodSpec.overhead[overhead] }}
+{%   endfor %}
 {% endif -%}
 
 {#  ## preemptionPolicy (string) #}
@@ -227,7 +235,7 @@ shareProcessNamespace: "{{ PodSpec.shareProcessNamespace | default('') }}"
 subdomain: "{{ PodSpec.subdomain | default('') }}"
 {% endif -%}
 
-{#  ## subterminationGracePeriodSecondsdomain (integer) #}
+{#  ## terminationGracePeriodSeconds (integer) #}
 {% if PodSpec.terminationGracePeriodSeconds is defined %}
 terminationGracePeriodSeconds: "{{ PodSpec.terminationGracePeriodSeconds | default('') }}"
 {% endif -%}

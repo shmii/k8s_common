@@ -1,0 +1,24 @@
+{#  ## fsType (string) #}
+{% if CinderVolumeSource.fsType is defined %}
+fsType: "{{ CinderVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## readOnly (boolean) #}
+{% if CinderVolumeSource.readOnly is defined %}
+readOnly: "{{ CinderVolumeSource.readOnly | default('') }}"
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if CinderVolumeSource.secretRef is defined %}
+secretRef:
+{%   for LocalObjectReference in CinderVolumeSource.secretRef | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## volumeID (string) #}
+{% if CinderVolumeSource.volumeID is defined %}
+volumeID: "{{ CinderVolumeSource.volumeID | default('') }}"
+{% endif %}

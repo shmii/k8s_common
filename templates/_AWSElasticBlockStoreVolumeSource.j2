@@ -1,0 +1,19 @@
+{#  ## fsType (string) #}
+{% if AWSElasticBlockStoreVolumeSource.fsType is defined %}
+fsType: "{{ AWSElasticBlockStoreVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## partition (integer) #}
+{% if AWSElasticBlockStoreVolumeSource.partition is defined %}
+partition: "{{ AWSElasticBlockStoreVolumeSource.partition | default('') }}"
+{% endif -%}
+
+{#  ## readOnly (boolean) #}
+{% if AWSElasticBlockStoreVolumeSource.readOnly is defined %}
+readOnly: "{{ AWSElasticBlockStoreVolumeSource.readOnly | default('') }}"
+{% endif -%}
+
+{#  ## volumeID (string) #}
+{% if AWSElasticBlockStoreVolumeSource.volumeID is defined %}
+volumeID: "{{ AWSElasticBlockStoreVolumeSource.volumeID | default('') }}"
+{% endif %}

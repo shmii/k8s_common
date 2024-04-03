@@ -1,0 +1,9 @@
+{#  ## name (string) #}
+{% if Sysctl.name is defined %}
+name: "{{ Sysctl.name | default('') }}"
+{% endif -%}
+
+{#  ## value (string) #}
+{% if Sysctl.value is defined %}
+value: "{{ Sysctl.value | default('') }}"
+{% endif -%}

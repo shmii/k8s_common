@@ -1,0 +1,69 @@
+{#  ## awsElasticBlockStore: (AWSElasticBlockStoreVolumeSource) #}
+{% if Volume.awsElasticBlockStore is defined %}
+awsElasticBlockStore:
+{%   for AWSElasticBlockStoreVolumeSource in Volume.awsElasticBlockStore | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_AWSElasticBlockStoreVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## azureDisk: (AzureDiskVolumeSource) #}
+{% if Volume.azureDisk is defined %}
+azureDisk:
+{%   for AzureDiskVolumeSource in Volume.azureDisk | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_AzureDiskVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## azureFile: (AzureFileVolumeSource) #}
+{% if Volume.azureFile is defined %}
+azureFile:
+{%   for AzureFileVolumeSource in Volume.azureFile | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_AzureFileVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## cephfs: (CephFSVolumeSource) #}
+{% if Volume.cephfs is defined %}
+cephfs:
+{%   for CephFSVolumeSource in Volume.cephfs | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_CephFSVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## cinder: (CinderVolumeSource) #}
+{% if Volume.cinder is defined %}
+cinder:
+{%   for CinderVolumeSource in Volume.cinder | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_CinderVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## configMap: (ConfigMapVolumeSource) #}
+{% if Volume.configMap is defined %}
+configMap:
+{%   for ConfigMapVolumeSource in Volume.configMap | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ConfigMapVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## csi: (CSIVolumeSource) #}
+{% if Volume.csi is defined %}
+csi:
+{%   for CSIVolumeSource in Volume.csi | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_CSIVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}

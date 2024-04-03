@@ -1,0 +1,37 @@
+{#  ## monitors: (string [array]) #}
+{% if CephFSVolumeSource.monitors is defined %}
+monitors:
+{%   for monitor in CephFSVolumeSource.monitors | default([], true) %}
+  - "{{ monitor | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## path (string) #}
+{% if CephFSVolumeSource.path is defined %}
+path: "{{ CephFSVolumeSource.path | default('') }}"
+{% endif -%}
+
+{#  ## readOnly (boolean) #}
+{% if CephFSVolumeSource.readOnly is defined %}
+readOnly: "{{ CephFSVolumeSource.readOnly | default('') }}"
+{% endif -%}
+
+{#  ## secretFile (string) #}
+{% if CephFSVolumeSource.secretFile is defined %}
+secretFile: "{{ CephFSVolumeSource.secretFile | default('') }}"
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if CephFSVolumeSource.secretRef is defined %}
+secretRef:
+{%   for LocalObjectReference in CephFSVolumeSource.secretRef | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## user (string) #}
+{% if CephFSVolumeSource.user is defined %}
+user: "{{ CephFSVolumeSource.user | default('') }}"
+{% endif %}

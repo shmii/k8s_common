@@ -11,9 +11,7 @@ matchExpressions:
 {#   ## matchLabels: (object) #}
 {% if LabelSelector.matchLabels is defined %}
 matchLabels:
-{%     filter indent(width=4, first=false) %}
-{%       for LabelSelector in LabelSelector.matchLabels | default([], true) %}
-  - {%         include '_LabelSelector.j2' %}
-{%       endfor %}
-{%     endfilter %}
-{% endif %}
+{%   for matchLabel in LabelSelector.matchLabels | default('') %}
+  {{ matchLabel }}: {{ LabelSelector.matchLabels[matchLabel] | default('') }}
+{%   endfor %}
+{% endif -%}

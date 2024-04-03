@@ -1,0 +1,4 @@
+{#  ## name (string) #}
+{% if LocalObjectReference.name is defined %}
+name: "{{ LocalObjectReference.name | default('') }}"
+{% endif %}

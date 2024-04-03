@@ -1,0 +1,12 @@
+{#  ## hostnames: (string [array]) #}
+{% if HostAlias.hostnames is defined %}
+hostnames:
+{%   for hostname in HostAlias.hostnames | default('', true) %}
+  - "{{ hostname | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## ip (string) #}
+{% if HostAlias.ip is defined %}
+ip: "{{ HostAlias.ip | default('') }}"
+{% endif -%}

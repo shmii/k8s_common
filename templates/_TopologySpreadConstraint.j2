@@ -1,0 +1,46 @@
+{#  ## labelSelector: (LabelSelector) #}
+{% if TopologySpreadConstraint.labelSelector is defined %}
+labelSelector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = TopologySpreadConstraint.labelSelector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## matchLabelKeys: (string [array]) #}
+{% if TopologySpreadConstraint.matchLabelKeys is defined %}
+matchLabelKeys:
+{%   for matchLabelKey in TopologySpreadConstraint.matchLabelKeys | default([], true) %}
+  - "{{ matchLabelKey | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## maxSkew (integer) #}
+{% if TopologySpreadConstraint.maxSkew is defined %}
+maxSkew: "{{ TopologySpreadConstraint.maxSkew | default('') }}"
+{% endif -%}
+
+{#  ## minDomains (integer) #}
+{% if TopologySpreadConstraint.minDomains is defined %}
+minDomains: "{{ TopologySpreadConstraint.minDomains | default('') }}"
+{% endif -%}
+
+{#  ## nodeAffinityPolicy (string) #}
+{% if TopologySpreadConstraint.nodeAffinityPolicy is defined %}
+nodeAffinityPolicy: "{{ TopologySpreadConstraint.nodeAffinityPolicy | default('') }}"
+{% endif -%}
+
+{#  ## nodeTaintsPolicy (string) #}
+{% if TopologySpreadConstraint.nodeTaintsPolicy is defined %}
+nodeTaintsPolicy: "{{ TopologySpreadConstraint.nodeTaintsPolicy | default('') }}"
+{% endif -%}
+
+{#  ## topologyKey (string) #}
+{% if TopologySpreadConstraint.topologyKey is defined %}
+topologyKey: "{{ TopologySpreadConstraint.topologyKey | default('') }}"
+{% endif -%}
+
+{#  ## whenUnsatisfiable (string) #}
+{% if TopologySpreadConstraint.whenUnsatisfiable is defined %}
+whenUnsatisfiable: "{{ TopologySpreadConstraint.whenUnsatisfiable | default('') }}"
+{% endif -%}
