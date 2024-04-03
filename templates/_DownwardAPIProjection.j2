@@ -1,0 +1,9 @@
+{#  ## items: (DownwardAPIVolumeFile [array]) #}
+{% if DownwardAPIProjection.items is defined %}
+items:
+{%   for DownwardAPIVolumeFile in DownwardAPIProjection.items | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_DownwardAPIVolumeFile.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}

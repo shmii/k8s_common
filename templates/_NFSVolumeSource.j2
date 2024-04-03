@@ -1,0 +1,14 @@
+{#  ## path: (string) #}
+{% if NFSVolumeSource.path is defined %}
+path: "{{ NFSVolumeSource.path | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if NFSVolumeSource.readOnly is defined %}
+readOnly: {{ NFSVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## server: (string) #}
+{% if NFSVolumeSource.server is defined %}
+server: "{{ NFSVolumeSource.server | default('') }}"
+{% endif %}

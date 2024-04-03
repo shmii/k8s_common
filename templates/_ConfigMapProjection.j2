@@ -1,0 +1,19 @@
+{#  ## items: (KeyToPath [array]) #}
+{% if ConfigMapProjection.items is defined %}
+items:
+{%   for KeyToPath in ConfigMapProjection.items | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_KeyToPath.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## name: (string) #}
+{% if ConfigMapProjection.name is defined %}
+name: "{{ ConfigMapProjection.name | default('') }}"
+{% endif %}
+
+{#  ## optional: (boolean) #}
+{% if ConfigMapProjection.optional is defined %}
+optional: {{ ConfigMapProjection.optional | default('') }}
+{% endif -%}

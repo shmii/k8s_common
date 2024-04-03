@@ -1,0 +1,14 @@
+{#  ## fsType: (string) #}
+{% if PortworxVolumeSource.fsType is defined %}
+fsType: "{{ PortworxVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if PortworxVolumeSource.readOnly is defined %}
+readOnly: {{ PortworxVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## volumeID: (string) #}
+{% if PortworxVolumeSource.volumeID is defined %}
+volumeID: "{{ PortworxVolumeSource.volumeID | default('') }}"
+{% endif %}

@@ -177,3 +177,98 @@ iscsi:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
+
+{#  ## name: (string) #}
+{% if Volume.name is defined %}
+name: "{{ Volume.name | default('') }}"
+{% endif -%}
+
+{#  ## nfs: (NFSVolumeSource) #}
+{% if Volume.nfs is defined %}
+nfs:
+{%   for NFSVolumeSource in Volume.nfs | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_NFSVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## persistentVolumeClaim: (PersistentVolumeClaimVolumeSource) #}
+{% if Volume.persistentVolumeClaim is defined %}
+persistentVolumeClaim:
+{%   for PersistentVolumeClaimVolumeSource in Volume.persistentVolumeClaim | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PersistentVolumeClaimVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## photonPersistentDisk: (PhotonPersistentDiskVolumeSource) #}
+{% if Volume.photonPersistentDisk is defined %}
+photonPersistentDisk:
+{%   for PhotonPersistentDiskVolumeSource in Volume.photonPersistentDisk | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PhotonPersistentDiskVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## portworxVolume: (PortworxVolumeSource) #}
+{% if Volume.portworxVolume is defined %}
+portworxVolume:
+{%   for PortworxVolumeSource in Volume.portworxVolume | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PortworxVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## projected: (ProjectedVolumeSource) #}
+{% if Volume.projected is defined %}
+projected:
+{%   for ProjectedVolumeSource in Volume.projected | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ProjectedVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## quobyte: (QuobyteVolumeSource) #}
+{% if Volume.quobyte is defined %}
+quobyte:
+{%   for QuobyteVolumeSource in Volume.quobyte | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_QuobyteVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## rbd: (RBDVolumeSource) #}
+{% if Volume.rbd is defined %}
+rbd:
+{%   for RBDVolumeSource in Volume.rbd | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_RBDVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## scaleIO: (ScaleIOVolumeSource) #}
+{% if Volume.scaleIO is defined %}
+scaleIO:
+{%   for ScaleIOVolumeSource in Volume.scaleIO | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ScaleIOVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## secret: (SecretVolumeSource) #}
+{% if Volume.secret is defined %}
+secret:
+{%   for SecretVolumeSource in Volume.secret | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_SecretVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}

@@ -1,0 +1,14 @@
+{#  ## defaultMode: (integer) #}
+{% if ProjectedVolumeSource.defaultMode is defined %}
+defaultMode: {{ ProjectedVolumeSource.defaultMode | default('') }}
+{% endif -%}
+
+{#  ## sources: (VolumeProjection [array]) #}
+{% if ProjectedVolumeSource.sources is defined %}
+sources:
+{%   for VolumeProjection in ProjectedVolumeSource.sources | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeProjection.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}

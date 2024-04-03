@@ -1,0 +1,47 @@
+{#  ## fsType: (string) #}
+{% if RBDVolumeSource.fsType is defined %}
+fsType: "{{ RBDVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## image: (string) #}
+{% if RBDVolumeSource.image is defined %}
+image: "{{ RBDVolumeSource.image | default('') }}"
+{% endif -%}
+
+{#  ## keyring: (string) #}
+{% if RBDVolumeSource.keyring is defined %}
+keyring: "{{ RBDVolumeSource.keyring | default('') }}"
+{% endif -%}
+
+{#  ## monitors: (string [array]) #}
+{% if RBDVolumeSource.monitors is defined %}
+monitors:
+{%   for monitor in RBDVolumeSource.monitors | default([], true) %}
+  - "{{ monitor | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## pool: (string) #}
+{% if RBDVolumeSource.pool is defined %}
+pool: "{{ RBDVolumeSource.pool | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if RBDVolumeSource.readOnly is defined %}
+readOnly: {{ RBDVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if RBDVolumeSource.secretRef is defined %}
+secretRef:
+{%   for LocalObjectReference in RBDVolumeSource.secretRef | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## user: (string) #}
+{% if RBDVolumeSource.user is defined %}
+user: "{{ RBDVolumeSource.user | default('') }}"
+{% endif %}
