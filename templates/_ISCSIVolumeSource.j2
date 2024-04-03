@@ -1,0 +1,62 @@
+{#  ## chapAuthDiscovery: (boolean) #}
+{% if ISCSIVolumeSource.chapAuthDiscovery is defined %}
+chapAuthDiscovery: {{ ISCSIVolumeSource.chapAuthDiscovery | default('') }}
+{% endif -%}
+
+{#  ## chapAuthSession: (boolean) #}
+{% if ISCSIVolumeSource.chapAuthSession is defined %}
+chapAuthSession: {{ ISCSIVolumeSource.chapAuthSession | default('') }}
+{% endif -%}
+
+{#  ## fsType: (string) #}
+{% if ISCSIVolumeSource.fsType is defined %}
+fsType: "{{ ISCSIVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## initiatorName: (string) #}
+{% if ISCSIVolumeSource.initiatorName is defined %}
+initiatorName: "{{ ISCSIVolumeSource.initiatorName | default('') }}"
+{% endif -%}
+
+{#  ## iqn: (string) #}
+{% if ISCSIVolumeSource.iqn is defined %}
+iqn: "{{ ISCSIVolumeSource.iqn | default('') }}"
+{% endif -%}
+
+{#  ## iscsiInterface: (string) #}
+{% if ISCSIVolumeSource.iscsiInterface is defined %}
+iscsiInterface: "{{ ISCSIVolumeSource.iscsiInterface | default('') }}"
+{% endif -%}
+
+{#  ## lun: (boolean) #}
+{% if ISCSIVolumeSource.lun is defined %}
+lun: {{ ISCSIVolumeSource.lun | default('') }}
+{% endif -%}
+
+{#  ## portals: (string [array]) #}
+{% if ISCSIVolumeSource.portals is defined %}
+portals:
+{%   for portal in ISCSIVolumeSource.portals | default([], true) %}
+  - "{{ portal | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if ISCSIVolumeSource.readOnly is defined %}
+readOnly: {{ ISCSIVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if ISCSIVolumeSource.secretRef is defined %}
+secretRef:
+{%   for LocalObjectReference in ISCSIVolumeSource.secretRef | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## targetPortal: (string) #}
+{% if ISCSIVolumeSource.targetPortal is defined %}
+targetPortal: "{{ ISCSIVolumeSource.targetPortal | default('') }}"
+{% endif %}

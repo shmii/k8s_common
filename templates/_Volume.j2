@@ -67,3 +67,113 @@ csi:
 {%     endfilter %}
 {%   endfor %}
 {% endif -%}
+
+{#  ## downwardAPI: (DownwardAPIVolumeSource) #}
+{% if Volume.downwardAPI is defined %}
+downwardAPI:
+{%   for DownwardAPIVolumeSource in Volume.downwardAPI | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_DownwardAPIVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## emptyDir: (EmptyDirVolumeSource) #}
+{% if Volume.emptyDir is defined %}
+emptyDir:
+{%   for EmptyDirVolumeSource in Volume.emptyDir | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EmptyDirVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## ephemeral: (EphemeralVolumeSource) #}
+{% if Volume.ephemeral is defined %}
+ephemeral:
+{%   for EphemeralVolumeSource in Volume.ephemeral | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EphemeralVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## fc: (FCVolumeSource) #}
+{% if Volume.fc is defined %}
+fc:
+{%   for FCVolumeSource in Volume.fc | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_FCVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## flexVolume: (FlexVolumeSource) #}
+{% if Volume.flexVolume is defined %}
+flexVolume:
+{%   for FlexVolumeSource in Volume.flexVolume | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_FlexVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## flocker: (FlockerVolumeSource) #}
+{% if Volume.flocker is defined %}
+flocker:
+{%   for FlockerVolumeSource in Volume.flocker | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_FlockerVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## gcePersistentDisk: (GCEPersistentDiskVolumeSource) #}
+{% if Volume.gcePersistentDisk is defined %}
+gcePersistentDisk:
+{%   for GCEPersistentDiskVolumeSource in Volume.gcePersistentDisk | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_GCEPersistentDiskVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## gitRepo: (GitRepoVolumeSource) #}
+{% if Volume.gitRepo is defined %}
+gitRepo:
+{%   for GitRepoVolumeSource in Volume.gitRepo | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_GitRepoVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## glusterfs: (GlusterfsVolumeSource) #}
+{% if Volume.glusterfs is defined %}
+glusterfs:
+{%   for GlusterfsVolumeSource in Volume.glusterfs | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_GlusterfsVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## hostPath: (HostPathVolumeSource) #}
+{% if Volume.hostPath is defined %}
+hostPath:
+{%   for HostPathVolumeSource in Volume.hostPath | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_HostPathVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## iscsi: (ISCSIVolumeSource) #}
+{% if Volume.iscsi is defined %}
+iscsi:
+{%   for ISCSIVolumeSource in Volume.iscsi | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ISCSIVolumeSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}

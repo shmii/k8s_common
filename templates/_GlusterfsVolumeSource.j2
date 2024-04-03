@@ -1,0 +1,14 @@
+{#  ## endpoints: (string) #}
+{% if GlusterfsVolumeSource.endpoints is defined %}
+endpoints: "{{ GlusterfsVolumeSource.endpoints | default('') }}"
+{% endif -%}
+
+{#  ## path: (string) #}
+{% if GlusterfsVolumeSource.path is defined %}
+path: "{{ GlusterfsVolumeSource.path | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if GlusterfsVolumeSource.readOnly is defined %}
+readOnly: "{{ GlusterfsVolumeSource.readOnly | default('') }}"
+{% endif -%}

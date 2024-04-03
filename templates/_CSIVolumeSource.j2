@@ -18,12 +18,15 @@ csi:
 {%   endfor %}
 {% endif -%}
 
-{#  ## workingDir (string) #}
-{% if CSIVolumeSource.workingDir is defined %}
-workingDir: "{{ CSIVolumeSource.workingDir | default('') }}"
+{#  ## readOnly (boolean) #}
+{% if CSIVolumeSource.readOnly is defined %}
+readOnly: "{{ CSIVolumeSource.readOnly | default('') }}"
 {% endif -%}
 
-{#  ## workingDir (string) #}
-{% if CSIVolumeSource.workingDir is defined %}
-workingDir: "{{ CSIVolumeSource.workingDir | default('') }}"
-{% endif -%}
+{#   ## volumeAttributes: (object) #}
+{% if CSIVolumeSource.volumeAttributes is defined %}
+volumeAttributes:
+{%   for volumeAttribute in CSIVolumeSource.volumeAttributes | default('') %}
+  {{ volumeAttribute }}: {{ CSIVolumeSource.volumeAttributes[volumeAttribute] | default('') }}
+{%   endfor %}
+{% endif %}

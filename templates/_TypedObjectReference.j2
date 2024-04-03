@@ -1,0 +1,19 @@
+{#  ## apiGroup (string) #}
+{% if TypedObjectReference.apiGroup is defined %}
+apiGroup: "{{ TypedObjectReference.apiGroup | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if TypedObjectReference.kind is defined %}
+kind: "{{ TypedObjectReference.kind | default('') }}"
+{% endif -%}
+
+{#  ## name (string) #}
+{% if TypedObjectReference.name is defined %}
+name: "{{ TypedObjectReference.name | default('') }}"
+{% endif -%}
+
+{#  ## namespace (string) #}
+{% if TypedObjectReference.namespace is defined %}
+namespace: "{{ TypedObjectReference.namespace | default('') }}"
+{% endif %}

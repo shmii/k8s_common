@@ -1,0 +1,9 @@
+{#  ## path: (string) #}
+{% if HostPathVolumeSource.path is defined %}
+path: "{{ HostPathVolumeSource.path | default('') }}"
+{% endif -%}
+
+{#  ## type: (string) #}
+{% if HostPathVolumeSource.type is defined %}
+type: "{{ HostPathVolumeSource.type | default('') }}"
+{% endif -%}

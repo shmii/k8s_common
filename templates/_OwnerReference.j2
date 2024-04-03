@@ -1,0 +1,29 @@
+{#  ## apiVersion (string) #}
+{% if OwnerReference.apiVersion is defined %}
+apiVersion: "{{ OwnerReference.apiVersion | default('') }}"
+{% endif -%}
+
+{#  ## blockOwnerDeletion (boolean) #}
+{% if OwnerReference.blockOwnerDeletion is defined %}
+blockOwnerDeletion: "{{ OwnerReference.blockOwnerDeletion | default('') }}"
+{% endif -%}
+
+{#  ## controller (boolean) #}
+{% if OwnerReference.controller is defined %}
+controller: "{{ OwnerReference.controller | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if OwnerReference.kind is defined %}
+kind: "{{ OwnerReference.kind | default('') }}"
+{% endif -%}
+
+{#  ## name (string) #}
+{% if OwnerReference.name is defined %}
+name: "{{ OwnerReference.name | default('') }}"
+{% endif -%}
+
+{#  ## uid (string) #}
+{% if OwnerReference.uid is defined %}
+uid: "{{ OwnerReference.uid | default('') }}"
+{% endif %}

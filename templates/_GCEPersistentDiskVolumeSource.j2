@@ -1,0 +1,19 @@
+{#  ## fsType: (string) #}
+{% if GCEPersistentDiskVolumeSource.fsType is defined %}
+fsType: "{{ GCEPersistentDiskVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## partition: (integer) #}
+{% if GCEPersistentDiskVolumeSource.partition is defined %}
+partition: "{{ GCEPersistentDiskVolumeSource.partition | default('') }}"
+{% endif -%}
+
+{#  ## pdName: (string) #}
+{% if GCEPersistentDiskVolumeSource.pdName is defined %}
+pdName: "{{ GCEPersistentDiskVolumeSource.pdName | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if GCEPersistentDiskVolumeSource.readOnly is defined %}
+readOnly: "{{ GCEPersistentDiskVolumeSource.readOnly | default('') }}"
+{% endif %}

@@ -1,0 +1,58 @@
+{#  ## accessModes: (string [array]) #}
+{% if PersistentVolumeClaimSpec.accessModes is defined %}
+accessModes:
+{%   for accessMode in PersistentVolumeClaimSpec.accessModes | default([], true) %}
+  - "{{ accessMode | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## dataSource: (TypedLocalObjectReference) #}
+{% if PersistentVolumeClaimSpec.dataSource is defined %}
+dataSource:
+{%   filter indent(width=2, first=true) %}
+{%     set TypedLocalObjectReference = PersistentVolumeClaimSpec.dataSource %}
+{%     include '_TypedLocalObjectReference.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## dataSourceRef: (TypedObjectReference) #}
+{% if PersistentVolumeClaimSpec.dataSourceRef is defined %}
+dataSourceRef:
+{%   filter indent(width=2, first=true) %}
+{%     set TypedObjectReference = PersistentVolumeClaimSpec.dataSourceRef %}
+{%     include '_TypedObjectReference.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## resources: (ResourceRequirements) #}
+{% if PersistentVolumeClaimSpec.resources is defined %}
+resources:
+{%   filter indent(width=2, first=true) %}
+{%     set ResourceRequirements = PersistentVolumeClaimSpec.resources %}
+{%     include '_ResourceRequirements.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## selector: (LabelSelector) #}
+{% if PersistentVolumeClaimSpec.selector is defined %}
+selector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = PersistentVolumeClaimSpec.selector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## storageClassName (string) #}
+{% if PersistentVolumeClaimSpec.storageClassName is defined %}
+storageClassName: "{{ PersistentVolumeClaimSpec.storageClassName | default('') }}"
+{% endif -%}
+
+{#  ## volumeMode (string) #}
+{% if PersistentVolumeClaimSpec.volumeMode is defined %}
+volumeMode: "{{ PersistentVolumeClaimSpec.volumeMode | default('') }}"
+{% endif -%}
+
+{#  ## volumeName (string) #}
+{% if PersistentVolumeClaimSpec.volumeName is defined %}
+volumeName: "{{ PersistentVolumeClaimSpec.volumeName | default('') }}"
+{% endif %}

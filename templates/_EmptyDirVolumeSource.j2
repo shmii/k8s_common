@@ -1,0 +1,10 @@
+{#  ## medium (string) #}
+{% if EmptyDirVolumeSource.medium is defined %}
+medium: "{{ EmptyDirVolumeSource.medium | default('') }}"
+{% endif -%}
+
+{#  ## sizeLimit: (Quantity) #}
+{#  ==> /!\ Casted to string on this template #}
+{% if EmptyDirVolumeSource.sizeLimit is defined %}
+sizeLimit: "{{ EmptyDirVolumeSource.sizeLimit | default('') }}"
+{% endif %}

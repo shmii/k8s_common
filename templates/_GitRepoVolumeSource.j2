@@ -1,0 +1,14 @@
+{#  ## directory: (string) #}
+{% if GitRepoVolumeSource.directory is defined %}
+directory: "{{ GitRepoVolumeSource.directory | default('') }}"
+{% endif -%}
+
+{#  ## repository: (string) #}
+{% if GitRepoVolumeSource.repository is defined %}
+repository: "{{ GitRepoVolumeSource.repository | default('') }}"
+{% endif -%}
+
+{#  ## revision: (string) #}
+{% if GitRepoVolumeSource.revision is defined %}
+revision: "{{ GitRepoVolumeSource.revision | default('') }}"
+{% endif %}

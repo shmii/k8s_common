@@ -12,10 +12,4 @@ resource: {{ ResourceFieldSelector.resource | default('') }}
 {#  ==> /!\ Casted to string on this template #}
 {% if ResourceFieldSelector.divisor is defined %}
 divisor: "{{ ResourceFieldSelector.divisor | default('') }}"
-{#
-{%   filter indent(width=2, first=true) %}
-{%     set Quantity = ResourceFieldSelector.divisor %}
-{%     include '_Quantity.j2' %}
-{%   endfilter %}
-#}
 {% endif %}
