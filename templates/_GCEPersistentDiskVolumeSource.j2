@@ -5,7 +5,7 @@ fsType: "{{ GCEPersistentDiskVolumeSource.fsType | default('') }}"
 
 {#  ## partition: (integer) #}
 {% if GCEPersistentDiskVolumeSource.partition is defined %}
-partition: "{{ GCEPersistentDiskVolumeSource.partition | default('') }}"
+partition: {{ GCEPersistentDiskVolumeSource.partition | default('') }}
 {% endif -%}
 
 {#  ## pdName: (string) #}
@@ -15,5 +15,5 @@ pdName: "{{ GCEPersistentDiskVolumeSource.pdName | default('') }}"
 
 {#  ## readOnly: (boolean) #}
 {% if GCEPersistentDiskVolumeSource.readOnly is defined %}
-readOnly: "{{ GCEPersistentDiskVolumeSource.readOnly | default('') }}"
+readOnly: {{ GCEPersistentDiskVolumeSource.readOnly | default('') }}
 {% endif %}

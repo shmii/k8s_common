@@ -1,0 +1,9 @@
+{#  ## maxSurge: (n/a) #}
+{% if RollingUpdateDeployment.maxSurge is defined %}
+maxSurge: {{ RollingUpdateDeployment.maxSurge | default('') }}
+{% endif -%}
+
+{#  ## maxUnavailable: (n/a) #}
+{% if RollingUpdateDeployment.maxUnavailable is defined %}
+maxUnavailable: {{ RollingUpdateDeployment.maxUnavailable | default('') }}
+{% endif %}

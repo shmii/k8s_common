@@ -25,5 +25,5 @@ kind: "{{ AzureDiskVolumeSource.kind | default('') }}"
 
 {#  ## readOnly (boolean) #}
 {% if AzureDiskVolumeSource.readOnly is defined %}
-readOnly: "{{ AzureDiskVolumeSource.readOnly | default('') }}"
+readOnly: {{ AzureDiskVolumeSource.readOnly | default('') }}
 {% endif %}

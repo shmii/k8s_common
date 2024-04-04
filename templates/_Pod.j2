@@ -1,0 +1,36 @@
+{#  ## apiVersion (string) #}
+{% if Pod.apiVersion is defined %}
+apiVersion: "{{ Pod.apiVersion | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if Pod.kind is defined %}
+kind: "{{ Pod.kind | default('') }}"
+{% endif -%}
+
+{# ## metadata: (ObjectMeta) #}
+{% if Pod.metadata is defined %}
+metadata:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectMeta = Pod.metadata %}
+{%     include '_ObjectMeta.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## Spec: (PodSpec) #}
+{% if Pod.spec is defined %}
+spec:
+{%   filter indent(width=2, first=true) %}
+{%     set PodSpec = Pod.spec %}
+{%     include '_PodSpec.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## status: (PodStatus) #}
+{% if Pod.status is defined %}
+status:
+{%   filter indent(width=2, first=true) %}
+{%     set PodStatus = Pod.status %}
+{%     include '_PodStatus.j2' %}
+{%   endfilter %}
+{% endif %}

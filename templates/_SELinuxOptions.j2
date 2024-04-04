@@ -1,19 +1,19 @@
 {#  ## level (string) #}
 {% if SELinuxOptions.level is defined %}
-level: {{ SELinuxOptions.level | default('') }}
+level: "{{ SELinuxOptions.level | default('') }}"
 {% endif -%}
 
 {#  ## role (string) #}
 {% if SELinuxOptions.role is defined %}
-role: {{ SELinuxOptions.role | default('') }}
+role: "{{ SELinuxOptions.role | default('') }}"
 {% endif -%}
 
 {#  ## type (string) #}
 {% if SELinuxOptions.type is defined %}
-type: {{ SELinuxOptions.type | default('') }}
+type: "{{ SELinuxOptions.type | default('') }}"
 {% endif -%}
 
 {#  ## user (string) #}
 {% if SELinuxOptions.user is defined %}
-user: {{ SELinuxOptions.user | default('') }}
+user: "{{ SELinuxOptions.user | default('') }}"
 {% endif %}

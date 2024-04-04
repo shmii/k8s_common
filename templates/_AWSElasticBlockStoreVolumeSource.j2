@@ -5,12 +5,12 @@ fsType: "{{ AWSElasticBlockStoreVolumeSource.fsType | default('') }}"
 
 {#  ## partition (integer) #}
 {% if AWSElasticBlockStoreVolumeSource.partition is defined %}
-partition: "{{ AWSElasticBlockStoreVolumeSource.partition | default('') }}"
+partition: {{ AWSElasticBlockStoreVolumeSource.partition | default('') }}
 {% endif -%}
 
 {#  ## readOnly (boolean) #}
 {% if AWSElasticBlockStoreVolumeSource.readOnly is defined %}
-readOnly: "{{ AWSElasticBlockStoreVolumeSource.readOnly | default('') }}"
+readOnly: {{ AWSElasticBlockStoreVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#  ## volumeID (string) #}

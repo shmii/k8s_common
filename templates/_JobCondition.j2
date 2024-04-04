@@ -1,0 +1,29 @@
+{#  ## lastProbeTime: (Time) #}
+{% if JobCondition.lastProbeTime is defined %}
+lastProbeTime: {{ JobCondition.lastProbeTime | default('') }}
+{% endif -%}
+
+{#  ## lastTransitionTime: (Time) #}
+{% if JobCondition.lastTransitionTime is defined %}
+lastTransitionTime: {{ JobCondition.lastTransitionTime | default('') }}
+{% endif -%}
+
+{#  ## message: (string) #}
+{% if JobCondition.message is defined %}
+message: "{{ JobCondition.message | default('') }}"
+{% endif -%}
+
+{#  ## reason: (string) #}
+{% if JobCondition.reason is defined %}
+reason: "{{ JobCondition.reason | default('') }}"
+{% endif -%}
+
+{#  ## status: (string) #}
+{% if JobCondition.status is defined %}
+status: "{{ JobCondition.status | default('') }}"
+{% endif -%}
+
+{#  ## type: (string) #}
+{% if JobCondition.type is defined %}
+type: "{{ JobCondition.type | default('') }}"
+{% endif %}

@@ -20,7 +20,7 @@ csi:
 
 {#  ## readOnly (boolean) #}
 {% if CSIVolumeSource.readOnly is defined %}
-readOnly: "{{ CSIVolumeSource.readOnly | default('') }}"
+readOnly: {{ CSIVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#   ## volumeAttributes: (object) #}

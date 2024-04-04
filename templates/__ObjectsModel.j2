@@ -15,17 +15,17 @@ tty: {{ EphemeralContainer.tty | default('') }}
 
 {#  ## divisor: (Quantity) #}
 {% if ResourceFieldSelector.divisor is defined %}
-divisor: "{{ ResourceFieldSelector.divisor | default('') }}"
+divisor: {{ ResourceFieldSelector.divisor | default('') }}
 {% endif %}
 
 {#  ## creationTimestamp: (Time) #}
 {% if ObjectMeta.creationTimestamp is defined %}
-creationTimestamp: "{{ ObjectMeta.creationTimestamp | default('') }}"
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
 {% endif -%}
 
 {#  ## fieldsV1: (FieldsV1) #}
 {% if ObjectMeta.creationTimestamp is defined %}
-creationTimestamp: "{{ ObjectMeta.creationTimestamp | default('') }}"
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
 {% endif -%}
 
 {#  ## add: (string [array]) #}

@@ -1,0 +1,36 @@
+{#  ## apiVersion (string) #}
+{% if Job.apiVersion is defined %}
+apiVersion: "{{ Job.apiVersion | default('v1') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if Job.kind is defined %}
+kind: "{{ Job.kind | default('Job') }}"
+{% endif -%}
+
+{# ## metadata: (ObjectMeta) #}
+{% if Job.metadata is defined %}
+metadata:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectMeta = Job.metadata %}
+{%     include '_ObjectMeta.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## Spec: (DeploymentSpec) #}
+{% if Job.spec is defined %}
+spec:
+{%   filter indent(width=2, first=true) %}
+{%     set JobSpec = Job.spec %}
+{%     include '_JobSpec.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## status: (DeploymentStatus) #}
+{% if Job.status is defined %}
+status:
+{%   filter indent(width=2, first=true) %}
+{%     set JobStatus = Job.status %}
+{%     include '_JobStatus.j2' %}
+{%   endfilter %}
+{% endif %}

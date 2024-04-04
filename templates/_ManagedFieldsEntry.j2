@@ -10,7 +10,7 @@ fieldsType: "{{ ManagedFieldsEntry.fieldsType | default('') }}"
 
 {#  ## fieldsV1: (FieldsV1) #}
 {% if ManagedFieldsEntry.fieldsV1 is defined %}
-fieldsV1: "{{ ManagedFieldsEntry.fieldsV1 | default('') }}"
+fieldsV1: {{ ManagedFieldsEntry.fieldsV1 | default('') }}
 {% endif -%}
 
 {#  ## manager (string) #}
@@ -30,5 +30,5 @@ subresource: "{{ ManagedFieldsEntry.subresource | default('') }}"
 
 {#  ## time (Time) #}
 {% if ObjectMeta.time is defined %}
-time: "{{ ObjectMeta.time | default('') }}"
-{% endif -%}
+time: {{ ObjectMeta.time | default('') }}
+{% endif %}

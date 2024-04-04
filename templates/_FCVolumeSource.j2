@@ -5,12 +5,12 @@ fsType: "{{ FCVolumeSource.fsType | default('') }}"
 
 {#  ## lun: (integer) #}
 {% if FCVolumeSource.lun is defined %}
-lun: "{{ FCVolumeSource.lun | default('') }}"
+lun: {{ FCVolumeSource.lun | default('') }}
 {% endif -%}
 
 {#  ## readOnly: (boolean) #}
 {% if FCVolumeSource.readOnly is defined %}
-readOnly: "{{ FCVolumeSource.readOnly | default('') }}"
+readOnly: {{ FCVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#  ## targetWWNs: (string [array]) #}
@@ -27,4 +27,4 @@ wwids:
 {%   for wwid in FCVolumeSource.wwids | default([], true) %}
   - "{{ wwid | default('') }}"
 {%   endfor %}
-{% endif -%}
+{% endif %}

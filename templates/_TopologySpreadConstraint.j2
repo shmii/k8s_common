@@ -17,12 +17,12 @@ matchLabelKeys:
 
 {#  ## maxSkew (integer) #}
 {% if TopologySpreadConstraint.maxSkew is defined %}
-maxSkew: "{{ TopologySpreadConstraint.maxSkew | default('') }}"
+maxSkew: {{ TopologySpreadConstraint.maxSkew | default('') }}
 {% endif -%}
 
 {#  ## minDomains (integer) #}
 {% if TopologySpreadConstraint.minDomains is defined %}
-minDomains: "{{ TopologySpreadConstraint.minDomains | default('') }}"
+minDomains: {{ TopologySpreadConstraint.minDomains | default('') }}
 {% endif -%}
 
 {#  ## nodeAffinityPolicy (string) #}
@@ -43,4 +43,4 @@ topologyKey: "{{ TopologySpreadConstraint.topologyKey | default('') }}"
 {#  ## whenUnsatisfiable (string) #}
 {% if TopologySpreadConstraint.whenUnsatisfiable is defined %}
 whenUnsatisfiable: "{{ TopologySpreadConstraint.whenUnsatisfiable | default('') }}"
-{% endif -%}
+{% endif %}

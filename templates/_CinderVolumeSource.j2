@@ -5,7 +5,7 @@ fsType: "{{ CinderVolumeSource.fsType | default('') }}"
 
 {#  ## readOnly (boolean) #}
 {% if CinderVolumeSource.readOnly is defined %}
-readOnly: "{{ CinderVolumeSource.readOnly | default('') }}"
+readOnly: {{ CinderVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#  ## secretRef: (LocalObjectReference) #}

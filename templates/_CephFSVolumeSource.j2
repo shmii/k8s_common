@@ -13,7 +13,7 @@ path: "{{ CephFSVolumeSource.path | default('') }}"
 
 {#  ## readOnly (boolean) #}
 {% if CephFSVolumeSource.readOnly is defined %}
-readOnly: "{{ CephFSVolumeSource.readOnly | default('') }}"
+readOnly: {{ CephFSVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#  ## secretFile (string) #}

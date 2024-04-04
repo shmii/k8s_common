@@ -1,0 +1,66 @@
+{#  ## activeDeadlineSeconds: (integer) #}
+{% if JobSpec.activeDeadlineSeconds is defined %}
+activeDeadlineSeconds: {{ JobSpec.activeDeadlineSeconds | default('') }}
+{% endif -%}
+
+{#  ## backoffLimit: (integer) #}
+{% if JobSpec.backoffLimit is defined %}
+backoffLimit: {{ JobSpec.backoffLimit | default('') }}
+{% endif -%}
+
+{#  ## completionMode: (string) #}
+{% if JobSpec.completionMode is defined %}
+completionMode: "{{ JobSpec.completionMode | default('') }}"
+{% endif -%}
+
+{#  ## completions: (integer) #}
+{% if JobSpec.completions is defined %}
+completions: {{ JobSpec.completions | default('') }}
+{% endif -%}
+
+{#  ## manualSelector: (boolean) #}
+{% if JobSpec.manualSelector is defined %}
+manualSelector: {{ JobSpec.manualSelector | default('') }}
+{% endif -%}
+
+{#  ## parallelism: (integer) #}
+{% if JobSpec.parallelism is defined %}
+parallelism: {{ JobSpec.parallelism | default('') }}
+{% endif -%}
+
+{#  ## podFailurePolicy: (PodFailurePolicy) #}
+{% if JobSpec.podFailurePolicy is defined %}
+podFailurePolicy:
+{%   filter indent(width=2, first=true) %}
+{%     set PodFailurePolicy = JobSpec.podFailurePolicy %}
+{%     include '_PodFailurePolicy.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## selector: (LabelSelector) #}
+{% if JobSpec.selector is defined %}
+selector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = JobSpec.selector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## suspend: (boolean) #}
+{% if JobSpec.suspend is defined %}
+suspend: {{ JobSpec.suspend | default('') }}
+{% endif -%}
+
+{#  ## template: (PodTemplateSpec) #}
+{% if JobSpec.template is defined %}
+template:
+{%   filter indent(width=2, first=true) %}
+{%     set PodTemplateSpec = JobSpec.template %}
+{%     include '_PodTemplateSpec.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## ttlSecondsAfterFinished: (integer) #}
+{% if JobSpec.ttlSecondsAfterFinished is defined %}
+ttlSecondsAfterFinished: {{ JobSpec.ttlSecondsAfterFinished | default('') }}
+{% endif %}

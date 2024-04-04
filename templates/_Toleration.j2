@@ -15,7 +15,7 @@ operator: "{{ Toleration.operator | default('') }}"
 
 {#  ## tolerationSeconds (integer) #}
 {% if Toleration.tolerationSeconds is defined %}
-tolerationSeconds: "{{ Toleration.tolerationSeconds | default('') }}"
+tolerationSeconds: {{ Toleration.tolerationSeconds | default('') }}
 {% endif -%}
 
 {#  ## value (string) #}

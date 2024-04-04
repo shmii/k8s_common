@@ -1,15 +1,14 @@
 {#  ## containerName: (string) #}
 {% if ResourceFieldSelector.containerName is defined %}
-containerName: {{ ResourceFieldSelector.containerName | default('') }}
+containerName: "{{ ResourceFieldSelector.containerName | default('') }}"
 {% endif -%}
 
 {#  ## resource: (string) #}
 {% if ResourceFieldSelector.resource is defined %}
-resource: {{ ResourceFieldSelector.resource | default('') }}
+resource: "{{ ResourceFieldSelector.resource | default('') }}"
 {% endif -%}
 
 {#  ## divisor: (Quantity) #}
-{#  ==> /!\ Casted to string on this template #}
 {% if ResourceFieldSelector.divisor is defined %}
-divisor: "{{ ResourceFieldSelector.divisor | default('') }}"
+divisor: {{ ResourceFieldSelector.divisor | default('') }}
 {% endif %}

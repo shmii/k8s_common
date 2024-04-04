@@ -5,12 +5,12 @@ apiVersion: "{{ OwnerReference.apiVersion | default('') }}"
 
 {#  ## blockOwnerDeletion (boolean) #}
 {% if OwnerReference.blockOwnerDeletion is defined %}
-blockOwnerDeletion: "{{ OwnerReference.blockOwnerDeletion | default('') }}"
+blockOwnerDeletion: {{ OwnerReference.blockOwnerDeletion | default('') }}
 {% endif -%}
 
 {#  ## controller (boolean) #}
 {% if OwnerReference.controller is defined %}
-controller: "{{ OwnerReference.controller | default('') }}"
+controller: {{ OwnerReference.controller | default('') }}
 {% endif -%}
 
 {#  ## kind (string) #}

@@ -1,6 +1,6 @@
 {#  ## fsGroup (integer) #}
 {% if PodSecurityContext.fsGroup is defined %}
-fsGroup: "{{ PodSecurityContext.fsGroup | default('') }}"
+fsGroup: {{ PodSecurityContext.fsGroup | default('') }}
 {% endif -%}
 
 {#  ## fsGroupChangePolicy (string) #}
@@ -10,17 +10,17 @@ fsGroupChangePolicy: "{{ PodSecurityContext.fsGroupChangePolicy | default('') }}
 
 {#  ## runAsGroup (integer) #}
 {% if PodSecurityContext.runAsGroup is defined %}
-runAsGroup: "{{ PodSecurityContext.runAsGroup | default('') }}"
+runAsGroup: {{ PodSecurityContext.runAsGroup | default('') }}
 {% endif -%}
 
 {#  ## runAsNonRoot (boolean) #}
 {% if PodSecurityContext.runAsNonRoot is defined %}
-runAsNonRoot: "{{ PodSecurityContext.runAsNonRoot | default('') }}"
+runAsNonRoot: {{ PodSecurityContext.runAsNonRoot | default('') }}
 {% endif -%}
 
 {#  ## runAsUser (integer) #}
 {% if PodSecurityContext.runAsUser is defined %}
-runAsUser: "{{ PodSecurityContext.runAsUser | default('') }}"
+runAsUser: {{ PodSecurityContext.runAsUser | default('') }}
 {% endif -%}
 
 {#  ## seLinuxOptions: (SELinuxOptions) #}
@@ -45,7 +45,7 @@ seccompProfile:
 {% if PodSecurityContext.supplementalGroups is defined %}
 supplementalGroups:
 {%   for supplementalGroup in PodSecurityContext.supplementalGroups | default("", true) %}
-  - "{{ supplementalGroup | default('') }}"
+  - {{ supplementalGroup | default('') }}
 {%   endfor %}
 {% endif -%}
 

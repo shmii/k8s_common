@@ -1,6 +1,6 @@
 {#  ## host (string) #}
 {% if TCPSocketAction.host is defined %}
-host: {{ TCPSocketAction.host | default('') }}
+host: "{{ TCPSocketAction.host | default('') }}"
 {% endif -%}
 
 {#  ## port (Name or number of the port)     #}

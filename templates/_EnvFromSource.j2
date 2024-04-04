@@ -9,7 +9,7 @@ configMapRef:
 
 {#  ## prefix (string) #}
 {% if EnvFromSource.prefix is defined %}
-prefix: {{ EnvFromSource.prefix | default('') }}
+prefix: "{{ EnvFromSource.prefix | default('') }}"
 {% endif -%}
 
 {#  ## secretRef: (SecretEnvSource) #}

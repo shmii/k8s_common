@@ -5,5 +5,5 @@ port: {{ GRPCAction.port | default('') }}
 
 {#  ## service (string) #}
 {% if GRPCAction.service is defined %}
-service: {{ GRPCAction.service | default('') }}
+service: "{{ GRPCAction.service | default('') }}"
 {% endif %}

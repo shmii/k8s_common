@@ -36,12 +36,12 @@ envFrom:
 
 {#  ## image (string) #}
 {% if EphemeralContainer.image is defined %}
-image: {{ EphemeralContainer.image | default('') }}
+image: "{{ EphemeralContainer.image | default('') }}"
 {% endif -%}
 
 {#  ## imagePullPolicy (string) #}
 {% if EphemeralContainer.imagePullPolicy is defined %}
-imagePullPolicy: {{ EphemeralContainer.imagePullPolicy | default('') }}
+imagePullPolicy: "{{ EphemeralContainer.imagePullPolicy | default('') }}"
 {% endif -%}
 
 {#  ## lifecycle: (Lifecycle) #}
@@ -64,7 +64,7 @@ livenessProbe:
 
 {#  ## name (string) #}
 {% if EphemeralContainer.name is defined %}
-name: {{ EphemeralContainer.name | default('') }}
+name: "{{ EphemeralContainer.name | default('') }}"
 {% endif -%}
 
 {#  ## ports: (ContainerPort [array]) #}
@@ -125,17 +125,17 @@ stdinOnce: {{ EphemeralContainer.stdinOnce | default('') }}
 
 {#  ## targetContainerName (string) #}
 {% if EphemeralContainer.targetContainerName is defined %}
-targetContainerName: {{ EphemeralContainer.targetContainerName | default('') }}
+targetContainerName: "{{ EphemeralContainer.targetContainerName | default('') }}"
 {% endif -%}
 
 {#  ## terminationMessagePath (string) #}
 {% if EphemeralContainer.terminationMessagePath is defined %}
-terminationMessagePath: {{ EphemeralContainer.terminationMessagePath | default('') }}
+terminationMessagePath: "{{ EphemeralContainer.terminationMessagePath | default('') }}"
 {% endif -%}
 
 {#  ## terminationMessagePolicy (string) #}
 {% if EphemeralContainer.terminationMessagePolicy is defined %}
-terminationMessagePolicy: {{ EphemeralContainer.terminationMessagePolicy | default('') }}
+terminationMessagePolicy: "{{ EphemeralContainer.terminationMessagePolicy | default('') }}"
 {% endif -%}
 
 {#  ## tty (boolean) #}
@@ -166,4 +166,4 @@ volumeMounts:
 {#  ## workingDir (string) #}
 {% if EphemeralContainer.workingDir is defined %}
 workingDir: "{{ EphemeralContainer.workingDir | default('') }}"
-{% endif -%}
+{% endif %}

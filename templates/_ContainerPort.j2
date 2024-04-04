@@ -5,7 +5,7 @@ containerPort: {{ ContainerPort.containerPort | default('') }}
 
 {#  ## hostIP (string) #}
 {% if ContainerPort.hostIP is defined %}
-hostIP: {{ ContainerPort.hostIP | default('') }}
+hostIP: "{{ ContainerPort.hostIP | default('') }}"
 {% endif -%}
 
 {#  ## hostPort (integer) #}
@@ -15,10 +15,10 @@ hostPort: {{ ContainerPort.hostPort | default('') }}
 
 {#  ## name (string) #}
 {% if ContainerPort.name is defined %}
-name: {{ ContainerPort.name | default('') }}
+name: "{{ ContainerPort.name | default('') }}"
 {% endif -%}
 
 {#  ## protocol (string) #}
 {% if ContainerPort.protocol is defined %}
-protocol: {{ ContainerPort.protocol | default('') }}
+protocol: "{{ ContainerPort.protocol | default('') }}"
 {% endif %}

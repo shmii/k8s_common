@@ -1,16 +1,16 @@
 {#  ## mountPath (string) #}
 {% if VolumeMount.mountPath is defined %}
-mountPath: {{ VolumeMount.mountPath | default('') }}
+mountPath: "{{ VolumeMount.mountPath | default('') }}"
 {% endif -%}
 
 {#  ## mountPropagation (string) #}
 {% if VolumeMount.mountPropagation is defined %}
-mountPropagation: {{ VolumeMount.mountPropagation | default('') }}
+mountPropagation: "{{ VolumeMount.mountPropagation | default('') }}"
 {% endif -%}
 
 {#  ## name (string) #}
 {% if VolumeMount.name is defined %}
-name: {{ VolumeMount.name | default('') }}
+name: "{{ VolumeMount.name | default('') }}"
 {% endif -%}
 
 {#  ## readOnly (boolean) #}
@@ -20,10 +20,10 @@ readOnly: {{ VolumeMount.readOnly | default('') }}
 
 {#  ## subPath (string) #}
 {% if VolumeMount.subPath is defined %}
-subPath: {{ VolumeMount.subPath | default('') }}
+subPath: "{{ VolumeMount.subPath | default('') }}"
 {% endif -%}
 
 {#  ## subPathExpr (string) #}
 {% if VolumeMount.subPathExpr is defined %}
-subPathExpr: {{ VolumeMount.subPathExpr | default('') }}
+subPathExpr: "{{ VolumeMount.subPathExpr | default('') }}"
 {% endif %}

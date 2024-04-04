@@ -36,12 +36,12 @@ envFrom:
 
 {#  ## image (string) #}
 {% if Container.image is defined %}
-image: {{ Container.image | default('') }}
+image: "{{ Container.image | default('') }}"
 {% endif -%}
 
 {#  ## imagePullPolicy (string) #}
 {% if Container.imagePullPolicy is defined %}
-imagePullPolicy: {{ Container.imagePullPolicy | default('') }}
+imagePullPolicy: "{{ Container.imagePullPolicy | default('') }}"
 {% endif -%}
 
 {#  ## lifecycle: (Lifecycle) #}
@@ -64,7 +64,7 @@ livenessProbe:
 
 {#  ## name (string) #}
 {% if Container.name is defined %}
-name: {{ Container.name | default('') }}
+name: "{{ Container.name | default('') }}"
 {% endif -%}
 
 {#  ## ports: (ContainerPort [array]) #}
@@ -125,12 +125,12 @@ stdinOnce: {{ Container.stdinOnce | default('') }}
 
 {#  ## terminationMessagePath (string) #}
 {% if Container.terminationMessagePath is defined %}
-terminationMessagePath: {{ Container.terminationMessagePath | default('') }}
+terminationMessagePath: "{{ Container.terminationMessagePath | default('') }}"
 {% endif -%}
 
 {#  ## terminationMessagePolicy (string) #}
 {% if Container.terminationMessagePolicy is defined %}
-terminationMessagePolicy: {{ Container.terminationMessagePolicy | default('') }}
+terminationMessagePolicy: "{{ Container.terminationMessagePolicy | default('') }}"
 {% endif -%}
 
 {#  ## tty (boolean) #}
@@ -161,4 +161,4 @@ volumeMounts:
 {#  ## workingDir (string) #}
 {% if Container.workingDir is defined %}
 workingDir: "{{ Container.workingDir | default('') }}"
-{% endif -%}
+{% endif %}

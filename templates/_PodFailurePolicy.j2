@@ -1,0 +1,9 @@
+{#  ## rules: (PodFailurePolicyRule [array]) #}
+{% if PodFailurePolicy.rules is defined %}
+rules:
+{%   for PodFailurePolicyRule in PodFailurePolicy.rules | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodFailurePolicyRule.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}

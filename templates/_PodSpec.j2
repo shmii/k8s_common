@@ -1,6 +1,6 @@
 {#  ## activeDeadlineSeconds (integer) #}
 {% if PodSpec.activeDeadlineSeconds is defined %}
-activeDeadlineSeconds: "{{ PodSpec.activeDeadlineSeconds | default('') }}"
+activeDeadlineSeconds: {{ PodSpec.activeDeadlineSeconds | default('') }}
 {% endif -%}
 
 {#  ## affinity: (Affinity) #}
@@ -14,7 +14,7 @@ affinity:
 
 {#  ## automountServiceAccountToken: (boolean) #}
 {% if PodSpec.automountServiceAccountToken is defined %}
-automountServiceAccountToken: "{{ PodSpec.automountServiceAccountToken | default('') }}"
+automountServiceAccountToken: {{ PodSpec.automountServiceAccountToken | default('') }}
 {% endif -%}
 
 {#  ## containers: (Container [array]) #}
@@ -43,7 +43,7 @@ dnsPolicy: "{{ PodSpec.dnsPolicy | default('') }}"
 
 {#  ## enableServiceLinks (boolean) #}
 {% if PodSpec.enableServiceLinks is defined %}
-enableServiceLinks: "{{ PodSpec.enableServiceLinks | default('') }}"
+enableServiceLinks: {{ PodSpec.enableServiceLinks | default('') }}
 {% endif -%}
 
 {#  ## ephemeralContainers: (EphemeralContainer [array]) #}
@@ -68,22 +68,22 @@ hostAliases:
 
 {#  ## hostIPC (boolean) #}
 {% if PodSpec.hostIPC is defined %}
-hostIPC: "{{ PodSpec.hostIPC | default('') }}"
+hostIPC: {{ PodSpec.hostIPC | default('') }}
 {% endif -%}
 
 {#  ## hostNetwork (boolean) #}
 {% if PodSpec.hostNetwork is defined %}
-hostNetwork: "{{ PodSpec.hostNetwork | default('') }}"
+hostNetwork: {{ PodSpec.hostNetwork | default('') }}
 {% endif -%}
 
 {#  ## hostPID (boolean) #}
 {% if PodSpec.hostPID is defined %}
-hostPID: "{{ PodSpec.hostPID | default('') }}"
+hostPID: {{ PodSpec.hostPID | default('') }}
 {% endif -%}
 
 {#  ## hostUsers (boolean) #}
 {% if PodSpec.hostUsers is defined %}
-hostUsers: "{{ PodSpec.hostUsers | default('') }}"
+hostUsers: {{ PodSpec.hostUsers | default('') }}
 {% endif -%}
 
 {#  ## hostname (string) #}
@@ -148,7 +148,7 @@ preemptionPolicy: "{{ PodSpec.preemptionPolicy | default('') }}"
 
 {#  ## priority (integer) #}
 {% if PodSpec.priority is defined %}
-priority: "{{ PodSpec.priority | default('') }}"
+priority: {{ PodSpec.priority | default('') }}
 {% endif -%}
 
 {#  ## priorityClassName (string) #}
@@ -222,12 +222,12 @@ serviceAccountName: "{{ PodSpec.serviceAccountName | default('') }}"
 
 {#  ## setHostnameAsFQDN (boolean) #}
 {% if PodSpec.setHostnameAsFQDN is defined %}
-setHostnameAsFQDN: "{{ PodSpec.setHostnameAsFQDN | default('') }}"
+setHostnameAsFQDN: {{ PodSpec.setHostnameAsFQDN | default('') }}
 {% endif -%}
 
 {#  ## shareProcessNamespace (boolean) #}
 {% if PodSpec.shareProcessNamespace is defined %}
-shareProcessNamespace: "{{ PodSpec.shareProcessNamespace | default('') }}"
+shareProcessNamespace: {{ PodSpec.shareProcessNamespace | default('') }}
 {% endif -%}
 
 {#  ## subdomain (string) #}
@@ -237,7 +237,7 @@ subdomain: "{{ PodSpec.subdomain | default('') }}"
 
 {#  ## terminationGracePeriodSeconds (integer) #}
 {% if PodSpec.terminationGracePeriodSeconds is defined %}
-terminationGracePeriodSeconds: "{{ PodSpec.terminationGracePeriodSeconds | default('') }}"
+terminationGracePeriodSeconds: {{ PodSpec.terminationGracePeriodSeconds | default('') }}
 {% endif -%}
 
 {#  ## tolerations: (Toleration [array]) #}

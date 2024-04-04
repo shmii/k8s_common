@@ -8,7 +8,7 @@ annotations:
 
 {#  ## creationTimestamp (Time) #}
 {% if ObjectMeta.creationTimestamp is defined %}
-creationTimestamp: "{{ ObjectMeta.creationTimestamp | default('') }}"
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
 {% endif -%}
 
 {#  ## deletionGracePeriodSeconds (integer) #}
@@ -18,7 +18,7 @@ deletionGracePeriodSeconds: {{ ObjectMeta.deletionGracePeriodSeconds | default('
 
 {#  ## deletionTimestamp (Time) #}
 {% if ObjectMeta.deletionTimestamp is defined %}
-deletionTimestamp: "{{ ObjectMeta.deletionTimestamp | default('') }}"
+deletionTimestamp: {{ ObjectMeta.deletionTimestamp | default('') }}
 {% endif -%}
 
 {#  ## finalizers: (string [array]) #}
@@ -84,7 +84,7 @@ resourceVersion: "{{ ObjectMeta.resourceVersion | default('') }}"
 
 {#  ## selfLink (string) #}
 {% if ObjectMeta.selfLink is defined %}
-selfLink: "{{ ObjectMeta.selfLink | default('') }}"
+selfLink: {{ ObjectMeta.selfLink | default('') }}
 {% endif -%}
 
 {#  ## uid (string) #}

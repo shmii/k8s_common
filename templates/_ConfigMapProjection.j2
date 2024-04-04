@@ -11,9 +11,9 @@ items:
 {#  ## name: (string) #}
 {% if ConfigMapProjection.name is defined %}
 name: "{{ ConfigMapProjection.name | default('') }}"
-{% endif %}
+{% endif -%}
 
 {#  ## optional: (boolean) #}
 {% if ConfigMapProjection.optional is defined %}
 optional: {{ ConfigMapProjection.optional | default('') }}
-{% endif -%}
+{% endif %}

@@ -1,7 +1,3 @@
-{% if PreferredSchedulingTerm.weight is defined %}
-weight: "{{ PreferredSchedulingTerm.weight | default(omit) }}"
-{% endif -%}
-
 {# ## preference : (NodeSelectorTerm) #}
 {% if PreferredSchedulingTerm.preference is defined %}
 preference:
@@ -9,4 +5,10 @@ preference:
 {%   set NodeSelectorTerm = PreferredSchedulingTerm.preference %}
 {%   include '_NodeSelectorTerm.j2' %}
 {% endfilter %}
+{% endif -%}
+
+{# ## weight : (integer) #}
+{% if PreferredSchedulingTerm.weight is defined %}
+weight: {{ PreferredSchedulingTerm.weight | default(omit) }}
 {% endif %}
+

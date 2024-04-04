@@ -10,5 +10,5 @@ path: "{{ GlusterfsVolumeSource.path | default('') }}"
 
 {#  ## readOnly: (boolean) #}
 {% if GlusterfsVolumeSource.readOnly is defined %}
-readOnly: "{{ GlusterfsVolumeSource.readOnly | default('') }}"
-{% endif -%}
+readOnly: {{ GlusterfsVolumeSource.readOnly | default('') }}
+{% endif %}

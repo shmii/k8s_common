@@ -1,6 +1,6 @@
 {#  ## host (string) #}
 {% if HTTPGetAction.host is defined %}
-host: {{ HTTPGetAction.host | default('') }}
+host: "{{ HTTPGetAction.host | default('') }}"
 {% endif -%}
 
 {#  ## httpHeaders: (HTTPHeader [array]) #}
@@ -15,7 +15,7 @@ httpHeaders:
 
 {#  ## path (string) #}
 {% if HTTPGetAction.path is defined %}
-path: {{ HTTPGetAction.path | default('') }}
+path: "{{ HTTPGetAction.path | default('') }}"
 {% endif -%}
 
 {#  ## port (Name or number of the port)     #}
@@ -27,5 +27,5 @@ port: {{ HTTPGetAction.port | default('') }}
 
 {#  ## scheme (string) #}
 {% if HTTPGetAction.scheme is defined %}
-scheme: {{ HTTPGetAction.scheme | default('') }}
+scheme: "{{ HTTPGetAction.scheme | default('') }}"
 {% endif %}

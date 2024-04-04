@@ -1,19 +1,14 @@
 ---
 #
-# Pod v1 core  (WORKLOADS APIS)
+# Deployment v1 apps  (WORKLOADS APIS)
 #
 # API Group: WORKLOADS APIS
-# Group: core
+# Group: apps
 # Version: v1
-# Kind: Pod
-
-#
-#   Warning: It is recommended that users create Pods only through a Controller, and not directly.
-#            See Controllers: Deployment, Job, or StatefulSet.
-#
+# Kind: Deployment
 
 apiVersion: v1
-kind: Pod
+kind: Deployment
 {# ## metadata: (ObjectMeta) #}
 {% if resource.metadata is defined %}
 metadata:
@@ -32,7 +27,7 @@ spec:
 {%   endfilter %}
 {% endif -%}
 
-{# ## status: (PodStatus) #}
+{# ## status: (DeploymentStatus) #}
 {% if resource.status is defined %}
 status:
 {%   filter indent(width=2, first=true) %}

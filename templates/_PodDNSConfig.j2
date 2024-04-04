@@ -2,7 +2,7 @@
 {% if PodDNSConfig.nameservers is defined %}
 nameservers:
 {%   for nameserver in PodDNSConfig.nameservers | default([], true) %}
-  - {{ nameserver }}
+  - "{{ nameserver }}"
 {%   endfor %}
 {% endif -%}
 
@@ -20,6 +20,6 @@ options:
 {% if PodDNSConfig.searches is defined %}
 searches:
 {%   for searche in PodDNSConfig.searches | default([], true) %}
-  - {{ searche }}
+  - "{{ searche }}"
 {%   endfor %}
 {% endif %}

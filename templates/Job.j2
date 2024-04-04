@@ -1,19 +1,15 @@
 ---
 #
-# Pod v1 core  (WORKLOADS APIS)
+# Job v1 batch  (WORKLOADS APIS)
 #
 # API Group: WORKLOADS APIS
-# Group: core
+# Group: batch
 # Version: v1
-# Kind: Pod
-
-#
-#   Warning: It is recommended that users create Pods only through a Controller, and not directly.
-#            See Controllers: Deployment, Job, or StatefulSet.
-#
+# Kind: Job
 
 apiVersion: v1
-kind: Pod
+kind: Job
+
 {# ## metadata: (ObjectMeta) #}
 {% if resource.metadata is defined %}
 metadata:
@@ -27,17 +23,17 @@ metadata:
 {% if resource.spec is defined %}
 spec:
 {%   filter indent(width=2, first=true) %}
-{%     set PodSpec = resource.spec %}
-{%     include '_PodSpec.j2' %}
+{%     set JobSpec = resource.spec %}
+{%     include '_JobSpec.j2' %}
 {%   endfilter %}
 {% endif -%}
 
-{# ## status: (PodStatus) #}
+{# ## status: (DeploymentStatus) #}
 {% if resource.status is defined %}
 status:
 {%   filter indent(width=2, first=true) %}
-{%     set PodStatus = resource.status %}
-{%     include '_PodStatus.j2' %}
+{%     set JobStatus = resource.status %}
+{%     include '_JobStatus.j2' %}
 {%   endfilter %}
 {% endif %}
 

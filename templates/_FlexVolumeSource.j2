@@ -18,7 +18,7 @@ options:
 
 {#  ## readOnly: (boolean) #}
 {% if FlexVolumeSource.readOnly is defined %}
-readOnly: "{{ FlexVolumeSource.readOnly | default('') }}"
+readOnly: {{ FlexVolumeSource.readOnly | default('') }}
 {% endif -%}
 
 {#  ## secretRef: (LocalObjectReference) #}

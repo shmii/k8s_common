@@ -6,4 +6,4 @@ name: "{{ Sysctl.name | default('') }}"
 {#  ## value (string) #}
 {% if Sysctl.value is defined %}
 value: "{{ Sysctl.value | default('') }}"
-{% endif -%}
+{% endif %}

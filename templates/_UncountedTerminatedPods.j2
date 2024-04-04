@@ -1,0 +1,15 @@
+{#  ## failed: (string [array]) #}
+{% if UncountedTerminatedPods.failed is defined %}
+failed:
+{%   for pod in UncountedTerminatedPods.failed | default([], true) %}
+  - "{{ pod | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## succeeded: (string [array]) #}
+{% if UncountedTerminatedPods.succeeded is defined %}
+succeeded:
+{%   for pod in UncountedTerminatedPods.succeeded | default([], true) %}
+  - "{{ pod | default('') }}"
+{%   endfor %}
+{% endif %}

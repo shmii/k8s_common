@@ -1,0 +1,45 @@
+---
+#
+# Deployment v1 apps  (WORKLOADS APIS)
+#
+# API Group: WORKLOADS APIS
+# Group: apps
+# Version: v1
+# Kind: Deployment
+
+{#  ## apiVersion (string) #}
+{% if Deployment.apiVersion is defined %}
+apiVersion: "{{ Deployment.apiVersion | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if Deployment.kind is defined %}
+kind: "{{ Deployment.kind | default('') }}"
+{% endif -%}
+
+{# ## metadata: (ObjectMeta) #}
+{% if Deployment.metadata is defined %}
+metadata:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectMeta = Deployment.metadata %}
+{%     include '_ObjectMeta.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## Spec: (DeploymentSpec) #}
+{% if Deployment.spec is defined %}
+spec:
+{%   filter indent(width=2, first=true) %}
+{%     set DeploymentSpec = Deployment.spec %}
+{%     include '_DeploymentSpec.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## status: (DeploymentStatus) #}
+{% if Deployment.status is defined %}
+status:
+{%   filter indent(width=2, first=true) %}
+{%     set DeploymentStatus = Deployment.status %}
+{%     include '_DeploymentStatus.j2' %}
+{%   endfilter %}
+{% endif %}

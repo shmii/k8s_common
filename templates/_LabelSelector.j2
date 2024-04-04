@@ -14,4 +14,4 @@ matchLabels:
 {%   for matchLabel in LabelSelector.matchLabels | default('') %}
   {{ matchLabel }}: {{ LabelSelector.matchLabels[matchLabel] | default('') }}
 {%   endfor %}
-{% endif -%}
+{% endif %}

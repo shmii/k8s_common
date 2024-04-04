@@ -1,12 +1,14 @@
+{#    ## key : (string ) #}
 {% if NodeSelectorRequirement.key is defined %}
-key: {{ NodeSelectorRequirement.key | default('') }}
+key: "{{ NodeSelectorRequirement.key | default('') }}"
 {% endif -%}
 
+{#    ## operator : (string ) #}
 {% if NodeSelectorRequirement.operator is defined %}
-operator: {{ NodeSelectorRequirement.operator | default('') }}
+operator: "{{ NodeSelectorRequirement.operator | default('') }}"
 {% endif -%}
 
-{#    ## matchExpressions : (NodeSelectorRequirement ) #}
+{#    ## values : (string [array]) #}
 {% if NodeSelectorRequirement.values is defined %}
 values:
 {%   for value in NodeSelectorRequirement["values"] | default('') %}
