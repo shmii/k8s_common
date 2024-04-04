@@ -1,0 +1,4 @@
+{#  ## name (string) #}
+{% if PodOS.name is defined %}
+name: "{{ PodOS.name | default('') }}"
+{% endif %}

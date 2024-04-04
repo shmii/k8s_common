@@ -1,0 +1,9 @@
+{#  ## devicePath (string) #}
+{% if VolumeDevice.devicePath is defined %}
+devicePath: "{{ VolumeDevice.devicePath | default('') }}"
+{% endif -%}
+
+{#  ## name (string) #}
+{% if VolumeDevice.name is defined %}
+name: "{{ VolumeDevice.name | default('') }}"
+{% endif %}

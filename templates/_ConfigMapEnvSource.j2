@@ -1,0 +1,9 @@
+{#  ## name (string) #}
+{% if ConfigMapEnvSource.name is defined %}
+name: {{ ConfigMapEnvSource.name | default('') }}
+{% endif -%}
+
+{#  ## optional (boolean) #}
+{% if ConfigMapEnvSource.optional is defined %}
+optional: {{ ConfigMapEnvSource.optional | default('') }}
+{% endif %}

@@ -1,0 +1,69 @@
+{#  ## fsGroup (integer) #}
+{% if PodSecurityContext.fsGroup is defined %}
+fsGroup: {{ PodSecurityContext.fsGroup | default('') }}
+{% endif -%}
+
+{#  ## fsGroupChangePolicy (string) #}
+{% if PodSecurityContext.fsGroupChangePolicy is defined %}
+fsGroupChangePolicy: "{{ PodSecurityContext.fsGroupChangePolicy | default('') }}"
+{% endif -%}
+
+{#  ## runAsGroup (integer) #}
+{% if PodSecurityContext.runAsGroup is defined %}
+runAsGroup: {{ PodSecurityContext.runAsGroup | default('') }}
+{% endif -%}
+
+{#  ## runAsNonRoot (boolean) #}
+{% if PodSecurityContext.runAsNonRoot is defined %}
+runAsNonRoot: {{ PodSecurityContext.runAsNonRoot | default('') }}
+{% endif -%}
+
+{#  ## runAsUser (integer) #}
+{% if PodSecurityContext.runAsUser is defined %}
+runAsUser: {{ PodSecurityContext.runAsUser | default('') }}
+{% endif -%}
+
+{#  ## seLinuxOptions: (SELinuxOptions) #}
+{% if PodSecurityContext.seLinuxOptions is defined %}
+seLinuxOptions:
+{%   filter indent(width=2, first=true) %}
+{%     set SELinuxOptions = PodSecurityContext.seLinuxOptions %}
+{%     include '_SELinuxOptions.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## seccompProfile: (SeccompProfile) #}
+{% if PodSecurityContext.seccompProfile is defined %}
+seccompProfile:
+{%   filter indent(width=2, first=true) %}
+{%     set SeccompProfile = PodSecurityContext.seccompProfile %}
+{%     include '_SeccompProfile.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## supplementalGroups: (integer [array]) #}
+{% if PodSecurityContext.supplementalGroups is defined %}
+supplementalGroups:
+{%   for supplementalGroup in PodSecurityContext.supplementalGroups | default("", true) %}
+  - {{ supplementalGroup | default('') }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## sysctls: (Sysctl [array]) #}
+{% if PodSecurityContext.sysctls is defined %}
+sysctls:
+{%   for Sysctl in PodSecurityContext.sysctls | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_Sysctl.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## windowsOptions: (WindowsSecurityContextOptions) #}
+{% if PodSecurityContext.windowsOptions is defined %}
+windowsOptions:
+{%   filter indent(width=2, first=true) %}
+{%     set WindowsSecurityContextOptions = PodSecurityContext.windowsOptions %}
+{%     include '_WindowsSecurityContextOptions.j2' %}
+{%   endfilter %}
+{% endif %}

@@ -1,0 +1,13 @@
+{#  ## rollingUpdate: (RollingUpdateDeployment) #}
+{% if DeploymentStrategy.rollingUpdate is defined %}
+rollingUpdate:
+{%   filter indent(width=2, first=true) %}
+{%     set RollingUpdateDeployment = DeploymentStrategy.rollingUpdate %}
+{%     include '_RollingUpdateDeployment.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## type: (string) #}
+{% if DeploymentStrategy.type is defined %}
+type: "{{ DeploymentStrategy.type | default('') }}"
+{% endif %}

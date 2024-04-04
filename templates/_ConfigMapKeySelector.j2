@@ -1,0 +1,14 @@
+{#  ## key (string) #}
+{% if ConfigMapKeySelector.key is defined %}
+key: {{ ConfigMapKeySelector.key | default('') }}
+{% endif -%}
+
+{#  ## name (string) #}
+{% if ConfigMapKeySelector.name is defined %}
+name: {{ ConfigMapKeySelector.name | default('') }}
+{% endif -%}
+
+{#  ## optional (boolean) #}
+{% if ConfigMapKeySelector.optional is defined %}
+optional: {{ ConfigMapKeySelector.optional | default('') }}
+{% endif %}

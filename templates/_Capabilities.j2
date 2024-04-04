@@ -1,0 +1,15 @@
+{#  ## add: (string [array]) #}
+{% if Capabilities.add is defined %}
+add:
+{%   for capability in Capabilities.add | default([], true) %}
+  - "{{ capability | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## drop: (string [array]) #}
+{% if Capabilities.drop is defined %}
+drop:
+{%   for capability in Capabilities.drop | default([], true) %}
+  - "{{ capability | default('') }}"
+{%   endfor %}
+{% endif %}

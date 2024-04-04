@@ -1,0 +1,51 @@
+{#  ## minReadySeconds: (integer) #}
+{% if DeploymentSpec.minReadySeconds is defined %}
+minReadySeconds: {{ DeploymentSpec.minReadySeconds | default('') }}
+{% endif -%}
+
+{#  ## paused: (boolean) #}
+{% if DeploymentSpec.paused is defined %}
+paused: {{ DeploymentSpec.paused | default('') }}
+{% endif -%}
+
+{#  ## progressDeadlineSeconds: (integer) #}
+{% if DeploymentSpec.progressDeadlineSeconds is defined %}
+progressDeadlineSeconds: {{ DeploymentSpec.progressDeadlineSeconds | default('') }}
+{% endif -%}
+
+{#  ## replicas: (integer) #}
+{% if DeploymentSpec.replicas is defined %}
+replicas: {{ DeploymentSpec.replicas | default('') }}
+{% endif -%}
+
+{#  ## revisionHistoryLimit: (integer) #}
+{% if DeploymentSpec.revisionHistoryLimit is defined %}
+revisionHistoryLimit: {{ DeploymentSpec.revisionHistoryLimit | default('') }}
+{% endif -%}
+
+{#  ## selector: (LabelSelector) #}
+{% if DeploymentSpec.selector is defined %}
+selector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = DeploymentSpec.selector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## strategy: (DeploymentStrategy) #}
+{% if DeploymentSpec.strategy is defined %}
+strategy:
+{%   filter indent(width=2, first=true) %}
+{%     set DeploymentStrategy = DeploymentSpec.strategy %}
+{%     include '_DeploymentStrategy.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## template: (PodTemplateSpec) #}
+{% if DeploymentSpec.template is defined %}
+template:
+{%   filter indent(width=2, first=true) %}
+{%     set PodTemplateSpec = DeploymentSpec.template %}
+{%     include '_PodTemplateSpec.j2' %}
+{%   endfilter %}
+{% endif %}

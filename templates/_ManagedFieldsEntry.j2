@@ -1,0 +1,34 @@
+{#  ## apiVersion (string) #}
+{% if ManagedFieldsEntry.apiVersion is defined %}
+apiVersion: "{{ ManagedFieldsEntry.apiVersion | default('') }}"
+{% endif -%}
+
+{#  ## fieldsType (string) #}
+{% if ManagedFieldsEntry.fieldsType is defined %}
+fieldsType: "{{ ManagedFieldsEntry.fieldsType | default('') }}"
+{% endif -%}
+
+{#  ## fieldsV1: (FieldsV1) #}
+{% if ManagedFieldsEntry.fieldsV1 is defined %}
+fieldsV1: {{ ManagedFieldsEntry.fieldsV1 | default('') }}
+{% endif -%}
+
+{#  ## manager (string) #}
+{% if ManagedFieldsEntry.manager is defined %}
+manager: "{{ ManagedFieldsEntry.manager | default('') }}"
+{% endif -%}
+
+{#  ## operation (string) #}
+{% if ManagedFieldsEntry.operation is defined %}
+operation: "{{ ManagedFieldsEntry.operation | default('') }}"
+{% endif -%}
+
+{#  ## subresource (string) #}
+{% if ManagedFieldsEntry.subresource is defined %}
+subresource: "{{ ManagedFieldsEntry.subresource | default('') }}"
+{% endif -%}
+
+{#  ## time (Time) #}
+{% if ObjectMeta.time is defined %}
+time: {{ ObjectMeta.time | default('') }}
+{% endif %}

@@ -1,0 +1,23 @@
+{#  ## action: (string) #}
+{% if PodFailurePolicyRule.action is defined %}
+action: "{{ PodFailurePolicyRule.action | default('') }}"
+{% endif -%}
+
+{#  ## onExitCodes: (PodFailurePolicyOnExitCodesRequirement) #}
+{% if PodFailurePolicyRule.onExitCodes is defined %}
+onExitCodes:
+{%   filter indent(width=2, first=true) %}
+{%     set PodFailurePolicyOnExitCodesRequirement = PodFailurePolicyRule.onExitCodes %}
+{%     include '_PodFailurePolicyOnExitCodesRequirement.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## onPodConditions: (PodFailurePolicyOnPodConditionsPattern [array]) #}
+{% if PodFailurePolicyRule.onPodConditions is defined %}
+onPodConditions:
+{%   for PodFailurePolicyOnPodConditionsPattern in PodFailurePolicyRule.onPodConditions | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodFailurePolicyOnPodConditionsPattern.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}

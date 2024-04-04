@@ -1,0 +1,14 @@
+{#  ## apiGroup (string) #}
+{% if TypedLocalObjectReference.apiGroup is defined %}
+apiGroup: "{{ TypedLocalObjectReference.apiGroup | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if TypedLocalObjectReference.kind is defined %}
+kind: "{{ TypedLocalObjectReference.kind | default('') }}"
+{% endif -%}
+
+{#  ## name (string) #}
+{% if TypedLocalObjectReference.name is defined %}
+name: "{{ TypedLocalObjectReference.name | default('') }}"
+{% endif %}

@@ -1,0 +1,27 @@
+{#  ## fieldRef: (ObjectFieldSelector) #}
+{% if DownwardAPIVolumeFile.fieldRef is defined %}
+fieldRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectFieldSelector = DownwardAPIVolumeFile.fieldRef %}
+{%     include '_ObjectFieldSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## mode (integer) #}
+{% if DownwardAPIVolumeFile.mode is defined %}
+mode: {{ DownwardAPIVolumeFile.mode | default('') }}
+{% endif -%}
+
+{#  ## path (string) #}
+{% if DownwardAPIVolumeFile.path is defined %}
+path: "{{ DownwardAPIVolumeFile.path | default('') }}"
+{% endif -%}
+
+{#  ## resourceFieldRef: (ResourceFieldSelector) #}
+{% if DownwardAPIVolumeFile.resourceFieldRef is defined %}
+resourceFieldRef:
+{%   filter indent(width=2, first=true) %}
+{%     set ResourceFieldSelector = DownwardAPIVolumeFile.resourceFieldRef %}
+{%     include '_ResourceFieldSelector.j2' %}
+{%   endfilter %}
+{% endif %}

@@ -1,0 +1,46 @@
+{#   ## labelSelector: (LabelSelector) #}
+{% if PodAffinityTerm.labelSelector is defined %}
+labelSelector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = PodAffinityTerm.labelSelector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#   ## namespaceSelector: (LabelSelector) #}
+{% if PodAffinityTerm.namespaceSelector is defined %}
+namespaceSelector:
+{%   filter indent(width=2, first=true) %}
+{%     set LabelSelector = PodAffinityTerm.namespaceSelector %}
+{%     include '_LabelSelector.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#   ## namespaces: (string array) #}
+{% if PodAffinityTerm.namespaces is defined %}
+namespaces:
+{%   for namespaces in PodAffinityTerm.namespaces | default([], true) %}
+  - "{{ namespaces }}"
+{%   endfor %}
+{% endif -%}
+
+{#   ## topologyKey: (string) #}
+{% if PodAffinityTerm.topologyKey is defined %}
+topologyKey: "{{ PodAffinityTerm.topologyKey }}"
+{% endif -%}
+
+{#   ## matchLabelKeys: (string array) #}
+{% if PodAffinityTerm.matchLabelKeys is defined %}
+matchLabelKeys:
+{%   for matchLabelKey in PodAffinityTerm.matchLabelKeys | default([], true) %}
+  - "{{ matchLabelKey }}"
+{%   endfor %}
+{% endif -%}
+
+{#   ## mismatchLabelKeys: (string array) #}
+{% if PodAffinityTerm.mismatchLabelKeys is defined %}
+mismatchLabelKeys:
+{%   for mismatchLabelKey in PodAffinityTerm.mismatchLabelKeys | default([], true) %}
+  - "{{ mismatchLabelKey }}"
+{%   endfor %}
+{% endif %}

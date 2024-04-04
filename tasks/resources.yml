@@ -1,0 +1,26 @@
+---
+- name: "K8S Common - Resources - Debug Informations"
+  ansible.builtin.debug:
+    msg:
+      - k8s_common: "{{ k8s_common | default('') }}"
+    verbosity: "{{ k8s_common_debug_level | default(1) }}"
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resources_debug
+
+- name: "K8S Common - Resources - Manage"
+  ansible.builtin.include_tasks: resource.yml
+  loop: "{{ k8s_common.resources | default([], true) }}"
+  loop_control:
+    loop_var: resource
+    pause: "{{ k8s_common.k8s.wait_timeout | default(5) }}"
+  when:
+    - k8s_common_resources_manage | default(true)
+    - k8s_common.resources
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resources_manage
+
+...

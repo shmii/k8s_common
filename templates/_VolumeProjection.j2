@@ -1,0 +1,35 @@
+{#  ## configMap: (ConfigMapProjection) #}
+{% if VolumeProjection.configMap is defined %}
+configMap:
+{%   filter indent(width=2, first=true) %}
+{%     set ConfigMapProjection = VolumeProjection.configMap %}
+{%     include '_ConfigMapProjection.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## downwardAPI: (DownwardAPIProjection) #}
+{% if VolumeProjection.downwardAPI is defined %}
+downwardAPI:
+{%   filter indent(width=2, first=true) %}
+{%     set DownwardAPIProjection = VolumeProjection.downwardAPI %}
+{%     include '_DownwardAPIProjection.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## secret: (DownwardAPIProjection) #}
+{% if VolumeProjection.secret is defined %}
+secret:
+{%   filter indent(width=2, first=true) %}
+{%     set SecretProjection = VolumeProjection.secret %}
+{%     include '_SecretProjection.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## serviceAccountToken: (ServiceAccountTokenProjection) #}
+{% if VolumeProjection.serviceAccountToken is defined %}
+serviceAccountToken:
+{%   filter indent(width=2, first=true) %}
+{%     set ServiceAccountTokenProjection = VolumeProjection.serviceAccountToken %}
+{%     include '_ServiceAccountTokenProjection.j2' %}
+{%   endfilter %}
+{% endif %}

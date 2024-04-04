@@ -1,0 +1,29 @@
+{#  ## cachingMode (string) #}
+{% if AzureDiskVolumeSource.cachingMode is defined %}
+cachingMode: "{{ AzureDiskVolumeSource.cachingMode | default('') }}"
+{% endif -%}
+
+{#  ## diskName (string) #}
+{% if AzureDiskVolumeSource.diskName is defined %}
+diskName: "{{ AzureDiskVolumeSource.diskName | default('') }}"
+{% endif -%}
+
+{#  ## diskURI (string) #}
+{% if AzureDiskVolumeSource.diskURI is defined %}
+diskURI: "{{ AzureDiskVolumeSource.diskURI | default('') }}"
+{% endif -%}
+
+{#  ## fsType (string) #}
+{% if AzureDiskVolumeSource.fsType is defined %}
+fsType: "{{ AzureDiskVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## kind (string) #}
+{% if AzureDiskVolumeSource.kind is defined %}
+kind: "{{ AzureDiskVolumeSource.kind | default('') }}"
+{% endif %}
+
+{#  ## readOnly (boolean) #}
+{% if AzureDiskVolumeSource.readOnly is defined %}
+readOnly: {{ AzureDiskVolumeSource.readOnly | default('') }}
+{% endif %}

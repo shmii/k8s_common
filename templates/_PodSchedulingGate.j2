@@ -1,0 +1,4 @@
+{#  ## name (string) #}
+{% if PodSchedulingGate.name is defined %}
+name: "{{ PodSchedulingGate.name | default('') }}"
+{% endif %}

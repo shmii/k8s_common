@@ -1,0 +1,14 @@
+{#  ## key (string) #}
+{% if KeyToPath.key is defined %}
+key: "{{ KeyToPath.key | default('') }}"
+{% endif -%}
+
+{#  ## mode (integer) #}
+{% if KeyToPath.mode is defined %}
+mode: {{ KeyToPath.mode | default('') }}
+{% endif -%}
+
+{#  ## path (string) #}
+{% if KeyToPath.path is defined %}
+path: "{{ KeyToPath.path | default('') }}"
+{% endif %}

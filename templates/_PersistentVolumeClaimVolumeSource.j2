@@ -1,0 +1,9 @@
+{#  ## claimName: (string) #}
+{% if PersistentVolumeClaimVolumeSource.claimName is defined %}
+claimName: "{{ PersistentVolumeClaimVolumeSource.claimName | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if PersistentVolumeClaimVolumeSource.readOnly is defined %}
+readOnly: {{ PersistentVolumeClaimVolumeSource.readOnly | default('') }}
+{% endif %}

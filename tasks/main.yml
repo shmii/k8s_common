@@ -39,10 +39,10 @@
     - k8s_common_registries
 
 # Run Tasks.
-- name: "K8S Common - Manage kinds"
-  ansible.builtin.import_tasks: kinds.yml
+- name: "K8S Common - Manage Resources"
+  ansible.builtin.import_tasks: resources.yml
   tags:
     - k8s_common
-    - k8s_common_kinds
+    - k8s_common_resources
 
 ...

@@ -1,0 +1,17 @@
+{#  ## containerName: (string) #}
+{% if PodFailurePolicyOnExitCodesRequirement.containerName is defined %}
+containerName: "{{ PodFailurePolicyOnExitCodesRequirement.containerName | default('') }}"
+{% endif -%}
+
+{#  ## operator: (string) #}
+{% if PodFailurePolicyOnExitCodesRequirement.operator is defined %}
+operator: "{{ PodFailurePolicyOnExitCodesRequirement.operator | default('') }}"
+{% endif -%}
+
+{#  ## values: (integer [array]) #}
+{% if PodFailurePolicyOnExitCodesRequirement.values is defined %}
+values:
+{%   for value in PodFailurePolicyOnExitCodesRequirement.values | default([], true) %}
+  - {{ value | default('') }}
+{%   endfor %}
+{% endif %}

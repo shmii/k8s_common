@@ -1,0 +1,93 @@
+{#   ## annotations: (object) #}
+{% if ObjectMeta.annotations is defined %}
+annotations:
+{%   for annotation in ObjectMeta.annotations | default('') %}
+  {{ annotation }}: {{ ObjectMeta.annotations[annotation] | default('') }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## creationTimestamp (Time) #}
+{% if ObjectMeta.creationTimestamp is defined %}
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
+{% endif -%}
+
+{#  ## deletionGracePeriodSeconds (integer) #}
+{% if ObjectMeta.deletionGracePeriodSeconds is defined %}
+deletionGracePeriodSeconds: {{ ObjectMeta.deletionGracePeriodSeconds | default('') }}
+{% endif -%}
+
+{#  ## deletionTimestamp (Time) #}
+{% if ObjectMeta.deletionTimestamp is defined %}
+deletionTimestamp: {{ ObjectMeta.deletionTimestamp | default('') }}
+{% endif -%}
+
+{#  ## finalizers: (string [array]) #}
+{% if ObjectMeta.finalizers is defined %}
+finalizers:
+{%   for finalizer in ObjectMeta.finalizers | default([], true) %}
+  - "{{ finalizer | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## generateName (string) #}
+{% if ObjectMeta.generateName is defined %}
+generateName: "{{ ObjectMeta.generateName | default('') }}"
+{% endif -%}
+
+{#  ## generation (integer) #}
+{% if ObjectMeta.generation is defined %}
+generation: {{ ObjectMeta.generation | default('') }}
+{% endif -%}
+
+{#   ## labels: (object) #}
+{% if ObjectMeta.labels is defined %}
+labels:
+{%   for label in ObjectMeta.labels | default('') %}
+  {{ label }}: {{ ObjectMeta.labels[label] | default('') }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## managedFields: (ManagedFieldsEntry [array]) #}
+{% if ObjectMeta.managedFields is defined %}
+managedFields:
+{%   for ManagedFieldsEntry in ObjectMeta.managedFields | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ManagedFieldsEntry.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## name (string) #}
+{% if ObjectMeta.name is defined %}
+name: "{{ ObjectMeta.name | default('') }}"
+{% endif -%}
+
+{#  ## namespace (string) #}
+{% if ObjectMeta.namespace is defined %}
+namespace: "{{ ObjectMeta.namespace | default('') }}"
+{% endif -%}
+
+{#  ## ownerReferences: (OwnerReference [array]) #}
+{% if ObjectMeta.ownerReferences is defined %}
+ownerReferences:
+{%   for OwnerReference in ObjectMeta.ownerReferences | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_OwnerReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## resourceVersion (string) #}
+{% if ObjectMeta.resourceVersion is defined %}
+resourceVersion: "{{ ObjectMeta.resourceVersion | default('') }}"
+{% endif -%}
+
+{#  ## selfLink (string) #}
+{% if ObjectMeta.selfLink is defined %}
+selfLink: {{ ObjectMeta.selfLink | default('') }}
+{% endif -%}
+
+{#  ## uid (string) #}
+{% if ObjectMeta.uid is defined %}
+uid: "{{ ObjectMeta.uid | default('') }}"
+{% endif %}

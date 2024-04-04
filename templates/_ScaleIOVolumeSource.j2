@@ -1,0 +1,54 @@
+{#  ## fsType: (string) #}
+{% if ScaleIOVolumeSource.fsType is defined %}
+fsType: "{{ ScaleIOVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## gateway: (string) #}
+{% if ScaleIOVolumeSource.gateway is defined %}
+gateway: "{{ ScaleIOVolumeSource.gateway | default('') }}"
+{% endif -%}
+
+{#  ## protectionDomain: (string) #}
+{% if ScaleIOVolumeSource.protectionDomain is defined %}
+protectionDomain: "{{ ScaleIOVolumeSource.protectionDomain | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if ScaleIOVolumeSource.readOnly is defined %}
+readOnly: {{ ScaleIOVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if ScaleIOVolumeSource.secretRef is defined %}
+secretRef:
+{%   for LocalObjectReference in ScaleIOVolumeSource.secretRef | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## sslEnabled: (boolean) #}
+{% if ScaleIOVolumeSource.sslEnabled is defined %}
+sslEnabled: {{ ScaleIOVolumeSource.sslEnabled | default('') }}
+{% endif -%}
+
+{#  ## storageMode: (string) #}
+{% if ScaleIOVolumeSource.storageMode is defined %}
+storageMode: "{{ ScaleIOVolumeSource.storageMode | default('') }}"
+{% endif -%}
+
+{#  ## storagePool: (string) #}
+{% if ScaleIOVolumeSource.storagePool is defined %}
+storagePool: "{{ ScaleIOVolumeSource.storagePool | default('') }}"
+{% endif -%}
+
+{#  ## system: (string) #}
+{% if ScaleIOVolumeSource.system is defined %}
+system: "{{ ScaleIOVolumeSource.system | default('') }}"
+{% endif -%}
+
+{#  ## volumeName: (string) #}
+{% if ScaleIOVolumeSource.volumeName is defined %}
+volumeName: "{{ ScaleIOVolumeSource.volumeName | default('') }}"
+{% endif %}

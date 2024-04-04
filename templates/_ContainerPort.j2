@@ -1,0 +1,24 @@
+{#  ## containerPort (integer) #}
+{% if ContainerPort.containerPort is defined %}
+containerPort: {{ ContainerPort.containerPort | default('') }}
+{% endif -%}
+
+{#  ## hostIP (string) #}
+{% if ContainerPort.hostIP is defined %}
+hostIP: "{{ ContainerPort.hostIP | default('') }}"
+{% endif -%}
+
+{#  ## hostPort (integer) #}
+{% if ContainerPort.hostPort is defined %}
+hostPort: {{ ContainerPort.hostPort | default('') }}
+{% endif -%}
+
+{#  ## name (string) #}
+{% if ContainerPort.name is defined %}
+name: "{{ ContainerPort.name | default('') }}"
+{% endif -%}
+
+{#  ## protocol (string) #}
+{% if ContainerPort.protocol is defined %}
+protocol: "{{ ContainerPort.protocol | default('') }}"
+{% endif %}

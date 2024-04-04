@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
-Namespace: "{{ kind.namespace }}"
 metadata:
-  name: "{{ kind.metadata.name | default('') }}"
+  name: "{{ resource.metadata.name | default('') }}"
+  namespace: "{{ resource.metadata.namespace | default('') }}"
   labels:
     type: local
 spec:
@@ -11,4 +11,4 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage:  "{{ kind.spec.resources.requests.storage }}"
+      storage:  "{{ resource.spec.resources.requests.storage | default('') }}"

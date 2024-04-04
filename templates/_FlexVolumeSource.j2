@@ -1,0 +1,31 @@
+{#  ## driver: (string) #}
+{% if FlexVolumeSource.driver is defined %}
+driver: "{{ FlexVolumeSource.driver | default('') }}"
+{% endif -%}
+
+{#  ## fsType: (string) #}
+{% if FlexVolumeSource.fsType is defined %}
+fsType: "{{ FlexVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#   ## options: (object) #}
+{% if FlexVolumeSource.options is defined %}
+options:
+{%   for option in FlexVolumeSource.options | default('') %}
+  {{ option }}: {{ FlexVolumeSource.options[option] | default('') }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if FlexVolumeSource.readOnly is defined %}
+readOnly: {{ FlexVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## secretRef: (LocalObjectReference) #}
+{% if FlexVolumeSource.secretRef is defined %}
+secretRef:
+{%   filter indent(width=2, first=true) %}
+{%     set LocalObjectReference = FlexVolumeSource.secretRef %}
+{%     include '_LocalObjectReference.j2' %}
+{%   endfilter %}
+{% endif %}

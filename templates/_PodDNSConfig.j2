@@ -1,0 +1,25 @@
+{#  ## nameservers: (string [array]) #}
+{% if PodDNSConfig.nameservers is defined %}
+nameservers:
+{%   for nameserver in PodDNSConfig.nameservers | default([], true) %}
+  - "{{ nameserver }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## options: (PodDNSConfigOption [array]) #}
+{% if PodDNSConfig.options is defined %}
+options:
+{%   for PodDNSConfigOption in PodDNSConfig.options | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PodDNSConfigOption.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## searches: (string [array]) #}
+{% if PodDNSConfig.searches is defined %}
+searches:
+{%   for searche in PodDNSConfig.searches | default([], true) %}
+  - "{{ searche }}"
+{%   endfor %}
+{% endif %}

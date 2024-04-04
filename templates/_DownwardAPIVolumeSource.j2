@@ -1,0 +1,14 @@
+{#  ## defaultMode (integer) #}
+{% if DownwardAPIVolumeSource.defaultMode is defined %}
+defaultMode: {{ DownwardAPIVolumeSource.defaultMode | default('') }}
+{% endif -%}
+
+{#  ## items: (DownwardAPIVolumeFile [array]) #}
+{% if DownwardAPIVolumeSource.items is defined %}
+items:
+{%   for DownwardAPIVolumeFile in DownwardAPIVolumeSource.items | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_DownwardAPIVolumeFile.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}

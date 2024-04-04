@@ -1,0 +1,9 @@
+{#  ## volumeClaimTemplate: (PersistentVolumeClaimTemplate) #}
+{% if EphemeralVolumeSource.volumeClaimTemplate is defined %}
+volumeClaimTemplate:
+{%   for PersistentVolumeClaimTemplate in EphemeralVolumeSource.volumeClaimTemplate | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PersistentVolumeClaimTemplate.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif %}

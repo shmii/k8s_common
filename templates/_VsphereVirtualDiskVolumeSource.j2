@@ -1,0 +1,19 @@
+{#  ## fsType: (string) #}
+{% if VsphereVirtualDiskVolumeSource.fsType is defined %}
+fsType: "{{ VsphereVirtualDiskVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## storagePolicyID: (string) #}
+{% if VsphereVirtualDiskVolumeSource.storagePolicyID is defined %}
+storagePolicyID: "{{ VsphereVirtualDiskVolumeSource.storagePolicyID | default('') }}"
+{% endif -%}
+
+{#  ## storagePolicyName: (string) #}
+{% if VsphereVirtualDiskVolumeSource.storagePolicyName is defined %}
+storagePolicyName: "{{ VsphereVirtualDiskVolumeSource.storagePolicyName | default('') }}"
+{% endif -%}
+
+{#  ## volumePath: (string) #}
+{% if VsphereVirtualDiskVolumeSource.volumePath is defined %}
+volumePath: "{{ VsphereVirtualDiskVolumeSource.volumePath | default('') }}"
+{% endif %}

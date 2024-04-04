@@ -1,0 +1,17 @@
+{# ## metadata: (ObjectMeta) #}
+{% if PodTemplateSpec.metadata is defined %}
+metadata:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectMeta = PodTemplateSpec.metadata %}
+{%     include '_ObjectMeta.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{# ## Spec: (PodSpec) #}
+{% if PodTemplateSpec.spec is defined %}
+spec:
+{%   filter indent(width=2, first=true) %}
+{%     set PodSpec = PodTemplateSpec.spec %}
+{%     include '_PodSpec.j2' %}
+{%   endfilter %}
+{% endif %}

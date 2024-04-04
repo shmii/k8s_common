@@ -1,0 +1,32 @@
+{#  ## driver (string) #}
+{% if CSIVolumeSource.driver is defined %}
+driver: "{{ CSIVolumeSource.driver | default('') }}"
+{% endif -%}
+
+{#  ## fsType (string) #}
+{% if CSIVolumeSource.fsType is defined %}
+fsType: "{{ CSIVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## nodePublishSecretRef: (LocalObjectReference) #}
+{% if CSIVolumeSource.csi is defined %}
+csi:
+{%   for LocalObjectReference in CSIVolumeSource.csi | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_LocalObjectReference.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## readOnly (boolean) #}
+{% if CSIVolumeSource.readOnly is defined %}
+readOnly: {{ CSIVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#   ## volumeAttributes: (object) #}
+{% if CSIVolumeSource.volumeAttributes is defined %}
+volumeAttributes:
+{%   for volumeAttribute in CSIVolumeSource.volumeAttributes | default('') %}
+  {{ volumeAttribute }}: {{ CSIVolumeSource.volumeAttributes[volumeAttribute] | default('') }}
+{%   endfor %}
+{% endif %}

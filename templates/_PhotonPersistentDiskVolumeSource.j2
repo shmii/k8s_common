@@ -1,0 +1,9 @@
+{#  ## fsType: (string) #}
+{% if PhotonPersistentDiskVolumeSource.fsType is defined %}
+fsType: "{{ PhotonPersistentDiskVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## pdID: (string) #}
+{% if PhotonPersistentDiskVolumeSource.pdID is defined %}
+pdID: "{{ PhotonPersistentDiskVolumeSource.pdID | default('') }}"
+{% endif %}

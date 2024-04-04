@@ -1,0 +1,29 @@
+{#  ## group: (string) #}
+{% if QuobyteVolumeSource.group is defined %}
+group: "{{ QuobyteVolumeSource.group | default('') }}"
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if QuobyteVolumeSource.readOnly is defined %}
+readOnly: {{ QuobyteVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## registry: (string) #}
+{% if QuobyteVolumeSource.registry is defined %}
+registry: "{{ QuobyteVolumeSource.registry | default('') }}"
+{% endif -%}
+
+{#  ## tenant: (string) #}
+{% if QuobyteVolumeSource.tenant is defined %}
+tenant: "{{ QuobyteVolumeSource.tenant | default('') }}"
+{% endif -%}
+
+{#  ## user: (string) #}
+{% if QuobyteVolumeSource.user is defined %}
+user: "{{ QuobyteVolumeSource.user | default('') }}"
+{% endif -%}
+
+{#  ## volume: (string) #}
+{% if QuobyteVolumeSource.volume is defined %}
+volume: "{{ QuobyteVolumeSource.volume | default('') }}"
+{% endif %}

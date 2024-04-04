@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
-Namespace: "{{ kind.namespace }}"
 metadata:
-  name: "{{ kind.metadata.name | default('') }}"
+  name: "{{ resource.metadata.name | default('') }}"
+  namespace: "{{ resource.metadata.namespace | default('') }}"
   labels:
     type: local
 spec:
   storageClassName: manual
   capacity:
-    storage: "{{ kind.spec.capacity.storage }}"
+    storage: "{{ resource.spec.capacity.storage | default('') }}"
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: ""{{ kind.spec.hostPath.path }}""
+    path: ""{{ resource.spec.hostPath.path | default('') }}""

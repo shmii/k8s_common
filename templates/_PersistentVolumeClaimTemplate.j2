@@ -1,0 +1,17 @@
+{#  ## metadata: (ObjectMeta) #}
+{% if PersistentVolumeClaimTemplate.metadata is defined %}
+metadata:
+{%   filter indent(width=2, first=true) %}
+{%     set ObjectMeta = PersistentVolumeClaimTemplate.metadata %}
+{%     include '_ObjectMeta.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## spec: (PersistentVolumeClaimSpec) #}
+{% if PersistentVolumeClaimTemplate.spec is defined %}
+spec:
+{%   filter indent(width=2, first=true) %}
+{%     set PersistentVolumeClaimSpec = PersistentVolumeClaimTemplate.spec %}
+{%     include '_PersistentVolumeClaimSpec.j2' %}
+{%   endfilter %}
+{% endif -%}

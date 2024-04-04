@@ -1,0 +1,9 @@
+{#  ## datasetName: (string) #}
+{% if FlockerVolumeSource.datasetName is defined %}
+datasetName: "{{ FlockerVolumeSource.datasetName | default('') }}"
+{% endif -%}
+
+{#  ## datasetUUID: (string) #}
+{% if FlockerVolumeSource.datasetUUID is defined %}
+datasetUUID: "{{ FlockerVolumeSource.datasetUUID | default('') }}"
+{% endif %}

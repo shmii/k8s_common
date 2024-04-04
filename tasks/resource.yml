@@ -1,0 +1,196 @@
+---
+- name: "K8S Common - Resources - Debug Informations - Resource : {{ resource.kind | default('') }}"
+  ansible.builtin.debug:
+    msg:
+      - resource: "{{ resource | default('') }}"
+    verbosity: "{{ k8s_common_debug_level | default(1) }}"
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resource
+    - k8s_common_resource_debug
+
+- name: "K8S Common - Resources - Manage - Resource (Direct) : {{ resource.kind | default('') }}"
+  kubernetes.core.k8s:
+    api_key: "{{ resource.api_key | default(omit) }}"
+    api_version: "{{ resource.api_version | default(omit) }}"
+    append_hash: "{{ resource.append_hash | default(omit) }}"
+    apply: "{{ resource.apply | default(omit) }}"
+    ca_cert: "{{ resource.ca_cert | default(omit) }}"
+    client_cert: "{{ resource.client_cert | default(omit) }}"
+    client_key: "{{ resource.client_key | default(omit) }}"
+    context: "{{ resource.context | default(omit) }}"
+    continue_on_error: "{{ resource.continue_on_error | default(omit) }}"
+    delete_options: "{{ resource.delete_options | default(omit) }}"
+    force: "{{ resource.force | default(omit) }}"
+    generate_name: "{{ resource.generate_name | default(omit) }}"
+    host: "{{ resource.host | default(omit) }}"
+    impersonate_groups: "{{ resource.impersonate_groups | default(omit) }}"
+    impersonate_user: "{{ resource.impersonate_user | default(omit) }}"
+    kind: "{{ resource.kind | default(omit) }}"
+    kubeconfig: "{{ resource.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
+    label_selectors: "{{ resource.label_selectors | default(omit) }}"
+    merge_type: "{{ resource.merge_type | default(omit) }}"
+    name: "{{ resource.metadata.name | default(omit) }}"
+    namespace: "{{ resource.metadata.namespace | default(omit) }}"
+    no_proxy: "{{ resource.no_proxy | default(omit) }}"
+    password: "{{ resource.password | default(omit) }}"
+    persist_config: "{{ resource.persist_config | default(omit) }}"
+    proxy: "{{ resource.proxy | default(omit) }}"
+    proxy_headers: "{{ resource.proxy_headers | default(omit) }}"
+    resource_definition: "{{ resource.resource_definition | default(omit) }}"
+    server_side_apply: "{{ resource.server_side_apply | default(omit) }}"
+    # src: "{{ resource.src | default(omit) }}"
+    state: "{{ resource.state | default(omit) }}"
+    # template: "{{ resource.template | default(omit) }}"
+    username: "{{ resource.username | default(omit) }}"
+    validate: "{{ resource.validate | default(omit) }}"
+    validate_certs: "{{ resource.validate_certs | default(omit) }}"
+    wait: "{{ resource.wait | default(omit) }}"
+    wait_condition: "{{ resource.wait_condition | default(omit) }}"
+    wait_sleep: "{{ resource.wait_sleep | default(omit) }}"
+    wait_timeout: "{{ resource.wait_timeout | default(omit) }}"
+  when:
+    - resource.template is undefined
+    - resource.src is undefined
+    - resource.manage  | default(true)
+    - resource.kind is defined or resource.resource_definition
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resource
+    - k8s_common_resource_manage
+    - k8s_common_resource_direct
+
+- name: "K8S Common - Resources - Manage - Resource (Through Template) - Save File: {{ resource.kind | default('') }}"
+  ansible.builtin.template:
+    src: "{{ resource.template | default(omit) }}.j2"
+    dest: "{{ resource.template_path | default('./') }}/\
+           {{ resource.template | default(omit) }}_\
+           {{ resource.metadata.namespace | default('default') }}_\
+           {{ resource.metadata.name | default('') }}.yml"
+    mode: '0644'
+  when:
+    - resource.template is defined
+    - resource.src is undefined
+    - resource.resource_definition is undefined
+    - resource.manage  | default(true)
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resource
+    - k8s_common_resource_manage
+    - k8s_common_resource_write_template
+
+- name: "K8S Common - Resources - Manage - Resource (Through Template) : {{ resource.kind | default('') }}"
+  kubernetes.core.k8s:
+    api_key: "{{ resource.api_key | default(omit) }}"
+    api_version: "{{ resource.api_version | default(omit) }}"
+    append_hash: "{{ resource.append_hash | default(omit) }}"
+    apply: "{{ resource.apply | default(omit) }}"
+    ca_cert: "{{ resource.ca_cert | default(omit) }}"
+    client_cert: "{{ resource.client_cert | default(omit) }}"
+    client_key: "{{ resource.client_key | default(omit) }}"
+    context: "{{ resource.context | default(omit) }}"
+    continue_on_error: "{{ resource.continue_on_error | default(omit) }}"
+    delete_options: "{{ resource.delete_options | default(omit) }}"
+    force: "{{ resource.force | default(omit) }}"
+    generate_name: "{{ resource.generate_name | default(omit) }}"
+    host: "{{ resource.host | default(omit) }}"
+    impersonate_groups: "{{ resource.impersonate_groups | default(omit) }}"
+    impersonate_user: "{{ resource.impersonate_user | default(omit) }}"
+    kind: "{{ resource.kind | default(omit) }}"
+    kubeconfig: "{{ resource.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
+    label_selectors: "{{ resource.label_selectors | default(omit) }}"
+    merge_type: "{{ resource.merge_type | default(omit) }}"
+    name: "{{ resource.metadata.name | default(omit) }}"
+    namespace: "{{ resource.metadata.namespace | default(omit) }}"
+    no_proxy: "{{ resource.no_proxy | default(omit) }}"
+    password: "{{ resource.password | default(omit) }}"
+    persist_config: "{{ resource.persist_config | default(omit) }}"
+    proxy: "{{ resource.proxy | default(omit) }}"
+    proxy_headers: "{{ resource.proxy_headers | default(omit) }}"
+    # resource_definition: "{{ resource.resource_definition | default(omit) }}"
+    server_side_apply: "{{ resource.server_side_apply | default(omit) }}"
+    # src: "{{ resource.src | default(omit) }}"
+    state: "{{ resource.state | default(omit) }}"
+    template: "{{ resource.template_path | default('./') }}/\
+               {{ resource.template | default(omit) }}_\
+               {{ resource.metadata.namespace | default('default') }}_\
+               {{ resource.metadata.name | default('') }}.yml"
+    username: "{{ resource.username | default(omit) }}"
+    validate: "{{ resource.validate | default(omit) }}"
+    validate_certs: "{{ resource.validate_certs | default(omit) }}"
+    wait: "{{ resource.wait | default(omit) }}"
+    wait_condition: "{{ resource.wait_condition | default(omit) }}"
+    wait_sleep: "{{ resource.wait_sleep | default(omit) }}"
+    wait_timeout: "{{ resource.wait_timeout | default(omit) }}"
+  when:
+    - resource.template is defined
+    - resource.src is undefined
+    - resource.resource_definition is undefined
+    - resource.manage  | default(true)
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resource
+    - k8s_common_resource_manage
+    - k8s_common_resource_manage_template
+
+- name: "K8S Common - Resources - Manage - Resource (Through YML File) : {{ resource.kind | default('') }}"
+  kubernetes.core.k8s:
+    api_key: "{{ resource.api_key | default(omit) }}"
+    api_version: "{{ resource.api_version | default(omit) }}"
+    append_hash: "{{ resource.append_hash | default(omit) }}"
+    apply: "{{ resource.apply | default(omit) }}"
+    ca_cert: "{{ resource.ca_cert | default(omit) }}"
+    client_cert: "{{ resource.client_cert | default(omit) }}"
+    client_key: "{{ resource.client_key | default(omit) }}"
+    context: "{{ resource.context | default(omit) }}"
+    continue_on_error: "{{ resource.continue_on_error | default(omit) }}"
+    delete_options: "{{ resource.delete_options | default(omit) }}"
+    force: "{{ resource.force | default(omit) }}"
+    generate_name: "{{ resource.generate_name | default(omit) }}"
+    host: "{{ resource.host | default(omit) }}"
+    impersonate_groups: "{{ resource.impersonate_groups | default(omit) }}"
+    impersonate_user: "{{ resource.impersonate_user | default(omit) }}"
+    kind: "{{ resource.kind | default(omit) }}"
+    kubeconfig: "{{ resource.kubeconfig | default(k8s_common_kubeconfig.file) | default(omit) }}"
+    label_selectors: "{{ resource.label_selectors | default(omit) }}"
+    merge_type: "{{ resource.merge_type | default(omit) }}"
+    name: "{{ resource.metadata.name | default(omit) }}"
+    namespace: "{{ resource.metadata.namespace | default(omit) }}"
+    no_proxy: "{{ resource.no_proxy | default(omit) }}"
+    password: "{{ resource.password | default(omit) }}"
+    persist_config: "{{ resource.persist_config | default(omit) }}"
+    proxy: "{{ resource.proxy | default(omit) }}"
+    proxy_headers: "{{ resource.proxy_headers | default(omit) }}"
+    # resource_definition: "{{ resource.resource_definition | default(omit) }}"
+    server_side_apply: "{{ resource.server_side_apply | default(omit) }}"
+    src: "{{ resource.src | default(omit) }}"
+    state: "{{ resource.state | default(omit) }}"
+    # template: "{{ resource.template | default(omit) }}"
+    username: "{{ resource.username | default(omit) }}"
+    validate: "{{ resource.validate | default(omit) }}"
+    validate_certs: "{{ resource.validate_certs | default(omit) }}"
+    wait: "{{ resource.wait | default(omit) }}"
+    wait_condition: "{{ resource.wait_condition | default(omit) }}"
+    wait_sleep: "{{ resource.wait_sleep | default(omit) }}"
+    wait_timeout: "{{ resource.wait_timeout | default(omit) }}"
+  when:
+    - resource.src is defined
+    - resource.template is undefined
+    - resource.resource_definition is undefined
+    - resource.manage  | default(true)
+  delegate_to: localhost
+  tags:
+    - k8s_common
+    - k8s_common_resources
+    - k8s_common_resource
+    - k8s_common_resource_manage
+    - k8s_common_resource_manage_file
+
+...

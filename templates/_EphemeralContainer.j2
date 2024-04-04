@@ -1,0 +1,169 @@
+{#  ## args: (string [array]) #}
+{% if EphemeralContainer.args is defined %}
+args:
+{%   for arg in EphemeralContainer.args | default([], true) %}
+  - "{{ arg | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## command: (string [array]) #}
+{% if EphemeralContainer.command is defined %}
+command:
+{%   for cmd in EphemeralContainer.command | default([], true) %}
+  - "{{ cmd | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## env: (EnvVar [array]) #}
+{% if EphemeralContainer.env is defined %}
+env:
+{%   for EnvVar in EphemeralContainer.env | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EnvVar.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## envFrom: (EnvFromSource [array]) #}
+{% if EphemeralContainer.envFrom is defined %}
+envFrom:
+{%   for EnvFromSource in EphemeralContainer.envFrom | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_EnvFromSource.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## image (string) #}
+{% if EphemeralContainer.image is defined %}
+image: "{{ EphemeralContainer.image | default('') }}"
+{% endif -%}
+
+{#  ## imagePullPolicy (string) #}
+{% if EphemeralContainer.imagePullPolicy is defined %}
+imagePullPolicy: "{{ EphemeralContainer.imagePullPolicy | default('') }}"
+{% endif -%}
+
+{#  ## lifecycle: (Lifecycle) #}
+{% if EphemeralContainer.lifecycle is defined %}
+lifecycle:
+{%   filter indent(width=2, first=true) %}
+{%     set Lifecycle = EphemeralContainer.lifecycle %}
+{%     include '_Lifecycle.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## livenessProbe: (Probe) #}
+{% if EphemeralContainer.livenessProbe is defined %}
+livenessProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = EphemeralContainer.livenessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## name (string) #}
+{% if EphemeralContainer.name is defined %}
+name: "{{ EphemeralContainer.name | default('') }}"
+{% endif -%}
+
+{#  ## ports: (ContainerPort [array]) #}
+{% if EphemeralContainer.ports is defined %}
+ports:
+{%   for ContainerPort in EphemeralContainer.ports | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ContainerPort.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## readinessProbe: (Probe) #}
+{% if EphemeralContainer.readinessProbe is defined %}
+readinessProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = EphemeralContainer.readinessProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## resources: (ResourceRequirements) #}
+{% if EphemeralContainer.resources is defined %}
+resources:
+{%   filter indent(width=2, first=true) %}
+{%     set ResourceRequirements = EphemeralContainer.resources %}
+{%     include '_ResourceRequirements.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## securityContext: (SecurityContext) #}
+{% if EphemeralContainer.securityContext is defined %}
+securityContext:
+{%   filter indent(width=2, first=true) %}
+{%     set SecurityContext = EphemeralContainer.securityContext %}
+{%     include '_SecurityContext.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## startupProbe: (Probe) #}
+{% if EphemeralContainer.startupProbe is defined %}
+startupProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = EphemeralContainer.startupProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## stdin (boolean) #}
+{% if EphemeralContainer.stdin is defined %}
+stdin: {{ EphemeralContainer.stdin | default('') }}
+{% endif -%}
+
+{#  ## stdinOnce (boolean) #}
+{% if EphemeralContainer.stdinOnce is defined %}
+stdinOnce: {{ EphemeralContainer.stdinOnce | default('') }}
+{% endif -%}
+
+{#  ## targetContainerName (string) #}
+{% if EphemeralContainer.targetContainerName is defined %}
+targetContainerName: "{{ EphemeralContainer.targetContainerName | default('') }}"
+{% endif -%}
+
+{#  ## terminationMessagePath (string) #}
+{% if EphemeralContainer.terminationMessagePath is defined %}
+terminationMessagePath: "{{ EphemeralContainer.terminationMessagePath | default('') }}"
+{% endif -%}
+
+{#  ## terminationMessagePolicy (string) #}
+{% if EphemeralContainer.terminationMessagePolicy is defined %}
+terminationMessagePolicy: "{{ EphemeralContainer.terminationMessagePolicy | default('') }}"
+{% endif -%}
+
+{#  ## tty (boolean) #}
+{% if EphemeralContainer.tty is defined %}
+tty: {{ EphemeralContainer.tty | default('') }}
+{% endif -%}
+
+{#  ## volumeDevices: (VolumeDevice [array]) #}
+{% if EphemeralContainer.volumeDevices is defined %}
+volumeDevices:
+{%   for VolumeDevice in EphemeralContainer.volumeDevices | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeDevice.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## volumeMounts: (VolumeMount [array]) #}
+{% if EphemeralContainer.volumeMounts is defined %}
+volumeMounts:
+{%   for VolumeMount in EphemeralContainer.volumeMounts | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeMount.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## workingDir (string) #}
+{% if EphemeralContainer.workingDir is defined %}
+workingDir: "{{ EphemeralContainer.workingDir | default('') }}"
+{% endif %}

@@ -1,0 +1,9 @@
+{#  ## status: (string) #}
+{% if PodFailurePolicyOnPodConditionsPattern.status is defined %}
+status: "{{ PodFailurePolicyOnPodConditionsPattern.status | default('') }}"
+{% endif -%}
+
+{#  ## type: (string) #}
+{% if PodFailurePolicyOnPodConditionsPattern.type is defined %}
+type: "{{ PodFailurePolicyOnPodConditionsPattern.type | default('') }}"
+{% endif %}

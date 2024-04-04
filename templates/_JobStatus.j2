@@ -1,0 +1,53 @@
+{#  ## active: (integer) #}
+{% if JobStatus.active is defined %}
+active: {{ JobStatus.active | default('') }}
+{% endif -%}
+
+{#  ## completedIndexes: (string) #}
+{% if JobStatus.completedIndexes is defined %}
+completedIndexes: "{{ JobStatus.completedIndexes | default('') }}"
+{% endif -%}
+
+{#  ## completionTime: (Time) #}
+{% if JobStatus.completionTime is defined %}
+completionTime: {{ JobStatus.completionTime | default('') }}
+{% endif -%}
+
+{#  ## conditions: (JobCondition [array]) #}
+{% if JobStatus.conditions is defined %}
+conditions:
+{%   for JobCondition in JobStatus.conditions | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_JobCondition.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## failed: (integer) #}
+{% if JobStatus.failed is defined %}
+failed: {{ JobStatus.failed | default('') }}
+{% endif -%}
+
+{#  ## ready: (integer) #}
+{% if JobStatus.ready is defined %}
+ready: {{ JobStatus.ready | default('') }}
+{% endif -%}
+
+{#  ## startTime: (Time) #}
+{% if JobStatus.startTime is defined %}
+startTime: {{ JobStatus.startTime | default('') }}
+{% endif -%}
+
+{#  ## succeeded: (integer) #}
+{% if JobStatus.succeeded is defined %}
+succeeded: {{ JobStatus.succeeded | default('') }}
+{% endif -%}
+
+{#  ## uncountedTerminatedPods: (UncountedTerminatedPods) #}
+{% if JobStatus.uncountedTerminatedPods is defined %}
+uncountedTerminatedPods:
+{%   filter indent(width=2, first=true) %}
+{%     set UncountedTerminatedPods = JobStatus.uncountedTerminatedPods %}
+{%     include '_UncountedTerminatedPods.j2' %}
+{%   endfilter %}
+{% endif %}

@@ -1,0 +1,17 @@
+{#    ## key : (string ) #}
+{% if NodeSelectorRequirement.key is defined %}
+key: "{{ NodeSelectorRequirement.key | default('') }}"
+{% endif -%}
+
+{#    ## operator : (string ) #}
+{% if NodeSelectorRequirement.operator is defined %}
+operator: "{{ NodeSelectorRequirement.operator | default('') }}"
+{% endif -%}
+
+{#    ## values : (string [array]) #}
+{% if NodeSelectorRequirement.values is defined %}
+values:
+{%   for value in NodeSelectorRequirement["values"] | default('') %}
+  - "{{ value | default('') }}"
+{%   endfor %}
+{% endif %}

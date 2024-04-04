@@ -1,0 +1,14 @@
+{#  ## readOnly (boolean) #}
+{% if AzureFileVolumeSource.readOnly is defined %}
+readOnly: "{{ AzureFileVolumeSource.readOnly | default('') }}"
+{% endif -%}
+
+{#  ## secretName (string) #}
+{% if AzureFileVolumeSource.secretName is defined %}
+secretName: "{{ AzureFileVolumeSource.secretName | default('') }}"
+{% endif -%}
+
+{#  ## shareName (string) #}
+{% if AzureFileVolumeSource.shareName is defined %}
+shareName: "{{ AzureFileVolumeSource.shareName | default('') }}"
+{% endif %}

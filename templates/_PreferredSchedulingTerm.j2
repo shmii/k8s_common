@@ -1,0 +1,14 @@
+{# ## preference : (NodeSelectorTerm) #}
+{% if PreferredSchedulingTerm.preference is defined %}
+preference:
+{% filter indent(width=2, first=true) %}
+{%   set NodeSelectorTerm = PreferredSchedulingTerm.preference %}
+{%   include '_NodeSelectorTerm.j2' %}
+{% endfilter %}
+{% endif -%}
+
+{# ## weight : (integer) #}
+{% if PreferredSchedulingTerm.weight is defined %}
+weight: {{ PreferredSchedulingTerm.weight | default(omit) }}
+{% endif %}
+

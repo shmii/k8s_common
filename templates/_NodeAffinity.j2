@@ -1,0 +1,20 @@
+{#   ## preferredDuringSchedulingIgnoredDuringExecution: (PreferredSchedulingTerm [array]) #}
+{% if NodeAffinity.preferredDuringSchedulingIgnoredDuringExecution is defined %}
+preferredDuringSchedulingIgnoredDuringExecution:
+{%   for PreferredSchedulingTerm in NodeAffinity.preferredDuringSchedulingIgnoredDuringExecution | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_PreferredSchedulingTerm.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{# ## requiredDuringSchedulingIgnoredDuringExecution : (NodeSelector) #}
+{% if NodeAffinity.requiredDuringSchedulingIgnoredDuringExecution is defined %}
+requiredDuringSchedulingIgnoredDuringExecution:
+{%   if NodeAffinity.requiredDuringSchedulingIgnoredDuringExecution | default([], true) %}
+{%     filter indent(width=2, first=true) %}
+{%       set NodeSelector = NodeAffinity.requiredDuringSchedulingIgnoredDuringExecution %}
+{%       include '_NodeSelector.j2' %}
+{%     endfilter %}
+{%   endif %}
+{% endif %}

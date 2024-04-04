@@ -1,0 +1,30 @@
+{#  ## fsType: (string) #}
+{% if FCVolumeSource.fsType is defined %}
+fsType: "{{ FCVolumeSource.fsType | default('') }}"
+{% endif -%}
+
+{#  ## lun: (integer) #}
+{% if FCVolumeSource.lun is defined %}
+lun: {{ FCVolumeSource.lun | default('') }}
+{% endif -%}
+
+{#  ## readOnly: (boolean) #}
+{% if FCVolumeSource.readOnly is defined %}
+readOnly: {{ FCVolumeSource.readOnly | default('') }}
+{% endif -%}
+
+{#  ## targetWWNs: (string [array]) #}
+{% if FCVolumeSource.targetWWNs is defined %}
+targetWWNs:
+{%   for targetWWN in FCVolumeSource.targetWWNs | default([], true) %}
+  - "{{ targetWWN | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#  ## wwids: (string [array]) #}
+{% if FCVolumeSource.wwids is defined %}
+wwids:
+{%   for wwid in FCVolumeSource.wwids | default([], true) %}
+  - "{{ wwid | default('') }}"
+{%   endfor %}
+{% endif %}

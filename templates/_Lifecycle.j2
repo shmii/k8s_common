@@ -1,0 +1,17 @@
+{#  ## postStart: (LifecycleHandler) #}
+{% if Lifecycle.postStart is defined %}
+postStart:
+{%   filter indent(width=2, first=true) %}
+{%     set LifecycleHandler = Lifecycle.postStart %}
+{%     include '_LifecycleHandler.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## preStop: (LifecycleHandler) #}
+{% if Lifecycle.preStop is defined %}
+preStop:
+{%   filter indent(width=2, first=true) %}
+{%     set LifecycleHandler = Lifecycle.preStop %}
+{%     include '_LifecycleHandler.j2' %}
+{%   endfilter %}
+{% endif %}

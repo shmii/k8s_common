@@ -1,0 +1,4 @@
+{#  ## conditionType (string) #}
+{% if PodReadinessGate.conditionType is defined %}
+conditionType: "{{ PodReadinessGate.conditionType | default('') }}"
+{% endif %}

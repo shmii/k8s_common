@@ -1,0 +1,64 @@
+{#  ## workingDir: (string) #}
+{% if EphemeralContainer.workingDir is defined %}
+workingDir: "{{ EphemeralContainer.workingDir | default('') }}"
+{% endif -%}
+
+{#  ## activeDeadlineSeconds: (integer) #}
+{% if PodSpec.activeDeadlineSeconds is defined %}
+activeDeadlineSeconds: {{ PodSpec.activeDeadlineSeconds | default('') }}
+{% endif -%}
+
+{#  ## tty: (boolean) #}
+{% if EphemeralContainer.tty is defined %}
+tty: {{ EphemeralContainer.tty | default('') }}
+{% endif -%}
+
+{#  ## divisor: (Quantity) #}
+{% if ResourceFieldSelector.divisor is defined %}
+divisor: {{ ResourceFieldSelector.divisor | default('') }}
+{% endif %}
+
+{#  ## creationTimestamp: (Time) #}
+{% if ObjectMeta.creationTimestamp is defined %}
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
+{% endif -%}
+
+{#  ## fieldsV1: (FieldsV1) #}
+{% if ObjectMeta.creationTimestamp is defined %}
+creationTimestamp: {{ ObjectMeta.creationTimestamp | default('') }}
+{% endif -%}
+
+{#  ## add: (string [array]) #}
+{% if Capabilities.add is defined %}
+add:
+{%   for capability in Capabilities.add | default([], true) %}
+  - "{{ capability | default('') }}"
+{%   endfor %}
+{% endif -%}
+
+{#   ## matchLabels: (object) #}
+{% if LabelSelector.matchLabels is defined %}
+matchLabels:
+{%   for matchLabel in LabelSelector.matchLabels | default('') %}
+  {{ matchLabel }}: {{ LabelSelector.matchLabels[matchLabel] | default('') }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## startupProbe: (Probe) #}
+{% if EphemeralContainer.startupProbe is defined %}
+startupProbe:
+{%   filter indent(width=2, first=true) %}
+{%     set Probe = EphemeralContainer.startupProbe %}
+{%     include '_Probe.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## volumeDevices: (VolumeDevice [array]) #}
+{% if EphemeralContainer.volumeDevices is defined %}
+volumeDevices:
+{%   for VolumeDevice in EphemeralContainer.volumeDevices | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_VolumeDevice.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}

@@ -1,0 +1,265 @@
+{#  ## awsElasticBlockStore: (AWSElasticBlockStoreVolumeSource) #}
+{% if Volume.awsElasticBlockStore is defined %}
+awsElasticBlockStore:
+{%   filter indent(width=2, first=true) %}
+{%     set AWSElasticBlockStoreVolumeSource = Volume.awsElasticBlockStore %}
+{%     include '_AWSElasticBlockStoreVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## azureDisk: (AzureDiskVolumeSource) #}
+{% if Volume.azureDisk is defined %}
+azureDisk:
+{%   filter indent(width=2, first=true) %}
+{%     set AzureDiskVolumeSource = Volume.azureDisk %}
+{%     include '_AzureDiskVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## azureFile: (AzureFileVolumeSource) #}
+{% if Volume.azureFile is defined %}
+azureFile:
+{%   filter indent(width=2, first=true) %}
+{%     set AzureFileVolumeSource = Volume.azureFile %}
+{%     include 'AzureFileVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## cephfs: (CephFSVolumeSource) #}
+{% if Volume.cephfs is defined %}
+cephfs:
+{%   filter indent(width=2, first=true) %}
+{%     set CephFSVolumeSource = Volume.cephfs %}
+{%     include '_CephFSVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## cinder: (CinderVolumeSource) #}
+{% if Volume.cinder is defined %}
+cinder:
+{%   filter indent(width=2, first=true) %}
+{%     set CinderVolumeSource = Volume.cinder %}
+{%     include '_CinderVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## configMap: (ConfigMapVolumeSource) #}
+{% if Volume.configMap is defined %}
+configMap:
+{%   filter indent(width=2, first=true) %}
+{%     set ConfigMapVolumeSource = Volume.configMap %}
+{%     include '_ConfigMapVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## csi: (CSIVolumeSource) #}
+{% if Volume.csi is defined %}
+csi:
+{%   filter indent(width=2, first=true) %}
+{%     set CSIVolumeSource = Volume.csi %}
+{%     include '_CSIVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## downwardAPI: (DownwardAPIVolumeSource) #}
+{% if Volume.downwardAPI is defined %}
+downwardAPI:
+{%   filter indent(width=2, first=true) %}
+{%     set DownwardAPIVolumeSource = Volume.downwardAPI %}
+{%     include '_DownwardAPIVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## emptyDir: (EmptyDirVolumeSource) #}
+{% if Volume.emptyDir is defined %}
+emptyDir:
+{%   filter indent(width=2, first=true) %}
+{%     set EmptyDirVolumeSource = Volume.emptyDir %}
+{%     include '_EmptyDirVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## ephemeral: (EphemeralVolumeSource) #}
+{% if Volume.ephemeral is defined %}
+ephemeral:
+{%   filter indent(width=2, first=true) %}
+{%     set EphemeralVolumeSource = Volume.ephemeral %}
+{%     include '_EphemeralVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## fc: (FCVolumeSource) #}
+{% if Volume.fc is defined %}
+fc:
+{%   filter indent(width=2, first=true) %}
+{%     set FCVolumeSource = Volume.fc %}
+{%     include '_FCVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## flexVolume: (FlexVolumeSource) #}
+{% if Volume.flexVolume is defined %}
+flexVolume:
+{%   filter indent(width=2, first=true) %}
+{%     set FlexVolumeSource = Volume.flexVolume %}
+{%     include '_FlexVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## flocker: (FlockerVolumeSource) #}
+{% if Volume.flocker is defined %}
+flocker:
+{%   filter indent(width=2, first=true) %}
+{%     set FlockerVolumeSource = Volume.flocker %}
+{%     include '_FlockerVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## gcePersistentDisk: (GCEPersistentDiskVolumeSource) #}
+{% if Volume.gcePersistentDisk is defined %}
+gcePersistentDisk:
+{%   filter indent(width=2, first=true) %}
+{%     set GCEPersistentDiskVolumeSource = Volume.gcePersistentDisk %}
+{%     include '_GCEPersistentDiskVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## gitRepo: (GitRepoVolumeSource) #}
+{% if Volume.gitRepo is defined %}
+gitRepo:
+{%   filter indent(width=2, first=true) %}
+{%     set GitRepoVolumeSource = Volume.gitRepo %}
+{%     include '_GitRepoVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## glusterfs: (GlusterfsVolumeSource) #}
+{% if Volume.glusterfs is defined %}
+glusterfs:
+{%   filter indent(width=2, first=true) %}
+{%     set GlusterfsVolumeSource = Volume.glusterfs %}
+{%     include '_GlusterfsVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## hostPath: (HostPathVolumeSource) #}
+{% if Volume.hostPath is defined %}
+hostPath:
+{%   filter indent(width=2, first=true) %}
+{%     set HostPathVolumeSource = Volume.hostPath %}
+{%     include '_HostPathVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## iscsi: (ISCSIVolumeSource) #}
+{% if Volume.iscsi is defined %}
+iscsi:
+{%   filter indent(width=2, first=true) %}
+{%     set ISCSIVolumeSource = Volume.iscsi %}
+{%     include '_ISCSIVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## name: (string) #}
+{% if Volume.name is defined %}
+name: "{{ Volume.name | default('') }}"
+{% endif -%}
+
+{#  ## nfs: (NFSVolumeSource) #}
+{% if Volume.nfs is defined %}
+nfs:
+{%   filter indent(width=2, first=true) %}
+{%     set NFSVolumeSource = Volume.nfs %}
+{%     include '_NFSVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## persistentVolumeClaim: (PersistentVolumeClaimVolumeSource) #}
+{% if Volume.persistentVolumeClaim is defined %}
+persistentVolumeClaim:
+{%   filter indent(width=2, first=true) %}
+{%     set PersistentVolumeClaimVolumeSource = Volume.persistentVolumeClaim %}
+{%     include '_PersistentVolumeClaimVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## photonPersistentDisk: (PhotonPersistentDiskVolumeSource) #}
+{% if Volume.photonPersistentDisk is defined %}
+photonPersistentDisk:
+{%   filter indent(width=2, first=true) %}
+{%     set PhotonPersistentDiskVolumeSource = Volume.photonPersistentDisk %}
+{%     include '_PhotonPersistentDiskVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## portworxVolume: (PortworxVolumeSource) #}
+{% if Volume.portworxVolume is defined %}
+portworxVolume:
+{%   filter indent(width=2, first=true) %}
+{%     set PortworxVolumeSource = Volume.portworxVolume %}
+{%     include '_PortworxVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## projected: (ProjectedVolumeSource) #}
+{% if Volume.projected is defined %}
+projected:
+{%   filter indent(width=2, first=true) %}
+{%     set ProjectedVolumeSource = Volume.projected %}
+{%     include '_ProjectedVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## quobyte: (QuobyteVolumeSource) #}
+{% if Volume.quobyte is defined %}
+quobyte:
+{%   filter indent(width=2, first=true) %}
+{%     set QuobyteVolumeSource = Volume.quobyte %}
+{%     include '_QuobyteVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## rbd: (RBDVolumeSource) #}
+{% if Volume.rbd is defined %}
+rbd:
+{%   filter indent(width=2, first=true) %}
+{%     set RBDVolumeSource = Volume.rbd %}
+{%     include '_RBDVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## scaleIO: (ScaleIOVolumeSource) #}
+{% if Volume.scaleIO is defined %}
+scaleIO:
+{%   filter indent(width=2, first=true) %}
+{%     set ScaleIOVolumeSource = Volume.scaleIO %}
+{%     include '_ScaleIOVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## secret: (SecretVolumeSource) #}
+{% if Volume.secret is defined %}
+secret:
+{%   filter indent(width=2, first=true) %}
+{%     set SecretVolumeSource = Volume.secret %}
+{%     include '_SecretVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## storageos: (StorageOSVolumeSource) #}
+{% if Volume.storageos is defined %}
+storageos:
+{%   filter indent(width=2, first=true) %}
+{%     set StorageOSVolumeSource = Volume.storageos %}
+{%     include '_StorageOSVolumeSource.j2' %}
+{%   endfilter %}
+{% endif -%}
+
+{#  ## vsphereVolume: (VsphereVirtualDiskVolumeSource) #}
+{% if Volume.vsphereVolume is defined %}
+vsphereVolume:
+{%   filter indent(width=2, first=true) %}
+{%     set VsphereVirtualDiskVolumeSource = Volume.vsphereVolume %}
+{%     include '_VsphereVirtualDiskVolumeSource.j2' %}
+{%   endfilter %}
+{% endif %}

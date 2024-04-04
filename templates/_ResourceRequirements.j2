@@ -1,0 +1,25 @@
+{#  ## claims: (ContainerPort [array]) #}
+{% if ResourceRequirements.claims is defined %}
+claims:
+{%   for ResourceClaim in ResourceRequirements.claims | default([], true) %}
+{%     filter indent(width=4, first=false) %}
+  - {%   include '_ResourceClaim.j2' %}
+{%     endfilter %}
+{%   endfor %}
+{% endif -%}
+
+{#  ## limits: (object) #}
+{% if ResourceRequirements.limits is defined %}
+limits:
+{%   for limit in ResourceRequirements.limits | default('') %}
+  {{ limit }}: {{ ResourceRequirements.limits[limit] }}
+{%   endfor %}
+{% endif -%}
+
+{#  ## requests: (object) #}
+{% if ResourceRequirements.requests is defined %}
+requests:
+{%   for request in ResourceRequirements.requests | default('') %}
+  {{ request }}: {{ ResourceRequirements.requests[request] }}
+{%   endfor %}
+{% endif %}

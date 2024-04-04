@@ -1,0 +1,19 @@
+{#  ## gmsaCredentialSpec (string) #}
+{% if WindowsSecurityContextOptions.gmsaCredentialSpec is defined %}
+gmsaCredentialSpec: "{{ WindowsSecurityContextOptions.gmsaCredentialSpec | default('') }}"
+{% endif -%}
+
+{#  ## gmsaCredentialSpecName (string) #}
+{% if WindowsSecurityContextOptions.gmsaCredentialSpecName is defined %}
+gmsaCredentialSpecName: "{{ WindowsSecurityContextOptions.gmsaCredentialSpecName | default('') }}"
+{% endif -%}
+
+{#  ## hostProcess (boolean) #}
+{% if WindowsSecurityContextOptions.hostProcess is defined %}
+hostProcess: {{ WindowsSecurityContextOptions.hostProcess | default('') }}
+{% endif -%}
+
+{#  ## runAsUserName (string) #}
+{% if WindowsSecurityContextOptions.runAsUserName is defined %}
+runAsUserName: "{{ WindowsSecurityContextOptions.runAsUserName | default('') }}"
+{% endif %}
